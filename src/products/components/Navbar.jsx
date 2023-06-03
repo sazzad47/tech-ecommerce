@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { close, logo, menu } from "../assets";
 import { appItems, navLinks } from "../constants";
 import { Link } from "react-router-dom";
@@ -14,18 +13,18 @@ const Navbar = () => {
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
       <img src={logo} alt="logo" className="w-[50px] h-[42px]" />
-      <div className="relative min-w-[20rem] h-full ml-16 sidebar">
-          <div className="pulse">
+      <div className="relative h-full ml-8 sm:ml-16 sidebar">
+        <div className="pulse cursor-pointer">
           <AiFillAppstore
-          onClick={() => setShowAppMenu(!showAppMenu)}
-          className="text-white text-2xl"
-        />
-          </div>
+            onClick={() => setShowAppMenu(!showAppMenu)}
+            className="text-white text-2xl"
+          />
+        </div>
         <div
           className={`${
             !showAppMenu ? "hidden" : "flex"
           } p-6 bg-black-gradient absolute top-10 left-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
-        >    
+        >
           <ul className="w-full list-none flex justify-end items-start flex-1 flex-col">
             {appItems.map((app, index) => (
               <li
@@ -36,16 +35,12 @@ const Navbar = () => {
                 onClick={() => setActiveApp(app.title)}
               >
                 <Link to="/">
-                  <div className="relative w-full h-full">
-                    {app.title} 
-                  </div>
+                  <div className="relative w-full h-full">{app.title}</div>
                 </Link>
               </li>
             ))}
           </ul>
-          
         </div>
-        
       </div>
 
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">

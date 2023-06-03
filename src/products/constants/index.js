@@ -13,6 +13,17 @@ import {
   send,
   shield,
   star,
+  mobile,
+  backend,
+  creator,
+  web,
+  carrent,
+  jobit,
+  tripguide,
+  man1,
+  man3,
+  man2,
+  
 } from "../assets";
 import { AiOutlineHome } from "react-icons/ai";
 import { BsFillCartPlusFill } from "react-icons/bs";
@@ -59,13 +70,125 @@ export const appItems = [
   { id: "gd", title: "Global Donation", route: "/" },
 ];
 
+export const services = [
+  {
+    title: "Web Development",
+    icon: web,
+  },
+  {
+    title: "App Development",
+    icon: mobile,
+  },
+  {
+    title: "Graphics Design",
+    icon: backend,
+  },
+  {
+    title: "SEO",
+    icon: creator,
+  },
+];
+
+export const projects = [
+  {
+    name: "Car Rent",
+    description:
+      "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
+    tags: [
+      {
+        name: "react",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "mongodb",
+        color: "green-text-gradient",
+      },
+      {
+        name: "tailwind",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: carrent,
+    source_code_link: "https://github.com/",
+  },
+  {
+    name: "Job IT",
+    description:
+      "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
+    tags: [
+      {
+        name: "react",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "restapi",
+        color: "green-text-gradient",
+      },
+      {
+        name: "scss",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: jobit,
+    source_code_link: "https://github.com/",
+  },
+  {
+    name: "Trip Guide",
+    description:
+      "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
+    tags: [
+      {
+        name: "nextjs",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "supabase",
+        color: "green-text-gradient",
+      },
+      {
+        name: "css",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: tripguide,
+    source_code_link: "https://github.com/",
+  },
+];
+
+export const testimonials = [
+  {
+    testimonial:
+      "I thought it was impossible to make a website as beautiful as our product, but Sazzad proved me wrong.",
+    name: "Sara Lee",
+    designation: "CFO",
+    company: "Acme Co",
+    image: man1,
+  },
+  {
+    testimonial:
+      "I've never met a web developer who truly cares about their clients' success like Sazzad does.",
+    name: "Chris Brown",
+    designation: "COO",
+    company: "DEF Corp",
+    image: man2,
+  },
+  {
+    testimonial:
+      "After Sazzad optimized our website, our traffic increased by 50%. We can't thank them enough!",
+    name: "Lisa Wang",
+    designation: "CTO",
+    company: "456 Enterprises",
+    image: man3,
+  },
+];
+
 export const features = [
   {
     id: "feature-1",
     icon: star,
-    title: "Rewards",
+    title: "Stunning Design",
     content:
-      "The best credit cards offer some tantalizing combinations of promotions and prizes",
+      "Stunning design increases your company's value, and puts your business in a better financial situation.",
   },
   {
     id: "feature-2",
@@ -77,11 +200,12 @@ export const features = [
   {
     id: "feature-3",
     icon: send,
-    title: "Balance Transfer",
+    title: "Fast and Intuitive",
     content:
-      "A balance transfer credit card can save you a lot of money in interest charges.",
+      "Give your business a boost with our fast and intuitive products and services.",
   },
 ];
+
 
 export const feedback = [
   {
@@ -113,18 +237,18 @@ export const feedback = [
 export const stats = [
   {
     id: "stats-1",
-    title: "User Active",
+    title: "Projects Completed",
     value: "3800+",
   },
   {
     id: "stats-2",
-    title: "Trusted by Company",
+    title: "Clients Satified",
     value: "230+",
   },
   {
     id: "stats-3",
-    title: "Transaction",
-    value: "$230M+",
+    title: "Positive Reviews",
+    value: "3030+",
   },
 ];
 
@@ -133,24 +257,24 @@ export const footerLinks = [
     title: "Useful Links",
     links: [
       {
-        name: "Content",
-        link: "https://www.hoobank.com/content/",
+        name: "Donate",
+        link: "https://www.facebook.com",
       },
       {
-        name: "How it Works",
-        link: "https://www.hoobank.com/how-it-works/",
+        name: "Explore Designs",
+        link: "https://www.facebook.com",
       },
       {
-        name: "Create",
-        link: "https://www.hoobank.com/create/",
+        name: "Order",
+        link: "https://www.facebook.com",
       },
       {
-        name: "Explore",
-        link: "https://www.hoobank.com/explore/",
+        name: "Sell",
+        link: "https://www.facebook.com",
       },
       {
-        name: "Terms & Services",
-        link: "https://www.hoobank.com/terms-and-services/",
+        name: "Buy Template",
+        link: "https://www.facebook.com",
       },
     ],
   },
@@ -159,36 +283,36 @@ export const footerLinks = [
     links: [
       {
         name: "Help Center",
-        link: "https://www.hoobank.com/help-center/",
+        link: "https://www.facebook.com",
       },
       {
-        name: "Partners",
-        link: "https://www.hoobank.com/partners/",
+        name: "Services",
+        link: "https://www.facebook.com",
       },
       {
-        name: "Suggestions",
-        link: "https://www.hoobank.com/suggestions/",
+        name: "Security",
+        link: "https://www.facebook.com",
       },
       {
-        name: "Blog",
-        link: "https://www.hoobank.com/blog/",
+        name: "Privacy Policy",
+        link: "https://www.facebook.com",
       },
       {
-        name: "Newsletters",
-        link: "https://www.hoobank.com/newsletters/",
+        name: "Terms and Conditions",
+        link: "https://www.facebook.com",
       },
     ],
   },
   {
-    title: "Partner",
+    title: "Website",
     links: [
       {
-        name: "Our Partner",
-        link: "https://www.hoobank.com/our-partner/",
+        name: "About us",
+        link: "https://www.facebook.com",
       },
       {
-        name: "Become a Partner",
-        link: "https://www.hoobank.com/become-a-partner/",
+        name: "FAQs",
+        link: "https://www.facebook.com",
       },
     ],
   },
