@@ -72,12 +72,12 @@ const App = () => {
 
       <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
-          <Stats />
           <About />
           <Skills />
           <Projects />
           <Business />
           <Pricing />
+          <Stats />
           <Feedbacks />
           <Faqs />
           <CTA />

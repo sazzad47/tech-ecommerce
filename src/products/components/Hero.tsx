@@ -36,7 +36,7 @@ const Hero = ({scrollToBottom}: {scrollToBottom: ()=> void}) => {
       </motion.div>
 
       <div
-        className={`hero-cover-photo flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative`}
+        className={`hero-cover-photo flex-1 hidden md:flex ${styles.flexCenter} md:my-0 my-10 relative`}
       >
         <motion.img
           initial={{ opacity: 0 }}
@@ -64,7 +64,7 @@ const Hero = ({scrollToBottom}: {scrollToBottom: ()=> void}) => {
           ))}
         </div>
       </div>
-      <div onClick={scrollToBottom} className="cursor-pointer absolute bottom-0 w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
+      <div onClick={scrollToBottom} className="cursor-pointer absolute bottom-[5rem] right-1/2 w-[35px] h-[64px] rounded-3xl border-4 border-secondary hidden md:flex justify-center items-start p-2">
         <motion.div
           animate={{
             y: [0, 24, 0],

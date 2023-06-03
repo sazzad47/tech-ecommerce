@@ -60,7 +60,7 @@ const Projects = () => {
 
   return (
     <>
-      <div id="projects" className="projects text-white py-10">
+      <div id="projects" className="projects text-white mt-5 md:mt-[2rem]">
         <div
           className={`${styles.paddingY} w-full flex justify-between items-center md:flex-row flex-col mb-6 relative z-[1]`}
         >
@@ -73,8 +73,8 @@ const Projects = () => {
             </p>
           </div>
         </div>
-        <div className="max-w-3xl mx-auto px-8 sm:px-0">
-          <div className="sm:w-7/12 sm:mx-auto">
+        <div className="w-full max-w-3xl overflow-x-auto">
+
             <div
               role="tablist"
               aria-label="tabs"
@@ -82,7 +82,7 @@ const Projects = () => {
             >
               <div
                 ref={indicatorRef}
-                className="absolute indicator h-11 my-auto top-0 bottom-0 left-0 rounded-full bg-white  shadow-md"
+                className="absolute indicator h-11 my-auto top-0 bottom-0 left-0 rounded-full bg-white shadow-md"
               ></div>
               <button
                 role="tab"
@@ -116,7 +116,7 @@ const Projects = () => {
               </button>
             </div>
           </div>
-        </div>
+  
         <div className="w-full mt-6 relative">
           <div
             ref={panelRefs["panel-1"]}

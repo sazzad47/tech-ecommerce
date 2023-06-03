@@ -7,7 +7,7 @@ import { fromDown, fromUp } from "../utils/Animations";
 function Designs() {
   return (
     <Main id="Designs">
-      <div className="w-full flex justify-between items-center md:flex-row flex-col mb-6 relative z-[1]">
+      <div className="mt-5 md:mt-[5rem] w-full flex justify-between items-center md:flex-row flex-col mb-6 relative z-[1]">
         <motion.h2
           variants={fromDown}
           transition={{ duration: 1 }}
@@ -43,7 +43,6 @@ const Main = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 10rem;
 
   .top {
     position: relative;
