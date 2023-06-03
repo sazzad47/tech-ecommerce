@@ -73,7 +73,7 @@ const Projects = () => {
             </p>
           </div>
         </div>
-        <div className="w-full max-w-3xl overflow-x-auto">
+        <div className="w-full max-w-3xl mx-auto overflow-x-auto">
 
             <div
               role="tablist"
