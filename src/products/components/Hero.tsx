@@ -8,13 +8,13 @@ const Hero = ({scrollToBottom}: {scrollToBottom: ()=> void}) => {
   return (
     <section
       id="home"
-      className={`relative flex md:flex-row justify-center flex-col ${styles.paddingY} xl:px-0 sm:px-16 px-6`}
+      className={`relative flex md:flex-row justify-center flex-col ${styles.paddingY} xl:px-0 sm:px-16 px-6 `}
     >
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 3, ease: easeOut }}
-        className={`flex-1 ${styles.flexStart} flex-col `}
+        className={`flex-1 ${styles.flexStart} flex-col z-[10]`}
       >
         <div className="text-white text-xl flex flex-row items-center py-[6px] mb-2">
           Hi there, my name is

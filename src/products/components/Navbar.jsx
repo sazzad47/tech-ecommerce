@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
       <img src={logo} alt="logo" className="w-[50px] h-[42px]" />
-      <div className="relative h-full ml-8 sm:ml-16 sidebar">
+      <div className="relative h-full ml-8 sm:ml-16 sidebar z-[100]">
         <div className="pulse cursor-pointer">
           <AiFillAppstore
             onClick={() => setShowAppMenu(!showAppMenu)}
