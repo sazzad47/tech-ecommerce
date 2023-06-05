@@ -9,10 +9,29 @@ import {
 import { BsInfoCircleFill } from "react-icons/bs";
 import { AiFillEye } from "react-icons/ai";
 import { Button } from "../../components/ui/button";
+import { menus } from "../technology/topbar/menus";
+import { useState } from "react";
+
+const fileURL =
+  "https://drive.google.com/file/d/1-v9NDQh1rlmLwNvRC5DClHcN6sadqgbF/view?usp=sharing";
 
 const Order = () => {
-  const fileURL =
-    "https://drive.google.com/file/d/1-v9NDQh1rlmLwNvRC5DClHcN6sadqgbF/view?usp=sharing";
+  const [category, setCategory] = useState<string>("");
+
+  const categories = menus.map((item, index) => (
+    <SelectItem key={index} value={item.title || ""}>
+      {item.title}
+    </SelectItem>
+  ));
+
+  const subCategories = menus
+    .find((item) => item.title === category)
+    ?.submenus?.map((item, index) => (
+      <SelectItem key={index} value={item.title || ""}>
+        {item.title}
+      </SelectItem>
+    ));
+
   return (
     <div
       className={`${styles.paddingX} ${styles.paddingY} bg-primaryTheme text-secondaryTheme`}
@@ -83,17 +102,11 @@ const Order = () => {
                         >
                           Choose category
                         </label>
-                        <Select>
+                        <Select onValueChange={setCategory}>
                           <SelectTrigger className="w-full bg-black-gradient-2">
-                            <SelectValue placeholder="Sort" />
+                            <SelectValue placeholder="Categories" />
                           </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Newest">Newest</SelectItem>
-                            <SelectItem value="Oldest">Oldest</SelectItem>
-                            <SelectItem value="Best Seller">
-                              Best Seller
-                            </SelectItem>
-                          </SelectContent>
+                          <SelectContent>{categories}</SelectContent>
                         </Select>
                       </div>
                       <div className="w-full lg:w-1/2 ">
@@ -103,16 +116,12 @@ const Order = () => {
                         >
                           Choose your product
                         </label>
-                        <Select>
+                        <Select disabled={!category}>
                           <SelectTrigger className="w-full bg-black-gradient-2">
-                            <SelectValue placeholder="Sort" />
+                            <SelectValue placeholder="Products" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="Newest">Newest</SelectItem>
-                            <SelectItem value="Oldest">Oldest</SelectItem>
-                            <SelectItem value="Best Seller">
-                              Best Seller
-                            </SelectItem>
+                            {subCategories}
                           </SelectContent>
                         </Select>
                       </div>
@@ -140,18 +149,20 @@ const Order = () => {
                         <BsInfoCircleFill /> Download this file and upload it in
                         the following box after filling it out.
                       </li>
-                      <li
-                      >
-                        <button onClick={() => window.open(fileURL, "_blank")} className="flex items-center gap-3 px-4 py-3 bg-btn-gradient"> <AiFillEye/> View file</button>
+                      <li>
+                        <button
+                          onClick={() => window.open(fileURL, "_blank")}
+                          className="flex items-center gap-3 px-4 py-3 bg-btn-gradient"
+                        >
+                          {" "}
+                          <AiFillEye /> View file
+                        </button>
                       </li>
                     </ul>
                   </div>
                 </div>
                 <div className="mt-4">
-                <div
-                   
-                    className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                  >
+                  <div className="block mb-3 text-sm font-semibold text-secondaryTheme">
                     Upload
                   </div>
                   <label className="block">
