@@ -4,6 +4,7 @@ import Checkout from "../pages/checkout";
 import ProductDetails from "../pages/products/[id]";
 import Order from "../pages/order";
 import Services from "../pages/services";
+import Security from "../pages/security";
 
 
 const routes = [
@@ -14,6 +15,7 @@ const routes = [
     { path: "/products/:id", component: <ProductDetails /> },
     { path: "/order", component: <Order /> },
     { path: "/services", component: <Services /> },
+    { path: "/security", component: <Security /> },
 ]
 
 export {routes};
