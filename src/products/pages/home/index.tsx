@@ -10,7 +10,6 @@ import {
   StarsCanvas,
   Contact,
   Feedbacks,
-  Pricing,
   Faqs,
 } from "../../components";
 import Skills from "../../components/Designs";
@@ -55,9 +54,7 @@ const App = () => {
   };
 
   return (
-    <div id="section-id" className="bg-primaryTheme w-full overflow-hidden">
-      
-
+    <div id="section-id" className="bg-primaryTheme w-full overflow-hidden">      
       <div className={`bg-primaryTheme ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
           <Hero scrollToBottom={scrollToBottom} />
@@ -70,7 +67,6 @@ const App = () => {
           <Skills />
           <Projects />
           <Business />
-          <Pricing />
           <Stats />
           <Feedbacks />
           <Faqs />

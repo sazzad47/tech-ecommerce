@@ -19,7 +19,7 @@ import {
 const Topbar = () => {
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
   return (
-    <div className=" w-full flex items-center justify-between gap-0 md:gap-[5rem] h-[10vh]">
+    <div className=" w-full flex items-center justify-between gap-0 sm:gap-[5rem] h-[10vh]">
       <Button onClick={() => setOpenSidebar(!openSidebar)}>
         {" "}
         <ListIcon className="mr-2 h-4 w-4" /> Categories

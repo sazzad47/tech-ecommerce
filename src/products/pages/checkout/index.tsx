@@ -21,7 +21,7 @@ const Checkout = () => {
             </h2>
             <form className="justify-center w-full mx-auto" method="post">
               <div className="">
-                <div className="space-x-0 lg:flex lg:space-x-4">
+                <div className="space-x-0 space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
                   <div className="w-full lg:w-1/2">
                     <label
                       htmlFor="firstName"
@@ -84,7 +84,7 @@ const Checkout = () => {
                     ></textarea>
                   </div>
                 </div>
-                <div className="space-x-0 lg:flex lg:space-x-4">
+                <div className="space-x-0 space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
                   <div className="w-full lg:w-1/2">
                     <label
                       htmlFor="city"

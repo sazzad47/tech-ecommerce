@@ -21,7 +21,7 @@ module.exports = {
       },
       colors: {
         primaryTheme: "#00040f",
-        secondaryTheme: "#00f6ff",        
+        secondaryTheme: "#00f6ff",    
         dimBlue: "rgba(9, 151, 124, 0.1)",
         primaryCard: "#050816",
         secondaryCard: "#aaa6c3",
