@@ -189,7 +189,7 @@ const Order = () => {
                   <input
                     name="postcode"
                     type="text"
-                    placeholder="Post Code"
+                    placeholder="Enter delivery date"
                     className="bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-gray-600"
                   />
                 </div>
