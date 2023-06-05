@@ -9,7 +9,7 @@ const ServiceCard = ({ index, title, icon }) => (
   <Tilt className="xs:w-[250px] w-full">
     <motion.div
       variants={fadeIn("right", "spring", index * 0.5, 0.75)}
-      className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card"
+      className="w-full green-pink-gradient p-[1px] rounded-[20px] "
     >
       <div
         options={{
@@ -25,7 +25,7 @@ const ServiceCard = ({ index, title, icon }) => (
           className="w-16 h-16 object-contain"
         />
 
-        <h3 className="text-white text-[20px] font-bold text-center">
+        <h3 className="text-secondaryTheme text-[20px] font-bold text-center">
           {title}
         </h3>
       </div>
@@ -51,7 +51,7 @@ const About = () => {
 
       {/* <motion.p
         variants={fadeIn("", "", 0.1, 1)}
-        className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
+        className="mt-4 text-secondaryTheme text-[17px] max-w-3xl leading-[30px]"
       >
         I'm a skilled software developer with experience in TypeScript and
         JavaScript, and expertise in frameworks like React, Node.js, and

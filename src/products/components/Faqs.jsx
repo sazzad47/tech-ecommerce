@@ -61,7 +61,7 @@ const Faqs = () => {
         {faqsList.map((item, i) => (
           <div key={i} className="accordion__item bg-black-gradient">
             <header
-              className="accordion__header text-white"
+              className="accordion__header text-secondaryTheme"
               onClick={() => toggleItem(i)}
             >
               <h3 className="accordion__title">{item.question}</h3>
@@ -70,7 +70,7 @@ const Faqs = () => {
 
             <Collapse isOpened={openItem === i}>
               <div className="accordion__content">
-                <p className="accordion__description text-white">
+                <p className="accordion__description text-secondaryTheme">
                   {item.answer}
                 </p>
               </div>

@@ -5,7 +5,7 @@ function DesignCard({ img, name }) {
     <Container>
       <img src={img} alt="project" className="absolute w-full h-full" />
       <div className="p-4 cursor-pointer details absolute top-[-100%] left-0 h-full w-full flex flex-col items-center justify-center bg-[#b004b0b7]">
-        <h1 className="text-white font-bold text-3xl text-center">{name}</h1>
+        <h1 className="text-secondaryTheme font-bold text-3xl text-center">{name}</h1>
       </div>
     </Container>
   );

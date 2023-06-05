@@ -15,11 +15,11 @@ export const ProjectCard = ({ index, name, description, image }) => {
         </div>
 
         <div className="mt-5">
-          <div className="text-white font-bold text-[24px] flex justify-between items-center">
+          <div className="text-secondaryTheme font-bold text-[24px] flex justify-between items-center">
             <h3>{name}</h3>
             <h3>$1000</h3>
           </div>
-          <p className="mt-2 text-secondary text-[14px]">{description}</p>
+          <p className="mt-2 text-secondaryTheme text-[14px]">{description}</p>
         </div>
 
         <div className="mt-4 flex justify-between items-center">

@@ -8,25 +8,25 @@ const Hero = ({scrollToBottom}: {scrollToBottom: ()=> void}) => {
   return (
     <section
       id="home"
-      className={`relative flex md:flex-row justify-center flex-col ${styles.paddingY} xl:px-0 sm:px-16 px-6 `}
+      className={`relative flex md:flex-row justify-center flex-col xl:px-0 sm:px-16 px-6 `}
     >
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 3, ease: easeOut }}
-        className={`flex-1 ${styles.flexStart} flex-col z-[10]`}
+        className={`flex-1 mt-5 md:mt-0 ${styles.flexStart} flex-col`}
       >
-        <div className="text-white text-xl flex flex-row items-center py-[6px] mb-2">
+        <div className="text-secondaryTheme text-xl flex flex-row items-center py-[6px] mb-2">
           Hi there, my name is
         </div>
 
         <div className="flex flex-row justify-between items-center w-full">
-          <h1 className="text-gradient flex-1 font-poppins font-semibold ss:text-[72px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]">
+          <h1 className="text-gradient flex-1 font-poppins font-semibold ss:text-[72px] text-[52px] text-secondaryTheme ss:leading-[100.8px] leading-[75px]">
             Sazzad Hossen
           </h1>
         </div>
 
-        <h1 className="font-poppins font-semibold ss:text-[38px] text-[42px] text-white ss:leading-[80.8px] leading-[55px] w-full">
+        <h1 className="font-poppins font-semibold ss:text-[38px] text-[42px] text-secondaryTheme ss:leading-[80.8px] leading-[55px] w-full">
           I am a software developer
         </h1>
         <div className="mt-10 flex items-center gap-10">
@@ -64,7 +64,7 @@ const Hero = ({scrollToBottom}: {scrollToBottom: ()=> void}) => {
           ))}
         </div>
       </div>
-      <div onClick={scrollToBottom} className="cursor-pointer absolute bottom-[5rem] right-1/2 w-[35px] h-[64px] rounded-3xl border-4 border-secondary hidden md:flex justify-center items-start p-2">
+      <div onClick={scrollToBottom} className="cursor-pointer absolute bottom-[5rem] right-1/2 w-[35px] h-[64px] rounded-3xl border-4 border-secondaryTheme hidden md:flex justify-center items-start p-2">
         <motion.div
           animate={{
             y: [0, 24, 0],
@@ -74,7 +74,7 @@ const Hero = ({scrollToBottom}: {scrollToBottom: ()=> void}) => {
             repeat: Infinity,
             repeatType: "loop",
           }}
-          className="w-3 h-3 rounded-full bg-secondary mb-1"
+          className="w-3 h-3 rounded-full bg-secondaryTheme mb-1"
         />
       </div>
     </section>

@@ -11,13 +11,15 @@ const Navbar = () => {
   const [showAppMenu, setShowAppMenu] = useState(false);
 
   return (
-    <nav className="w-full flex py-6 justify-between items-center navbar">
-      <img src={logo} alt="logo" className="w-[50px] h-[42px]" />
+    <nav className="h-[12vh] w-full bg-primaryTheme flex py-6 justify-between items-center navbar fixed top-0 z-10 sm:px-16 px-6">
+      <Link to="/">
+        <img src={logo} alt="logo" className="w-[50px] h-[42px]" />
+      </Link>
       <div className="relative h-full ml-8 sm:ml-16 sidebar z-[100]">
         <div className="pulse cursor-pointer">
           <AiFillAppstore
             onClick={() => setShowAppMenu(!showAppMenu)}
-            className="text-white text-2xl"
+            className="text-secondaryTheme text-2xl"
           />
         </div>
         <div
@@ -30,7 +32,7 @@ const Navbar = () => {
               <li
                 key={app.id}
                 className={`w-full font-poppins font-medium cursor-pointer text-[16px] ${
-                  activeApp === app.title ? "text-white" : "text-dimWhite"
+                  activeApp === app.title ? "text-secondaryTheme" : "text-dimWhite"
                 } ${index === appItems.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setActiveApp(app.title)}
               >
@@ -48,11 +50,14 @@ const Navbar = () => {
           <li
             key={nav.id}
             className={`font-poppins font-normal cursor-pointer text-[16px] ${
-              activePage === nav.title ? "text-white" : "text-dimWhite"
+              activePage === nav.title ? "text-secondaryTheme" : "text-dimWhite"
             } ${index === navLinks.length - 1 ? "mr-0" : "mr-10"}`}
             onClick={() => setActivePage(nav.title)}
           >
-            <Link className="flex flex-col items-center gap-2" to="/">
+            <Link
+              className="flex flex-col items-center gap-2"
+              to={`/${nav.id}`}
+            >
               {" "}
               <div className="text-lg">
                 {" "}
@@ -82,11 +87,11 @@ const Navbar = () => {
               <li
                 key={nav.id}
                 className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                  activePage === nav.title ? "text-white" : "text-dimWhite"
+                  activePage === nav.title ? "text-secondaryTheme" : "text-dimWhite"
                 } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setActivePage(nav.title)}
               >
-                <a href={`#${nav.id}`}>{nav.title}</a>
+                <Link to={`/${nav.id}`}>{nav.title}</Link>
               </li>
             ))}
           </ul>

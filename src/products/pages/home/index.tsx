@@ -3,8 +3,6 @@ import animateScrollTo from "animated-scroll-to";
 import {
   Business,
   CTA,
-  Footer,
-  Navbar,
   Stats,
   Hero,
   Projects,
@@ -57,20 +55,16 @@ const App = () => {
   };
 
   return (
-    <div id="section-id" className="bg-primary w-full overflow-hidden">
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Navbar />
-        </div>
-      </div>
+    <div id="section-id" className="bg-primaryTheme w-full overflow-hidden">
+      
 
-      <div className={`bg-primary ${styles.flexStart}`}>
+      <div className={`bg-primaryTheme ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
           <Hero scrollToBottom={scrollToBottom} />
         </div>
       </div>
 
-      <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
+      <div className={`bg-primaryTheme ${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <About />
           <Skills />
@@ -85,7 +79,6 @@ const App = () => {
             <Contact />
             <StarsCanvas />
           </div>
-          <Footer />
         </div>
       </div>
     </div>
