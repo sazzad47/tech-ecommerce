@@ -53,7 +53,7 @@ const Faqs = () => {
   ];
 
   return (
-    <section className="w-full flex flex-col justify-center items-center">
+    <section className="w-full mt-10 flex flex-col justify-center items-center">
       <p className={`${styles.heading2} text-center`}>
         Frequently Asked Questions
       </p>
