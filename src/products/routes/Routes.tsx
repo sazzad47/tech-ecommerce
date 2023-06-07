@@ -9,13 +9,14 @@ import Security from "../pages/security";
 
 const routes = [
     { path: "/", component: <Home /> },
-    { path: "/home", component: <Home /> },
-    { path: "/technology", component: <Technology /> },
-    { path: "/checkout", component: <Checkout /> },
-    { path: "/products/:id", component: <ProductDetails /> },
-    { path: "/order", component: <Order /> },
-    { path: "/services", component: <Services /> },
-    { path: "/security", component: <Security /> },
+    { path: "/it", component: <Home /> },
+    { path: "/it/home", component: <Home /> },
+    { path: "/it/technology", component: <Technology /> },
+    { path: "/it/checkout", component: <Checkout /> },
+    { path: "/it/products/:id", component: <ProductDetails /> },
+    { path: "/it/order", component: <Order /> },
+    { path: "/it/services", component: <Services /> },
+    { path: "/it/security", component: <Security /> },
 ]
 
 export {routes};

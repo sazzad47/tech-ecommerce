@@ -65,9 +65,9 @@ export const navLinks = [
 ];
 
 export const appItems = [
-  { id: "it", title: "Information Technology", route: "/" },
-  { id: "ce", title: "Civil Engineering", route: "/" },
-  { id: "gd", title: "Global Donation", route: "/" },
+  { id: "it", title: "Information Technology", route: "/it" },
+  { id: "ce", title: "Civil Engineering", route: "/ce" },
+  { id: "gd", title: "Global Donation", route: "/gd" },
 ];
 
 export const services = [

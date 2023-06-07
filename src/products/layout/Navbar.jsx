@@ -6,7 +6,7 @@ import { AiFillAppstore } from "react-icons/ai";
 
 const Navbar = () => {
   const [activePage, setActivePage] = useState("Home");
-  const [activeApp, setActiveApp] = useState("IT");
+  const [activeApp, setActiveApp] = useState("it");
   const [showNavMenu, setShowNavMenu] = useState(false);
   const [showAppMenu, setShowAppMenu] = useState(false);
 
@@ -36,7 +36,7 @@ const Navbar = () => {
                 } ${index === appItems.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setActiveApp(app.title)}
               >
-                <Link to="/">
+                <Link to={`${app.route}`}>
                   <div className="relative w-full h-full">{app.title}</div>
                 </Link>
               </li>
@@ -56,7 +56,7 @@ const Navbar = () => {
           >
             <Link
               className="flex flex-col items-center gap-2"
-              to={`/${nav.id}`}
+              to={`/it/${nav.id}`}
             >
               {" "}
               <div className="text-lg">
@@ -91,7 +91,7 @@ const Navbar = () => {
                 } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setActivePage(nav.title)}
               >
-                <Link to={`/${nav.id}`}>{nav.title}</Link>
+                <Link to={`/it/${nav.id}`}>{nav.title}</Link>
               </li>
             ))}
           </ul>
