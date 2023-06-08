@@ -56,7 +56,7 @@ const Navbar = () => {
           >
             <Link
               className="flex flex-col items-center gap-2"
-              to={`/${nav.id}`}
+              to={`/ce/${nav.id}`}
             >
               {" "}
               <div className="text-lg">
@@ -91,7 +91,7 @@ const Navbar = () => {
                 } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setActivePage(nav.title)}
               >
-                <Link to={`/${nav.id}`}>{nav.title}</Link>
+                <Link to={`/ce/${nav.id}`}>{nav.title}</Link>
               </li>
             ))}
           </ul>

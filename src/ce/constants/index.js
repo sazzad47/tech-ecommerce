@@ -60,7 +60,7 @@ export const navLinks = [
   },
   {
     id: "company",
-    title: "Company Now",
+    title: "Company",
     icon: BsFillCartPlusFill,
   },
   {
