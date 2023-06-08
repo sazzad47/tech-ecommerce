@@ -1,5 +1,4 @@
 import styles from "../../style";
-import coverPhoto from "../../images/hero-banner.png";
 import Button, { PrimaryButton } from "../../components/Button";
 import { easeOut, motion } from "framer-motion";
 import HeroSlider from "./HeroSlider";
@@ -39,14 +38,6 @@ const Hero = ({scrollToBottom}: {scrollToBottom: ()=> void}) => {
       <div
         className={`hero-cover-photo flex-1 relative hidden md:flex ${styles.flexCenter} md:my-0 my-10 relative`}
       >
-        {/* <motion.img
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
-          src={coverPhoto}
-          alt="cover-photo"
-          className="w-[80%] h-[80%] relative z-[5]"
-        /> */}
        
         <HeroSlider />
       
