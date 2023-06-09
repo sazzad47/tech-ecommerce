@@ -36,7 +36,7 @@ const Topbar = () => {
           <SelectContent>
             <SelectItem value="Newest">Newest</SelectItem>
             <SelectItem value="Oldest">Oldest</SelectItem>
-            <SelectItem value="Best Seller">Best Seller</SelectItem>
+            <SelectItem value="Emergency">Emergency</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -72,6 +72,7 @@ const Sidebar = ({ setOpenSidebar }: { setOpenSidebar: Function }) => {
           setOpenMegaMenu={setOpenMegaMenu}
           setCurrentMegaMenu={setCurrentMegaMenu}
           setOpenSidebar={setOpenSidebar}
+          setOpenMainMenu={setOpenMainMenu}
         />
       </CSSTransition>
       <CSSTransition
@@ -97,10 +98,12 @@ const MainMenu = ({
   setOpenMegaMenu,
   setCurrentMegaMenu,
   setOpenSidebar,
+  setOpenMainMenu,
 }: {
   setOpenMegaMenu: Function;
   setCurrentMegaMenu: Function;
   setOpenSidebar: Function;
+  setOpenMainMenu: Function;
 }) => {
   return (
     <div className="">
@@ -120,14 +123,19 @@ const MainMenu = ({
         {menus.map((megaMenu) => (
           <div
             onClick={() => {
-              setCurrentMegaMenu(megaMenu.title);
-              setOpenMegaMenu(true);
+              if (megaMenu.submenus) {
+                setCurrentMegaMenu(megaMenu.title);
+                setOpenMegaMenu(true);
+              } else {
+                setOpenSidebar(false);
+                setOpenMainMenu(false);
+              }
             }}
             key={megaMenu.id}
             className="cursor-pointer flex items-center gap-2 p-2 hover:bg-primaryTheme"
           >
             <Typography className="p-0 text-sm">{megaMenu.title}</Typography>
-            <ChevronRightIcon />
+            {megaMenu.submenus && <ChevronRightIcon />}
           </div>
         ))}
       </div>

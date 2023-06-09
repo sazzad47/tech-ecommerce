@@ -18,19 +18,14 @@ import {
   man2,
 } from "../assets";
 import { AiOutlineHome } from "react-icons/ai";
-import { BsFillCartPlusFill } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
-import { SiSemanticweb } from "react-icons/si";
-import { ImRoad } from "react-icons/im";
-import { MdHomeWork } from "react-icons/md";
-import { HiOfficeBuilding } from "react-icons/hi";
-import { SiMarketo } from "react-icons/si";
-import { FaMosque } from "react-icons/fa";
-import {GiArchBridge} from "react-icons/gi";
 import { MdMiscellaneousServices, MdOutlineSecurity } from "react-icons/md";
 import hero1 from "../images/hero1.png";
 import hero2 from "../images/hero2.png";
 import hero3 from "../images/hero3.png";
+import { BiDonateBlood } from "react-icons/bi";
+import { AiFillFund } from "react-icons/ai";
+import { IoMdBusiness } from "react-icons/io";
 
 export const navLinks = [
   {
@@ -39,14 +34,14 @@ export const navLinks = [
     icon: AiOutlineHome,
   },
   {
-    id: "donate",
-    title: "Donate",
-    icon: SiSemanticweb,
+    id: "causes",
+    title: "Causes",
+    icon: AiFillFund,
   },
   {
-    id: "fund",
-    title: "Fund",
-    icon: SiSemanticweb,
+    id: "donate",
+    title: "Donate",
+    icon: BiDonateBlood,
   },
   {
     id: "services",
@@ -61,7 +56,7 @@ export const navLinks = [
   {
     id: "company",
     title: "Company",
-    icon: BsFillCartPlusFill,
+    icon: IoMdBusiness,
   },
   {
     id: "profile",
@@ -76,32 +71,6 @@ export const appItems = [
   { id: "gd", title: "Global Donation", route: "/gd" },
 ];
 
-export const services = [
-  {
-    title: "House Design",
-    icon: <MdHomeWork />,
-  },
-  {
-    title: "Office Design",
-    icon: <HiOfficeBuilding />,
-  },
-  {
-    title: "Market Design",
-    icon: <SiMarketo />,
-  },
-  {
-    title: "Mosque Design",
-    icon: <FaMosque />,
-  },
-  {
-    title: "Road Design",
-    icon: <ImRoad />,
-  },
-  {
-    title: "Bridge Design",
-    icon: <GiArchBridge />,
-  },
-];
 
 export const causes = [
   {
@@ -115,7 +84,7 @@ export const causes = [
     name: "Beautiful Apartments",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-    
+
     image: hero2,
     source_code_link: "https://github.com/",
   },
@@ -137,7 +106,7 @@ export const causes = [
     name: "Beautiful Apartments",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-    
+
     image: hero2,
     source_code_link: "https://github.com/",
   },

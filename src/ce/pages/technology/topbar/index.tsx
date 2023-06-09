@@ -72,6 +72,7 @@ const Sidebar = ({ setOpenSidebar }: { setOpenSidebar: Function }) => {
           setOpenMegaMenu={setOpenMegaMenu}
           setCurrentMegaMenu={setCurrentMegaMenu}
           setOpenSidebar={setOpenSidebar}
+          setOpenMainMenu={setOpenMainMenu}
         />
       </CSSTransition>
       <CSSTransition
@@ -97,10 +98,12 @@ const MainMenu = ({
   setOpenMegaMenu,
   setCurrentMegaMenu,
   setOpenSidebar,
+  setOpenMainMenu
 }: {
   setOpenMegaMenu: Function;
   setCurrentMegaMenu: Function;
   setOpenSidebar: Function;
+  setOpenMainMenu: Function;
 }) => {
   return (
     <div className="">
@@ -120,8 +123,13 @@ const MainMenu = ({
         {menus.map((megaMenu) => (
           <div
             onClick={() => {
-              setCurrentMegaMenu(megaMenu.title);
-              setOpenMegaMenu(true);
+              if (megaMenu.submenus) {
+                setCurrentMegaMenu(megaMenu.title);
+                setOpenMegaMenu(true);
+              } else {
+                setOpenSidebar(false);
+                setOpenMainMenu(false);
+              }
             }}
             key={megaMenu.id}
             className="cursor-pointer flex items-center gap-2 p-2 hover:bg-primaryTheme"

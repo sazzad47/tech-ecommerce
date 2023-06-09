@@ -1,5 +1,5 @@
 import styles from "../../style";
-import AllServices from "./Services";
+
 
 const Services = () => {
  
@@ -12,7 +12,7 @@ const Services = () => {
           Services
         </h1>
       </div>
-      <AllServices/>
+    
     
     </div>
   );

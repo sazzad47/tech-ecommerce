@@ -9,7 +9,7 @@ import {
 import { BsInfoCircleFill } from "react-icons/bs";
 import { AiFillEye } from "react-icons/ai";
 import { Button } from "../../components/ui/button";
-import { menus } from "../technology/topbar/menus";
+import { menus } from "../donate/topbar/menus";
 import { useState } from "react";
 
 const fileURL =
