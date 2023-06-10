@@ -19,12 +19,8 @@ const Description = () => {
           </Button>
         </div>
         <p className="text-secondaryTheme">
-          Introducing our cutting-edge multipurpose admin dashboard, a powerful
-          solution designed to streamline your administrative tasks and empower
-          your organization like never before. Packed with an array of
-          innovative features, our dashboard is built to enhance productivity,
-          improve efficiency, and provide you with comprehensive control over
-          your system or organization.
+          This beautiful home has many stylish interiors with blue hues and
+          tailored furniture.
         </p>
       </div>
     </div>

@@ -36,7 +36,7 @@ const Topbar = () => {
           <SelectContent>
             <SelectItem value="Newest">Newest</SelectItem>
             <SelectItem value="Oldest">Oldest</SelectItem>
-            <SelectItem value="Best Seller">Best Seller</SelectItem>
+            <SelectItem value="Emergency">Emergency</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -98,7 +98,7 @@ const MainMenu = ({
   setOpenMegaMenu,
   setCurrentMegaMenu,
   setOpenSidebar,
-  setOpenMainMenu
+  setOpenMainMenu,
 }: {
   setOpenMegaMenu: Function;
   setCurrentMegaMenu: Function;
@@ -135,7 +135,7 @@ const MainMenu = ({
             className="cursor-pointer flex items-center gap-2 p-2 hover:bg-primaryTheme"
           >
             <Typography className="p-0 text-sm">{megaMenu.title}</Typography>
-            <ChevronRightIcon />
+            {megaMenu.submenus && <ChevronRightIcon />}
           </div>
         ))}
       </div>

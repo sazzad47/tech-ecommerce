@@ -20,14 +20,18 @@ import {
 import { AiOutlineHome } from "react-icons/ai";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
-import { SiSemanticweb } from "react-icons/si";
+import { IoMdBusiness } from "react-icons/io";
 import { ImRoad } from "react-icons/im";
 import { MdHomeWork } from "react-icons/md";
 import { HiOfficeBuilding } from "react-icons/hi";
 import { SiMarketo } from "react-icons/si";
 import { FaMosque } from "react-icons/fa";
-import {GiArchBridge} from "react-icons/gi";
-import { MdMiscellaneousServices, MdOutlineSecurity } from "react-icons/md";
+import { GiArchBridge } from "react-icons/gi";
+import {
+  MdMiscellaneousServices,
+  MdOutlineSecurity,
+  MdArchitecture,
+} from "react-icons/md";
 import design1 from "../images/design1.jpg";
 import design2 from "../images/design2.jpg";
 import design3 from "../images/design3.jpg";
@@ -41,7 +45,7 @@ export const navLinks = [
   {
     id: "architecture",
     title: "Architecture",
-    icon: SiSemanticweb,
+    icon: MdArchitecture,
   },
   {
     id: "services",
@@ -61,7 +65,7 @@ export const navLinks = [
   {
     id: "company",
     title: "Company",
-    icon: BsFillCartPlusFill,
+    icon: IoMdBusiness,
   },
   {
     id: "profile",
@@ -115,7 +119,7 @@ export const projects = [
     name: "Beautiful Apartments",
     description:
       "This beautiful home has many stylish interiors with blue hues and tailored furniture.",
-    
+
     image: design2,
     source_code_link: "https://github.com/",
   },

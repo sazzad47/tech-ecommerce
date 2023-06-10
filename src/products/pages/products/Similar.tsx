@@ -1,41 +1,35 @@
-import styles from "../../../style";
-import { projects } from "../../../constants";
-import { motion } from "framer-motion";
-import { fadeIn } from "../../../components/utils/motion";
-import Button, { PrimaryButton } from "../../../components/Button";
 import { Link } from "react-router-dom";
+import Button, { PrimaryButton } from "../../components/Button";
+import styles from "../../style";
+import { motion } from "framer-motion";
+import { fadeIn } from "../../components/utils/motion";
+import { projects } from "../../constants";
 
-const Designs = () => {
+const Similar = () => {
   return (
-    <>
-      <div className="text-secondaryTheme">
-        <div
-          className={`w-full flex justify-between items-center md:flex-row flex-col mb-6 relative z-[1]`}
-        >
-          <h2 className={styles.heading2}>Designs</h2>
-        </div>
-        <div className="min-w-full overflow-x-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-            {projects.map((project, index) => (
-              <DesignCard key={`project-${index}`} index={index} {...project} />
-            ))}
-          </div>
+    <div className="text-secondaryTheme">
+      <h3 className={`${styles.heading2}`}>Similar Templates</h3>
+      <div className="min-w-full overflow-x-auto mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          {projects.map((project, index) => (
+            <TemplateCard key={`project-${index}`} index={index} {...project} />
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default Designs;
+export default Similar;
 
-interface DesignCardProps {
+interface TemplateCardProps {
   index: number;
   name: string;
   description: string;
   image: string;
 }
 
-export const DesignCard: React.FC<DesignCardProps> = ({
+export const TemplateCard: React.FC<TemplateCardProps> = ({
   index,
   name,
   description,
@@ -61,10 +55,10 @@ export const DesignCard: React.FC<DesignCardProps> = ({
         </div>
 
         <div className="mt-4 flex justify-between items-center">
-          <Link to="/products/123">
+          <Link to="/it/products/123">
             <PrimaryButton styles=""> View details </PrimaryButton>
           </Link>
-          <Link to="/checkout">
+          <Link to="/it/checkout">
             <Button styles="">Buy Now</Button>
           </Link>
         </div>

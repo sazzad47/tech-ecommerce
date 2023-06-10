@@ -1,36 +1,26 @@
-import styles from "../../../style";
-import { causes } from "../../../constants";
-import { motion } from "framer-motion";
-import { fadeIn } from "../../../components/utils/motion";
-import Button, { PrimaryButton } from "../../../components/Button";
 import { Link } from "react-router-dom";
+import Button, { PrimaryButton } from "../../components/Button";
+import styles from "../../style";
+import { motion } from "framer-motion";
+import { fadeIn } from "../../components/utils/motion";
+import { causes } from "../../constants";
 
-const Causes = ({ title }: { title: string }) => {
+const Emergency = () => {
   return (
-    <>
-      <div className="text-secondaryTheme">
-        <div
-          className={`w-full flex justify-between items-center md:flex-row flex-col mb-6 relative z-[1]`}
-        >
-          <h2 className={styles.heading2}>{title}</h2>
-        </div>
-        <div className="min-w-full overflow-x-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-            {causes.map((project, index) => (
-              <TemplateCard
-                key={`project-${index}`}
-                index={index}
-                {...project}
-              />
-            ))}
-          </div>
+    <div className="text-secondaryTheme">
+      <h3 className={`${styles.heading2}`}>Emergency Causes</h3>
+      <div className="min-w-full overflow-x-auto mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          {causes.map((project, index) => (
+            <TemplateCard key={`project-${index}`} index={index} {...project} />
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default Causes;
+export default Emergency;
 
 interface TemplateCardProps {
   index: number;
@@ -71,8 +61,12 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
           <p className="mt-2 text-secondaryTheme text-[14px]">{description}</p>
 
           <div className="mt-4 flex justify-between items-center">
-            <Link to="/gd/causes/123"><PrimaryButton> View </PrimaryButton></Link>
-            <Link to="/gd/donate"><Button>Donate</Button></Link>
+            <Link to="/gd/causes/123">
+              <PrimaryButton> View </PrimaryButton>
+            </Link>
+            <Link to="/gd/donate">
+              <Button>Donate</Button>
+            </Link>
           </div>
         </div>
       </div>

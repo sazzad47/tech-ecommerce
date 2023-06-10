@@ -7,11 +7,11 @@ import { useState } from "react";
 import { BsCartCheckFill } from "react-icons/bs";
 import PriceBox from "./PriceBox";
 import Description from "./Description";
-import { Button } from "../../components/ui/button";
 import styles from "../../style";
-import { jobit } from "../../assets";
-import { carrent } from "../../assets";
-import { tripguide } from "../../assets";
+import design1 from "../../images/design1.jpg";
+import design2 from "../../images/design2.jpg";
+import design3 from "../../images/design3.jpg";
+import Similar from "./Similar";
 
 const Product: React.FC = () => {
   const [slideNumber, setSlideNumber] = useState<number>(0);
@@ -19,22 +19,22 @@ const Product: React.FC = () => {
 
   const photos = [
     {
-      src: jobit,
+      src: design1,
     },
     {
-      src: carrent,
+      src: design2,
     },
     {
-      src: tripguide,
+      src: design3,
     },
     {
-      src: carrent,
+      src: design1,
     },
     {
-      src: tripguide,
+      src: design2,
     },
     {
-      src: jobit,
+      src: design3,
     },
   ];
 
@@ -74,20 +74,19 @@ const Product: React.FC = () => {
             />
           </div>
         )}
-        <div className={`${styles.paddingX} ${styles.paddingY} w-full flex flex-col gap-7`}>
+        <div
+          className={`${styles.paddingX} ${styles.paddingY} w-full flex flex-col gap-7`}
+        >
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-5 md:gap-0">
             <div className="flex flex-col">
               <h1 className={`text-secondaryTheme ${styles.heading2}`}>
-                Multipurpose Admin Dashboard
+                Modern Apertment
               </h1>
               <div className="flex items-center gap-3 text-secondaryTheme">
                 <BsCartCheckFill />
                 <span>3,436 sales</span>
               </div>
             </div>
-            <Button className="">
-              Live Preview
-            </Button>
           </div>
 
           <div className="grid grid-cols-3 gap-2">
@@ -102,13 +101,18 @@ const Product: React.FC = () => {
               </div>
             ))}
           </div>
-          <div className="w-full flex flex-col md:flex-row justify-between gap-5 items-start">
-            <div className="w-full md:max-w-2xl order-2 md:order-1">
-              <Description />
+          <div className="w-full flex flex-col sm:flex-row gap-5">
+            <div className="w-full md:w-2/3">
+              <div className="w-full order-2 md:order-1">
+                <Description />
+              </div>
             </div>
-            <div className="bg-black-gradient-2 order-1 md:order-2">
+            <div className="w-full md:w-1/3 flex flex-col gap-5 mt-5 sm:mt-0">
               <PriceBox />
             </div>
+          </div>
+          <div>
+            <Similar />
           </div>
         </div>
       </div>

@@ -65,8 +65,8 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
         </div>
 
         <div className="mt-4 flex justify-between items-center">
-          <Link to="/products/123"><PrimaryButton styles=""> View details </PrimaryButton></Link>
-          <Link to="/checkout"><Button styles="">Buy Now</Button></Link>
+          <Link to="/it/products/123"><PrimaryButton styles=""> View details </PrimaryButton></Link>
+          <Link to="/it/checkout"><Button styles="">Buy Now</Button></Link>
         </div>
       </div>
     </motion.div>

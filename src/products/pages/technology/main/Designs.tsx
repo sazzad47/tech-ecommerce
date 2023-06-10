@@ -61,10 +61,10 @@ export const DesignCard: React.FC<DesignCardProps> = ({
         </div>
 
         <div className="mt-4 flex justify-between items-center">
-          <Link to="/products/123">
+          <Link to="/it/products/123">
             <PrimaryButton styles=""> View details </PrimaryButton>
           </Link>
-          <Link to="/checkout">
+          <Link to="/it/checkout">
             <Button styles="">Buy Now</Button>
           </Link>
         </div>

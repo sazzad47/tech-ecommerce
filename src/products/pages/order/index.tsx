@@ -1,208 +1,86 @@
+import * as React from "react";
+import { useTheme } from "@mui/material/styles";
+import MobileStepper from "@mui/material/MobileStepper";
+import Button from "@mui/material/Button";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import styles from "../../style";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../../components/ui/select";
-import { BsInfoCircleFill } from "react-icons/bs";
-import { AiFillEye } from "react-icons/ai";
-import { Button } from "../../components/ui/button";
-import { menus } from "../technology/topbar/menus";
-import { useState } from "react";
+import ContactInfo from "./ContactInfo";
+import ProjectDetails from "./ProjectDetails";
 
-const fileURL =
-  "https://drive.google.com/file/d/1-v9NDQh1rlmLwNvRC5DClHcN6sadqgbF/view?usp=sharing";
+const steps = [
+  {
+    label: "Contact Information",
+    content: <ContactInfo/>,
+  },
+  {
+    label: "Project Details",
+    content: <ProjectDetails/>,
+  },
+];
 
-const Order = () => {
-  const [category, setCategory] = useState<string>("");
+export default function TextMobileStepper() {
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const maxSteps = steps.length;
 
-  const categories = menus.map((item, index) => (
-    <SelectItem key={index} value={item.title || ""}>
-      {item.title}
-    </SelectItem>
-  ));
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
 
-  const subCategories = menus
-    .find((item) => item.title === category)
-    ?.submenus?.map((item, index) => (
-      <SelectItem key={index} value={item.title || ""}>
-        {item.title}
-      </SelectItem>
-    ));
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
 
   return (
-    <div
-      className={`${styles.paddingX} ${styles.paddingY} bg-primaryTheme text-secondaryTheme`}
-    >
+    <div className={`${styles.paddingX} ${styles.paddingY} bg-primaryTheme text-secondaryTheme`}>
       <div className="">
         <h1 className={`flex items-center justify-center ${styles.heading2}`}>
           Order
         </h1>
       </div>
-      <div className="">
-        <div className="flex flex-col w-full px-0 mx-auto md:flex-row">
-          <div className="flex flex-col md:w-full">
-            <form className="justify-center w-full mx-auto" method="post">
-              <div className="">
-                <div className="mt-4">
-                  <div className="space-x-0 space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
-                    <div className="w-full lg:w-1/2">
-                      <label
-                        htmlFor="firstName"
-                        className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                      >
-                        First Name
-                      </label>
-                      <input
-                        name="firstName"
-                        type="text"
-                        placeholder="First Name"
-                        className="bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-gray-600 "
-                      />
-                    </div>
-                    <div className="w-full lg:w-1/2 ">
-                      <label
-                        htmlFor="firstName"
-                        className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                      >
-                        Last Name
-                      </label>
-                      <input
-                        name="Last Name"
-                        type="text"
-                        placeholder="Last Name"
-                        className="bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-gray-600"
-                      />
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <div className="w-full">
-                      <label
-                        htmlFor="Email"
-                        className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                      >
-                        Email
-                      </label>
-                      <input
-                        name="Last Name"
-                        type="text"
-                        placeholder="Email"
-                        className="bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-gray-600"
-                      />
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <div className="space-x-0 space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
-                      <div className="w-full lg:w-1/2">
-                        <label
-                          htmlFor="firstName"
-                          className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                        >
-                          Choose category
-                        </label>
-                        <Select onValueChange={setCategory}>
-                          <SelectTrigger className="w-full bg-black-gradient-2">
-                            <SelectValue placeholder="Categories" />
-                          </SelectTrigger>
-                          <SelectContent>{categories}</SelectContent>
-                        </Select>
-                      </div>
-                      <div className="w-full lg:w-1/2 ">
-                        <label
-                          htmlFor="firstName"
-                          className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                        >
-                          Choose your product
-                        </label>
-                        <Select disabled={!category}>
-                          <SelectTrigger className="w-full bg-black-gradient-2">
-                            <SelectValue placeholder="Products" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {subCategories}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="relative pt-3 xl:pt-6">
-                  <label
-                    htmlFor="note"
-                    className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                  >
-                    Describe your order
-                  </label>
-                  <textarea
-                    name="note"
-                    className="flex items-center bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-600"
-                    rows={4}
-                    placeholder="Describe your order"
-                  ></textarea>
-                </div>
-                <div className="w-full mt-4">
-                  <div className="w-full">
-                    <ul className="flex flex-col gap-3 text-secondaryTheme">
-                      <li className="flex items-center gap-3">
-                        <BsInfoCircleFill /> Download this file and upload it in
-                        the following box after filling it out.
-                      </li>
-                      <li>
-                        <button
-                          onClick={() => window.open(fileURL, "_blank")}
-                          className="flex items-center gap-3 px-4 py-3 bg-btn-gradient"
-                        >
-                          {" "}
-                          <AiFillEye /> View file
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <div className="block mb-3 text-sm font-semibold text-secondaryTheme">
-                    Upload
-                  </div>
-                  <label className="block">
-                    <span className="sr-only">Upload your file</span>
-                    <input
-                      type="file"
-                      className=" block w-full text-sm 
-                    file:mr-4 file:py-2 file:px-4
-                    file:rounded-md file:border-0 file:h-[3rem] file:cursor-pointer
-                    file:text-sm file:font-semibold
-                    file:bg-gray-900 file:text-white
-                    hover:file:bg-gray-900/2 bg-btn-gradient cursor-pointer rounded-md text-secondaryTheme h-[3rem]"
-                    />
-                  </label>
-                </div>
-
-                <div className="w-full mt-4">
-                  <label
-                    htmlFor="postcode"
-                    className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                  >
-                    Delivery Date
-                  </label>
-                  <input
-                    name="postcode"
-                    type="text"
-                    placeholder="Enter delivery date"
-                    className="bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-gray-600"
-                  />
-                </div>
-                <div className="mt-4">
-                  <Button className="w-full">Submit</Button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+      <h4 className="text-xl font-bold">
+      {steps[activeStep].label}
+      </h4>
+      <div
+        className="h-[255] max-w-[400] w-full mt-5"
+        
+      >
+        {steps[activeStep].content}
       </div>
+      <MobileStepper
+        variant="text"
+        steps={maxSteps}
+        position="static"
+        activeStep={activeStep}
+        sx={{background: "transparent", color: "white", marginTop: "3rem", padding: 0}}
+        nextButton={
+          <Button
+            size="small"
+            onClick={handleNext}
+            disabled={activeStep === maxSteps - 1}
+            className="flex items-center text-secondaryTheme"
+          >
+            <span className="mt-[2px]">Next</span>
+            {theme.direction === "rtl" ? (
+              <KeyboardArrowLeft />
+            ) : (
+              <KeyboardArrowRight />
+            )}
+          </Button>
+        }
+        backButton={
+          <Button size="small" className="text-secondaryTheme" onClick={handleBack} disabled={activeStep === 0}>
+            {theme.direction === "rtl" ? (
+              <KeyboardArrowRight />
+            ) : (
+              <KeyboardArrowLeft />
+            )}
+            Back
+          </Button>
+        }
+      />
     </div>
+   
   );
-};
-
-export default Order;
+}

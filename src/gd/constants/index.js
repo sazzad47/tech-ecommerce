@@ -24,7 +24,6 @@ import hero1 from "../images/hero1.png";
 import hero2 from "../images/hero2.png";
 import hero3 from "../images/hero3.png";
 import { BiDonateBlood } from "react-icons/bi";
-import { AiFillFund } from "react-icons/ai";
 import { IoMdBusiness } from "react-icons/io";
 
 export const navLinks = [
@@ -35,11 +34,6 @@ export const navLinks = [
   },
   {
     id: "causes",
-    title: "Causes",
-    icon: AiFillFund,
-  },
-  {
-    id: "donate",
     title: "Donate",
     icon: BiDonateBlood,
   },
