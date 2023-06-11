@@ -1,0 +1,18 @@
+.bg-profile-btn {
+  background: linear-gradient(
+    144.39deg,
+    #ffffff -278.56%,
+    #6d6d6d -78.47%,
+    #11101d 91.61%
+  );
+  color: #fff;
+  border-radius: 10px;
+}
+.bg-profile-btn:hover {
+  background: linear-gradient(
+    144.39deg,
+    #ffffff -278.56%,
+    #6d6d6d -258.47%,
+    #11101d 91.61%
+  );
+}

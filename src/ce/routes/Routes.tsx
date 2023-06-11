@@ -6,6 +6,11 @@ import Order from "../pages/order";
 import Services from "../pages/services";
 import Security from "../pages/security";
 import Company from "../pages/company";
+import Orders from "../pages/profile/order";
+import Transactions from "../pages/profile/transaction";
+import Profile from "../pages/profile/profile";
+import Settings from "../pages/profile/settings";
+
 
 
 const routes = [
@@ -18,6 +23,10 @@ const routes = [
     { path: "/ce/services", component: <Services /> },
     { path: "/ce/security", component: <Security /> },
     { path: "/ce/company", component: <Company /> },
+    { path: "/ce/profile", component: <Orders /> },
+    { path: "/ce/profile/transactions", component: <Transactions /> },
+    { path: "/ce/profile/edit", component: <Profile /> },
+    { path: "/ce/profile/settings", component: <Settings /> },
 ]
 
 export {routes};
