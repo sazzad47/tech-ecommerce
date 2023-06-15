@@ -13,60 +13,68 @@ import {
   send,
   shield,
   star,
+  mobile,
+  backend,
+  creator,
+  web,
+  carrent,
+  jobit,
+  tripguide,
   man1,
   man3,
   man2,
 } from "../assets";
 import { AiOutlineHome } from "react-icons/ai";
+import { BsFillCartPlusFill } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
-import { MdMiscellaneousServices, MdOutlineSecurity } from "react-icons/md";
-import hero1 from "../images/hero1.png";
-import hero2 from "../images/hero2.png";
-import hero3 from "../images/hero3.png";
-import { BiDonateBlood } from "react-icons/bi";
-import { IoMdBusiness } from "react-icons/io";
+import { SiSemanticweb } from "react-icons/si";
 import { BsPersonFillLock } from "react-icons/bs";
+import { IoMdBusiness } from "react-icons/io";
+import { MdMiscellaneousServices, MdOutlineSecurity } from "react-icons/md";
 import { useSelector } from "react-redux";
 
-export const GenerateNavLinks = ()=> {
-
+export const GenereateNavLinks = ()=> {
   const { access_token } = useSelector(state => state.auth);
-  
   const items = [
-    {
-      id: "home",
-      title: "Home",
-      icon: AiOutlineHome,
-    },
-    {
-      id: "causes",
-      title: "Donate",
-      icon: BiDonateBlood,
-    },
-    {
-      id: "services",
-      title: "Services",
-      icon: MdMiscellaneousServices,
-    },
-    {
-      id: "security",
-      title: "Security",
-      icon: MdOutlineSecurity,
-    },
-    {
-      id: "company",
-      title: "Company",
-      icon: IoMdBusiness,
-    },
+      {
+        id: "home",
+        title: "Home",
+        icon: AiOutlineHome,
+      },
+      {
+        id: "technology",
+        title: "Technology",
+        icon: SiSemanticweb,
+      },
+      {
+        id: "services",
+        title: "Services",
+        icon: MdMiscellaneousServices,
+      },
+      {
+        id: "security",
+        title: "Security",
+        icon: MdOutlineSecurity,
+      },
+      {
+        id: "order",
+        title: "Order Now",
+        icon: BsFillCartPlusFill,
+      },
+      {
+        id: "company",
+        title: "Company",
+        icon: IoMdBusiness,
+      },
       {
         id: access_token ? "profile" : "login",
         title: access_token ? "Profile" : "Login",
         icon: access_token ? CgProfile : BsPersonFillLock,
       },
   ]
-  
+
   return items;
-  }
+}
 
 export const appItems = [
   { id: "it", title: "Information Technology", route: "/it" },
@@ -74,49 +82,87 @@ export const appItems = [
   { id: "gd", title: "Global Donation", route: "/gd" },
 ];
 
-export const causes = [
+export const services = [
   {
-    name: "Modern Apartments",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
-    image: hero1,
-    source_code_link: "https://github.com/",
+    title: "Web Development",
+    icon: web,
   },
   {
-    name: "Beautiful Apartments",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
+    title: "App Development",
+    icon: mobile,
+  },
+  {
+    title: "Graphics Design",
+    icon: backend,
+  },
+  {
+    title: "SEO",
+    icon: creator,
+  },
+];
 
-    image: hero2,
+export const projects = [
+  {
+    name: "Car Rent",
+    description:
+      "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
+    tags: [
+      {
+        name: "react",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "mongodb",
+        color: "green-text-gradient",
+      },
+      {
+        name: "tailwind",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: carrent,
     source_code_link: "https://github.com/",
   },
   {
-    name: "Stunning Design",
+    name: "Job IT",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-    image: hero3,
+      "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
+    tags: [
+      {
+        name: "react",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "restapi",
+        color: "green-text-gradient",
+      },
+      {
+        name: "scss",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: jobit,
     source_code_link: "https://github.com/",
   },
   {
-    name: "Modern Apartments",
+    name: "Trip Guide",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-    image: hero1,
-    source_code_link: "https://github.com/",
-  },
-  {
-    name: "Beautiful Apartments",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-
-    image: hero2,
-    source_code_link: "https://github.com/",
-  },
-  {
-    name: "Stunning Design",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-    image: hero3,
+      "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
+    tags: [
+      {
+        name: "nextjs",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "supabase",
+        color: "green-text-gradient",
+      },
+      {
+        name: "css",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: tripguide,
     source_code_link: "https://github.com/",
   },
 ];

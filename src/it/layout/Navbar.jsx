@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { close, logo, menu } from "../assets";
-import { appItems, GenerateNavLinks } from "../constants";
+import { appItems, GenereateNavLinks } from "../constants";
 import { Link } from "react-router-dom";
 import { AiFillAppstore } from "react-icons/ai";
 
 const Navbar = () => {
   const [activePage, setActivePage] = useState("Home");
-  const [activeApp, setActiveApp] = useState("IT");
+  const [activeApp, setActiveApp] = useState("it");
   const [showNavMenu, setShowNavMenu] = useState(false);
   const [showAppMenu, setShowAppMenu] = useState(false);
-
-  const navLinks = GenerateNavLinks();
+  
+  const navLinks = GenereateNavLinks();
 
   return (
     <nav className="h-[12vh] w-full bg-primaryTheme flex py-6 justify-between items-center navbar fixed top-0 z-10 sm:px-16 px-6">
-      <Link to="/ce">
+      <Link to="/">
         <img src={logo} alt="logo" className="w-[50px] h-[42px]" />
       </Link>
       <div className="relative h-full ml-8 sm:ml-16 sidebar z-[100]">
@@ -60,14 +60,12 @@ const Navbar = () => {
           >
             <Link
               className="flex flex-col items-center gap-2"
-              to={nav.id === "login" ? `/${nav.id}` : `/ce/${nav.id}`}
+              to={nav.id === "login" ? `/${nav.id}` : `/it/${nav.id}`}
             >
-              {" "}
               <div className="text-lg">
-                {" "}
-                <nav.icon />{" "}
-              </div>{" "}
-              <div> {nav.title} </div>{" "}
+                <nav.icon />
+              </div>
+              <div> {nav.title} </div>
             </Link>
           </li>
         ))}
@@ -97,7 +95,7 @@ const Navbar = () => {
                 } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setActivePage(nav.title)}
               >
-                <Link to={nav.id === "login" ? `/${nav.id}` : `/ce/${nav.id}`}>
+                <Link to={nav.id === "login" ? `/${nav.id}` : `/it/${nav.id}`}>
                   {nav.title}
                 </Link>
               </li>

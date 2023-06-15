@@ -28,7 +28,7 @@ const MainMenu = ({ setOpenSidebar }: { setOpenSidebar: Function }) => {
   const handleLogout = ()=> {
     dispatch(unSetUserToken({ access_token: null }))
     removeToken()
-    navigate('/gd')
+    navigate('/it')
   }
 
   const handleMenuClick = () => {

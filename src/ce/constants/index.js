@@ -27,6 +27,7 @@ import { HiOfficeBuilding } from "react-icons/hi";
 import { SiMarketo } from "react-icons/si";
 import { FaMosque } from "react-icons/fa";
 import { GiArchBridge } from "react-icons/gi";
+import { BsPersonFillLock } from "react-icons/bs";
 import {
   MdMiscellaneousServices,
   MdOutlineSecurity,
@@ -35,8 +36,13 @@ import {
 import design1 from "../images/design1.jpg";
 import design2 from "../images/design2.jpg";
 import design3 from "../images/design3.jpg";
+import { useSelector } from "react-redux";
 
-export const navLinks = [
+export const GenerateNavLinks = ()=> {
+
+const { access_token } = useSelector(state => state.auth);
+
+const items = [
   {
     id: "home",
     title: "Home",
@@ -67,12 +73,15 @@ export const navLinks = [
     title: "Company",
     icon: IoMdBusiness,
   },
-  {
-    id: "profile",
-    title: "Profile",
-    icon: CgProfile,
-  },
-];
+    {
+      id: access_token ? "profile" : "login",
+      title: access_token ? "Profile" : "Login",
+      icon: access_token ? CgProfile : BsPersonFillLock,
+    },
+]
+
+return items;
+}
 
 export const appItems = [
   { id: "it", title: "Information Technology", route: "/it" },

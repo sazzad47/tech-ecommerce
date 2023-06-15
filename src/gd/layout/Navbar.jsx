@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { close, logo, menu } from "../assets";
-import { appItems, navLinks } from "../constants";
+import { appItems, GenerateNavLinks } from "../constants";
 import { Link } from "react-router-dom";
 import { AiFillAppstore } from "react-icons/ai";
 
@@ -9,6 +9,8 @@ const Navbar = () => {
   const [activeApp, setActiveApp] = useState("IT");
   const [showNavMenu, setShowNavMenu] = useState(false);
   const [showAppMenu, setShowAppMenu] = useState(false);
+  
+  const navLinks = GenerateNavLinks();
 
   return (
     <nav className="h-[12vh] w-full bg-primaryTheme flex py-6 justify-between items-center navbar fixed top-0 z-10 sm:px-16 px-6">
@@ -32,7 +34,9 @@ const Navbar = () => {
               <li
                 key={app.id}
                 className={`w-full font-poppins font-medium cursor-pointer text-[16px] ${
-                  activeApp === app.title ? "text-secondaryTheme" : "text-dimWhite"
+                  activeApp === app.title
+                    ? "text-secondaryTheme"
+                    : "text-dimWhite"
                 } ${index === appItems.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setActiveApp(app.title)}
               >
@@ -56,7 +60,7 @@ const Navbar = () => {
           >
             <Link
               className="flex flex-col items-center gap-2"
-              to={`/gd/${nav.id}`}
+              to={nav.id === "login" ? `/${nav.id}` : `/gd/${nav.id}`}
             >
               {" "}
               <div className="text-lg">
@@ -87,11 +91,15 @@ const Navbar = () => {
               <li
                 key={nav.id}
                 className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                  activePage === nav.title ? "text-secondaryTheme" : "text-dimWhite"
+                  activePage === nav.title
+                    ? "text-secondaryTheme"
+                    : "text-dimWhite"
                 } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setActivePage(nav.title)}
               >
-                <Link to={`/gd/${nav.id}`}>{nav.title}</Link>
+                <Link to={nav.id === "login" ? `/${nav.id}` : `/gd/${nav.id}`}>
+                  {nav.title}
+                </Link>
               </li>
             ))}
           </ul>

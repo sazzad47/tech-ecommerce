@@ -3,7 +3,7 @@ import Layout from '../Layout'
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Billing from './Billing';
-import Password from './Password';
+import ChangePassword from '../../../../auth/changePassword';
 import Card from './Card';
 
 interface TabPanelProps {
@@ -72,7 +72,7 @@ const Settings = () => {
             <Billing/>
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <Password/>
+            <ChangePassword/>
           </TabPanel>
         </div>
     </Layout>

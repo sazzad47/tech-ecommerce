@@ -22,7 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const handleLogout = ()=> {
     dispatch(unSetUserToken({ access_token: null }))
     removeToken()
-    navigate('/ce')
+    navigate('/it')
   }
 
   const handleMenuClick = () => {

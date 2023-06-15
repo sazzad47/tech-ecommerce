@@ -1,5 +1,5 @@
 import { IconButton, Typography } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import profilePhoto from "../../images/profile-photo.png";
 import {
   AiOutlineMacCommand,
@@ -8,6 +8,9 @@ import {
 } from "react-icons/ai";
 import { ImProfile } from "react-icons/im";
 import { FiSettings, FiLogOut } from "react-icons/fi";
+import { useDispatch } from "react-redux";
+import { unSetUserToken } from "../../../state/slices/common/auth";
+import { removeToken } from "../../../state/localStorage";
 
 const Sidebar = ({ setOpenSidebar }: { setOpenSidebar: Function }) => {
   return (
@@ -19,6 +22,14 @@ const Sidebar = ({ setOpenSidebar }: { setOpenSidebar: Function }) => {
 
 const MainMenu = ({ setOpenSidebar }: { setOpenSidebar: Function }) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+ 
+  const handleLogout = ()=> {
+    dispatch(unSetUserToken({ access_token: null }))
+    removeToken()
+    navigate('/ce')
+  }
 
   const handleMenuClick = () => {
     setOpenSidebar(false);
@@ -55,11 +66,7 @@ const MainMenu = ({ setOpenSidebar }: { setOpenSidebar: Function }) => {
           </div>
           <div className="w-full p-2 flex flex-col gap-2 text-secondaryTheme">
             {menus.map((item) => (
-              <Link
-                to={item.url}
-                key={item.id}
-                onClick={handleMenuClick}
-              >
+              <Link to={item.url} key={item.id} onClick={handleMenuClick}>
                 <button
                   className={`w-full flex gap-3 items-center px-2 py-2 rounded-md ${
                     location.pathname === item.url ? "bg-zinc-700" : ""
@@ -70,6 +77,12 @@ const MainMenu = ({ setOpenSidebar }: { setOpenSidebar: Function }) => {
                 </button>
               </Link>
             ))}
+            <button onClick={handleLogout} className="w-full flex gap-3 items-center px-2 py-2 rounded-md" >
+              <div className="text-secondaryTheme">
+                <FiLogOut />
+              </div>
+              Logout
+            </button>
           </div>
         </div>
       </div>
@@ -89,31 +102,25 @@ export const menus: Array<MenuProps> = [
     id: 1,
     title: "Orders",
     icon: <AiOutlineMacCommand />,
-    url: "/ce/profile",
+    url: "/it/profile",
   },
   {
     id: 2,
     title: "Transactions",
     icon: <AiOutlineTransaction />,
-    url: "/ce/profile/transactions",
+    url: "/it/profile/transactions",
   },
   {
     id: 3,
     title: "Profile",
     icon: <ImProfile />,
-    url: "/ce/profile/edit",
+    url: "/it/profile/edit",
   },
   {
     id: 4,
     title: "Settings",
     icon: <FiSettings />,
-    url: "/ce/profile/settings",
-  },
-  {
-    id: 5,
-    title: "Logout",
-    icon: <FiLogOut />,
-    url: "/ce",
+    url: "/it/profile/settings",
   },
 ];
 

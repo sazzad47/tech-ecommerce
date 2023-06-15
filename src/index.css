@@ -790,3 +790,39 @@
   color: lightgray;
   cursor: pointer;
 }
+
+/*common*/
+.common-input {
+ height: 56px !important;
+ width: 100% !important;
+ background-color: transparent !important;
+ border: 1px solid !important;
+ border-color: rgb(120 113 108) !important;
+ border-radius: 5px !important;
+ color: white !important;
+}
+.common-input:hover{
+ border-color: rgb(168 162 158) !important;
+}
+.common-input:focus{
+ border-color: rgb(214 211 209) !important;
+}
+
+.combobox-input {
+ height: 56px !important;
+ width: 100% !important;
+ background-color: transparent !important;
+ border: 1px solid !important;
+ border-color: rgb(120 113 108) !important;
+ border-radius: 5px !important;
+ color: white !important;
+ justify-content: space-between !important;
+}
+.combobox-input:hover {
+ background-color: transparent !important;
+ border-color: rgb(168 162 158) !important;
+}
+.combobox-input:focus {
+ background-color: transparent !important;
+ border-color: rgb(214 211 209) !important;
+}

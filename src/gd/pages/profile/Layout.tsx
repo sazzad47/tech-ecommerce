@@ -3,7 +3,11 @@ import { CSSTransition } from "react-transition-group";
 import Sidebar, { menus } from "./Sidebar";
 import styles from "../../style";
 import profilePhoto from "../../images/profile-photo.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
+import { useDispatch } from "react-redux";
+import { unSetUserToken } from "../../../state/slices/common/auth";
+import { removeToken } from "../../../state/localStorage";
 
 interface LayoutProps {
   children: ReactNode;
@@ -12,7 +16,15 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
  
+  const handleLogout = ()=> {
+    dispatch(unSetUserToken({ access_token: null }))
+    removeToken()
+    navigate('/gd')
+  }
+
   const handleMenuClick = () => {
     setOpenSidebar(false);
   };
@@ -69,6 +81,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </button>
               </Link>
             ))}
+             <button onClick={handleLogout} className="w-full flex gap-3 items-center px-2 py-2 rounded-md" >
+              <div className="text-secondaryTheme">
+                <FiLogOut />
+              </div>
+              Logout
+            </button>
             </div>
           </div>
         </div>
