@@ -6,43 +6,66 @@ import {
   TextField,
   Tooltip,
 } from "@mui/material";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import EditIcon from "@mui/icons-material/Edit";
 import ErrorIcon from "@mui/icons-material/Error";
-import SupportIcon from "@mui/icons-material/Support";
+import {
+  useUpdateProfileMutation,
+  useGetProfileQuery,
+} from "../../../state/api";
+import { useDispatch, useSelector } from "react-redux";
+import { handleNotification } from "../../../state/slices/common/auth";
+import { ColorRing } from "react-loader-spinner";
+import { RootState } from "../../../state/store";
 
-const Biography = () => {
+const Expertise = () => {
   return (
     <Grid className="w-full">
-        <BiographyInfo />
+      <ExpertiseInfo />
     </Grid>
   );
 };
 
-const BiographyInfo = () => {
+const ExpertiseInfo = () => {
+  const { access_token } = useSelector((state: RootState) => state.auth);
+  const [updateProfile, { isLoading: isUpdatingProfile }] =
+    useUpdateProfileMutation();
+  const { data } = useGetProfileQuery({ access_token });
+  const dispatch = useDispatch();
   const [inputForm, setInputForm] = useState<boolean>(false);
-  const [biography, setBiography] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string[]>([]);
-  const [focused, setFocused] = useState<boolean>(false);
+  const [showData, setShowData] = useState(data);
+  const [expertise, setExpertise] = useState<string>("");
 
   const handleSubmit = async () => {
-    
-    setInputForm(false);
-  };
-  
-  useMemo(() => {
-    if (!focused && !inputForm) {
-      setErrorMessage(["Please add your biography."]);
-    } else if (focused) {
-      setErrorMessage([]);
+    const response = await updateProfile({
+      userData: { expertise },
+      access_token,
+    });
+
+    if ("data" in response) {
+      dispatch(
+        handleNotification({
+          show: true,
+          message: "Data saved successfully",
+        })
+      );
+      setShowData(response.data);
+      setInputForm(false);
     }
-  }, [focused, inputForm]);
+  };
+
+  useEffect(() => {
+    if (data?.expertise) {
+      setExpertise(data.expertise);
+    }
+  }, [data]);
 
   return (
     <Grid>
       <Grid className="flex gap-3 items-center mb-2">
-        <SupportIcon />
-        <Typography className="p-0 font-bold">Biography</Typography>
+        <LocalLibraryIcon />
+        <Typography className="p-0 font-bold">Expertise</Typography>
         {!inputForm && (
           <Tooltip title="Edit">
             <IconButton
@@ -55,48 +78,44 @@ const BiographyInfo = () => {
           </Tooltip>
         )}
       </Grid>
-      {errorMessage.length !== 0 && (
-        <Grid className="w-full md:w-[20rem] p-4 my-4 bg-zinc-500 flex flex-col gap-3">
-          {errorMessage.map((error, i) => (
-            <Grid key={i} className="flex items-center gap-2">
-              <ErrorIcon />
-              <Typography className="p-0 text-sm">{error}</Typography>
-            </Grid>
-          ))}
+      {!showData?.expertise && (
+        <Grid className="w-full md:w-[20rem] p-4 my-4 bg-zinc-500 flex flex-col gap-3 text-inherit">
+          <Grid className="flex items-center gap-2">
+            <ErrorIcon />
+            <Typography className="p-0 text-sm">
+              Please add your expertise
+            </Typography>
+          </Grid>
         </Grid>
       )}
       {inputForm ? (
         <Form
           setInputForm={setInputForm}
-          data={biography}
-          setData={setBiography}
-          setFocused={setFocused}
+          data={expertise}
+          setData={setExpertise}
           handleSubmit={handleSubmit}
+          isUpdatingProfile={isUpdatingProfile}
         />
       ) : (
-        <Typography className="p-0">  </Typography>
+        <Typography className="p-0"> {showData?.expertise} </Typography>
       )}
     </Grid>
   );
 };
 
-
 const Form = ({
   setInputForm,
   data,
   setData,
-  setFocused,
   handleSubmit,
+  isUpdatingProfile,
 }: {
   setInputForm: Function;
   data: string;
   setData: Function;
-  setFocused: Function;
   handleSubmit: Function;
-
+  isUpdatingProfile: boolean;
 }) => {
-
-
   return (
     <Grid className="">
       <form>
@@ -106,30 +125,24 @@ const Form = ({
             autoFocus
             onChange={(e) => setData(e.target.value)}
             value={data}
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
             sx={{
               label: {
                 color: "rgb(214 211 209)",
               },
               "& label.Mui-focused": {
-                color:
-                 "rgb(214 211 209)",
+                color: "rgb(214 211 209)",
               },
               "& .MuiOutlinedInput-root": {
                 color: "white",
                 "& fieldset": {
                   color: "white",
-                  borderColor:
-                    "rgb(120 113 108)",
+                  borderColor: "rgb(120 113 108)",
                 },
                 "&:hover fieldset": {
-                  borderColor:
-                    "rgb(168 162 158)",
+                  borderColor: "rgb(168 162 158)",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor:
-                   "rgb(214 211 209)",
+                  borderColor: "rgb(214 211 209)",
                 },
               },
             }}
@@ -153,7 +166,25 @@ const Form = ({
                 variant="contained"
                 className="w-[5rem] normal-case text-slate-200 bg-green-700 hover:bg-green-800"
               >
-               Save
+                {isUpdatingProfile ? (
+                  <ColorRing
+                    visible={true}
+                    height="30"
+                    width="30"
+                    ariaLabel="blocks-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="blocks-wrapper"
+                    colors={[
+                      "#b8c480",
+                      "#B2A3B5",
+                      "#F4442E",
+                      "#51E5FF",
+                      "#429EA6",
+                    ]}
+                  />
+                ) : (
+                  "Save"
+                )}
               </Button>
             </Grid>
           </Grid>
@@ -162,4 +193,4 @@ const Form = ({
     </Grid>
   );
 };
-export default Biography;
+export default Expertise;

@@ -11,57 +11,80 @@ import {
   MenuItem,
   Checkbox,
 } from "@mui/material";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
+import WorkIcon from "@mui/icons-material/Work";
 import DeleteIcon from "@mui/icons-material/Delete";
-import SchoolIcon from "@mui/icons-material/School";
 import EditIcon from "@mui/icons-material/Edit";
 import ErrorIcon from "@mui/icons-material/Error";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import {
+  useUpdateProfileMutation,
+  useGetProfileQuery,
+} from "../../../state/api";
+import { useDispatch, useSelector } from "react-redux";
+import { handleNotification } from "../../../state/slices/common/auth";
+import { ColorRing } from "react-loader-spinner";
 
-const Education = () => {
+const Profession = () => {
   return (
     <Grid className="w-full">
       <Grid className="flex flex-col gap-3">
-        <EducationComponent />
+        <ProfessionComponent />
       </Grid>
     </Grid>
   );
 };
 
-const EducationComponent = () => {
-
+const ProfessionComponent = () => {
+  const { access_token } = useSelector((state) => state.auth);
+  const [updateProfile, { isLoading: isUpdatingProfile }] =
+    useUpdateProfileMutation();
+  const { data } = useGetProfileQuery({ access_token });
+  const dispatch = useDispatch();
   const [inputForm, setInputForm] = useState(false);
-  const [errorMessage, setErrorMessage] = useState([]);
-  const [focused, setFocused] = useState(false);
-  const [education, setEducation] = useState([
+  const [showData, setShowData] = useState(data);
+
+  const [profession, setProfession] = useState([
     {
-      school: "",
+      position: "",
+      company: "",
       current: false,
       from: "",
       to: "",
-      degree: "",
       description: "",
     },
   ]);
 
   const handleSubmit = async () => {
-    
-    setInputForm(false);
+    const serializedProfession = JSON.stringify(profession);
+    const response = await updateProfile({
+      userData: { profession: serializedProfession },
+      access_token,
+    });
+  
+    if ("data" in response) {
+      dispatch(
+        handleNotification({
+          show: true,
+          message: "Data saved successfully",
+        })
+      );
+      setShowData(response.data);
+      setInputForm(false);
+    }
   };
 
-  useMemo(() => {
-    if (!focused && !inputForm) {
-      setErrorMessage(["Please add your education."]);
-    } else if (focused) {
-      setErrorMessage([]);
+  useEffect(() => {
+    if (data?.profession) {
+      setProfession(data.profession);
     }
-  }, [focused, inputForm]);
+  }, [data]);
 
   return (
     <Grid>
       <Grid className="flex gap-3 items-center mb-2">
-        <SchoolIcon />
-        <Typography className="p-0 font-bold">Education</Typography>
+        <WorkIcon />
+        <Typography className="p-0 font-bold">Profession</Typography>
         {!inputForm && (
           <Tooltip title="Edit">
             <IconButton
@@ -74,27 +97,41 @@ const EducationComponent = () => {
           </Tooltip>
         )}
       </Grid>
-      {errorMessage.length !== 0 && (
+      {!showData?.profession && (
         <Grid className="w-full md:w-[20rem] p-4 my-4 bg-zinc-500 flex flex-col gap-3 text-inherit">
-          {errorMessage.map((error, i) => (
-            <Grid key={i} className="flex items-center gap-2">
-              <ErrorIcon />
-              <Typography className="p-0 text-sm">{error}</Typography>
-            </Grid>
-          ))}
+          <Grid className="flex items-center gap-2">
+            <ErrorIcon />
+            <Typography className="p-0 text-sm">
+              Please add your profession
+            </Typography>
+          </Grid>
         </Grid>
       )}
       {inputForm ? (
         <Form
           setInputForm={setInputForm}
-          data={education}
-          setData={setEducation}
-          setFocused={setFocused}
+          data={profession}
+          setData={setProfession}
           handleSubmit={handleSubmit}
+          isUpdatingProfile={isUpdatingProfile}
         />
       ) : (
         <Grid className="flex flex-col gap-2">
-          
+          {showData?.profession &&
+            showData.profession.map((item, index) => (
+            <Grid key={index} className="w-full md:w-[20rem] min-h-[5rem] flex">
+              <Grid className="w-[30%]">
+                <Typography className="p-0">
+                  {item.from}-{item.current ? "present" : item.to}
+                </Typography>
+              </Grid>
+              <Grid className="w-[70%] flex flex-col gap-2">
+                <Typography className="p-0 font-bold">{item.position}</Typography>
+                <Typography className="p-0">{item.company}</Typography>
+                <Typography className="p-0">{item.description}</Typography>
+              </Grid>
+            </Grid>
+          ))}
         </Grid>
       )}
     </Grid>
@@ -105,10 +142,9 @@ const Form = ({
   setInputForm,
   data,
   setData,
-  setFocused,
   handleSubmit,
+  isUpdatingProfile
 }) => {
- 
 
   function generateArrayOfYears() {
     let max = new Date().getFullYear();
@@ -133,13 +169,13 @@ const Form = ({
   };
   const addMore = () => {
     let object = {
-      school: "",
-      current: false,
-      from: "",
-      to: "",
-      degree: "",
-      description: "",
-    };
+        position: "",
+        company: "",
+        current: false,
+        from: "",
+        to: "",
+        description: "",
+      };
     setData([...data, object]);
   };
 
@@ -148,7 +184,7 @@ const Form = ({
       <form className="flex flex-col gap-5">
         {data.map((item, index) => (
           <Grid key={index}>
-            <Grid className="w-full md:w-[20rem] flex justify-end text-white">
+            <Grid className="w-full md:w-[20rem] flex justify-end">
               <Tooltip title="Delete">
                 <IconButton
                   onClick={() => deleteField(index)}
@@ -161,15 +197,27 @@ const Form = ({
             <Grid className="flex flex-col w-full gap-2">
               <CustomTextField
                 inputProps={{
-                  multiline: true,
                   autoFocus: true,
+                  multiline: true,
                   type: "text",
-                  name: "school",
-                  id: "school",
-                  label: "Institute",
-                  value: item.school,
+                  name: "position",
+                  id: "position",
+                  label: "Position",
+                  value: item.position,
                   onChange: (event) => handleChange(event, index),
-                  setFocused: setFocused,
+                  
+                }}
+              />
+              <CustomTextField
+                inputProps={{
+                  multiline: true,
+                  type: "text",
+                  name: "company",
+                  id: "company",
+                  label: "Company",
+                  value: item.company,
+                  onChange: (event) => handleChange(event, index),
+                  
                 }}
               />
               <Grid className="flex flex-col">
@@ -191,7 +239,7 @@ const Form = ({
                     }}
                   />
                   <Typography className="p-0 pl-3">
-                    I currently study here
+                    I currently work here
                   </Typography>
                 </Grid>
                 <Grid className="w-full my-3">
@@ -206,7 +254,7 @@ const Form = ({
                           label: "Year",
                           value: item.from,
                           onChange: (event) => handleChange(event, index),
-                          setFocused: setFocused,
+                          
                         }}
                       >
                         {generateArrayOfYears().map((year, i) => (
@@ -227,7 +275,7 @@ const Form = ({
                           label: "Year",
                           value: item.from,
                           onChange: (event) => handleChange(event, index),
-                          setFocused: setFocused,
+                          
                         }}
                       >
                         {generateArrayOfYears().map((year, i) => (
@@ -245,7 +293,7 @@ const Form = ({
                           label: "Year",
                           value: item.to,
                           onChange: (event) => handleChange(event, index),
-                          setFocused: setFocused,
+                          
                         }}
                       >
                         {generateArrayOfYears().map((year, i) => (
@@ -261,18 +309,6 @@ const Form = ({
               <CustomTextField
                 inputProps={{
                   multiline: true,
-                  type: "text",
-                  name: "degree",
-                  id: "degree",
-                  label: "Degree",
-                  value: item.degree,
-                  onChange: (event) => handleChange(event, index),
-                  setFocused: setFocused,
-                }}
-              />
-              <CustomTextField
-                inputProps={{
-                  multiline: true,
                   minRows: 4,
                   type: "text",
                   name: "description",
@@ -280,7 +316,7 @@ const Form = ({
                   label: "Description",
                   value: item.description,
                   onChange: (event) => handleChange(event, index),
-                  setFocused: setFocused,
+                  
                 }}
               />
             </Grid>
@@ -292,7 +328,7 @@ const Form = ({
           disableRipple
           className="w-[12rem] text-slate-200 bg-stone-500 hover:bg-stone-600 focus:outline-none normal-case"
         >
-          Add another degree
+          {data.length === 0 ? "Add a workplace" : "Add another workplace"}
         </Button>
 
         <Grid className="w-full md:w-[20rem] flex justify-end ">
@@ -301,14 +337,15 @@ const Form = ({
               onClick={() => {
                 setInputForm(false);
                 setData([
-                  {
-                    school: "",
-                    current: false,
-                    from: "",
-                    to: "",
-                    degree: "",
-                    description: "",
-                  },
+                    {
+                        position: "",
+                        company: "",
+            
+                        current: false,
+                        from: "",
+                        to: "",
+                        description: "",
+                      },
                 ]);
               }}
               className="w-[5rem] normal-case text-slate-200 bg-zinc-500 hover:bg-zinc-600"
@@ -321,9 +358,27 @@ const Form = ({
               variant="contained"
               className="w-[5rem] normal-case text-slate-200 bg-green-700 hover:bg-green-800"
             >
-              
-                <Typography>Save</Typography>
-         
+             
+             {isUpdatingProfile ? (
+                <ColorRing
+                  visible={true}
+                  height="30"
+                  width="30"
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="blocks-wrapper"
+                  colors={[
+                    "#b8c480",
+                    "#B2A3B5",
+                    "#F4442E",
+                    "#51E5FF",
+                    "#429EA6",
+                  ]}
+                />
+              ) : (
+                "Save"
+              )}
+          
             </Button>
           </Grid>
         </Grid>
@@ -333,8 +388,7 @@ const Form = ({
 };
 
 const CustomSelect = ({ children, inputProps }) => {
-  const { type, name, id, label, value, onChange, setFocused, autoFocus } = inputProps;
-
+  const { type, name, id, label, value, onChange } = inputProps;
   return (
     <FormControl>
       <InputLabel
@@ -351,7 +405,6 @@ const CustomSelect = ({ children, inputProps }) => {
         {label}
       </InputLabel>
       <Select
-        autoFocus={autoFocus}
         required
         type={type}
         labelId={name}
@@ -359,8 +412,6 @@ const CustomSelect = ({ children, inputProps }) => {
         name={name}
         value={value}
         onChange={onChange}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
         sx={{
           color: "white",
           label: {
@@ -372,7 +423,7 @@ const CustomSelect = ({ children, inputProps }) => {
           ".MuiOutlinedInput-notchedOutline": {
             color:
               "rgb(214 211 209)",
-            borderColor: "rgb(120 113 108)" ,
+            borderColor: "rgb(120 113 108)",
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             color:
@@ -383,7 +434,7 @@ const CustomSelect = ({ children, inputProps }) => {
           "&:hover .MuiOutlinedInput-notchedOutline": {
             color:
               "rgb(214 211 209)",
-            borderColor: "rgb(168 162 158)" ,
+            borderColor: "rgb(168 162 158)",
           },
           ".MuiSvgIcon-root ": {
             fill:
@@ -418,7 +469,6 @@ const CustomTextField = ({ inputProps }) => {
     label,
     value,
     onChange,
-    setFocused,
     multiline,
     minRows,
     autoFocus,
@@ -437,8 +487,6 @@ const CustomTextField = ({ inputProps }) => {
       id={id}
       label={label}
       onChange={onChange}
-      onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
       sx={{
         label: {
           color: "rgb(214 211 209)",
@@ -467,4 +515,4 @@ const CustomTextField = ({ inputProps }) => {
   );
 };
 
-export default Education;
+export default Profession;

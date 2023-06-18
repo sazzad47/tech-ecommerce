@@ -110,10 +110,10 @@ export const userApi = createApi({
       }),
     }),
     createBillingAddress: builder.mutation<any, any>({
-      query: ({data, access_token}) => ({
+      query: ({userData, access_token}) => ({
         url: "billing-address/",
         method: "POST",
-        body: data,
+        body: userData,
         headers: {
           "Content-type": "application/json",
           authorization: `Bearer ${access_token}`,
@@ -121,10 +121,10 @@ export const userApi = createApi({
       }),
     }),
     updateBillingAddress: builder.mutation<any, any>({
-      query: ({data, access_token}) => ({
+      query: ({userData, access_token}) => ({
         url: "billing-address/update/",
         method: "PUT",
-        body: data,
+        body: userData,
         headers: {
           "Content-type": "application/json",
           authorization: `Bearer ${access_token}`,
@@ -134,6 +134,34 @@ export const userApi = createApi({
     getBillingAddress: builder.query<any, any>({
       query: ({access_token}) => ({
         url: "billing-address/",
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${access_token}`,
+        },
+      }),
+    }),
+    updateProfile: builder.mutation<any, any>({
+      query: ({ userData, access_token }) => {
+        const formData = new FormData();
+        for (const key in userData) {
+          formData.append(key, userData[key]);
+        }
+        return {
+          url: "profile/update/",
+          method: "PUT",
+          body: formData,
+          headers: {
+            authorization: `Bearer ${access_token}`,
+            
+          },
+        };
+      },
+    }),
+    
+    getProfile: builder.query<any, any>({
+      query: ({access_token}) => ({
+        url: "profile/detail/",
         method: "GET",
         headers: {
           "Content-type": "application/json",
@@ -155,4 +183,7 @@ export const {
   useGetBillingAddressQuery,
   useCreateBillingAddressMutation,
   useUpdateBillingAddressMutation,
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+
 } = userApi;
