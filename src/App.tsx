@@ -2,9 +2,9 @@
 import InformationTechnology from "./it/routes/index";
 import CivilEngineering from "./ce/routes/index";
 import GlobalDonation from "./gd/routes/index";
-import Auth from "./auth/routes/index";
+import Auth from "./user/routes/index";
 import { useEffect } from "react";
-import { useRefreshAccessToken } from "./auth/refreshToken";
+import { useRefreshAccessToken } from "./user/refreshToken";
 import Toast from "./components/Toast";
 
 

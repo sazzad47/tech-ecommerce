@@ -1,5 +1,5 @@
 import Layout from "../Layout";
-import CommonProfile from '../../../../auth/profile';
+import CommonProfile from '../../../../user/profile';
 
 const Profile = () => {
  

@@ -102,25 +102,25 @@ export const menus: Array<MenuProps> = [
     id: 1,
     title: "Orders",
     icon: <AiOutlineMacCommand />,
-    url: "/it/profile",
+    url: "/ce/profile",
   },
   {
     id: 2,
     title: "Transactions",
     icon: <AiOutlineTransaction />,
-    url: "/it/profile/transactions",
+    url: "/ce/profile/transactions",
   },
   {
     id: 3,
     title: "Profile",
     icon: <ImProfile />,
-    url: "/it/profile/edit",
+    url: "/ce/profile/edit",
   },
   {
     id: 4,
     title: "Settings",
     icon: <FiSettings />,
-    url: "/it/profile/settings",
+    url: "/ce/profile/settings",
   },
 ];
 

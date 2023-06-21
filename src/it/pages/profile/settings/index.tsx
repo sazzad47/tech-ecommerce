@@ -2,8 +2,8 @@ import React from 'react'
 import Layout from '../Layout'
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import ChangePassword from '../../../../auth/changePassword';
-import BillingAddress from '../../../../auth/billingAddress/BillingAddress';
+import ChangePassword from '../../../../user/changePassword';
+import BillingAddress from '../../../../user/billingAddress/BillingAddress';
 
 interface TabPanelProps {
     children?: React.ReactNode;

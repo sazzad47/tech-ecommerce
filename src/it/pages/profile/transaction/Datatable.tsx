@@ -1,10 +1,9 @@
-import React from "react";
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
-} from "@tanstack/react-table"
+} from "@tanstack/react-table";
 
 import {
   Table,
@@ -13,11 +12,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../../components/ui/table"
+} from "../../../../components/table";
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[] | undefined;
 }
 
 export function DataTable<TData, TValue>({
@@ -25,10 +24,14 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
-    data,
+    data: data || [], // Ensure data is an array or an empty array if it's undefined
     columns,
     getCoreRowModel: getCoreRowModel(),
-  })
+  });
+
+  if (!data) {
+    return <div>Loading...</div>; // Render a loading indicator if data is undefined
+  }
 
   return (
     <div className="rounded-md border">
@@ -46,7 +49,7 @@ export function DataTable<TData, TValue>({
                           header.getContext()
                         )}
                   </TableHead>
-                )
+                );
               })}
             </TableRow>
           ))}
@@ -76,5 +79,5 @@ export function DataTable<TData, TValue>({
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }

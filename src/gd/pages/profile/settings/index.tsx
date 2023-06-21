@@ -3,7 +3,7 @@ import Layout from '../Layout'
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Billing from './Billing';
-import ChangePassword from '../../../../auth/changePassword';
+import ChangePassword from '../../../../user/changePassword';
 import Card from './Card';
 
 interface TabPanelProps {

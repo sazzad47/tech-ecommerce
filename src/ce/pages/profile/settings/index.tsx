@@ -4,7 +4,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Billing from './Billing';
 import Card from './Card';
-import ChangePassword from '../../../../auth/changePassword';
+import ChangePassword from '../../../../user/changePassword';
 
 interface TabPanelProps {
     children?: React.ReactNode;

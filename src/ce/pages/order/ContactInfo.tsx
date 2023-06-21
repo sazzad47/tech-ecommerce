@@ -1,27 +1,31 @@
-import { Checkbox } from "../../components/ui/checkbox";
+import React from "react";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import ErrorIcon from "@mui/icons-material/Error";
+import PhoneInput from "react-phone-input-2";
 import { countries } from "countries-list";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "../../../lib/utils";
-import { Button } from "../../components/ui/button";
+
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from "../../components/ui/command";
+} from "../../../components/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "../../components/ui/popover";
-import React from "react";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
+} from "../../../components/popover";
+import { UserData } from ".";
 
-const ContactInfo = () => {
+export default function BillingAddress({userData, setUserData, errorMessage, setErrorMessage}: {userData: UserData, setUserData: Function, errorMessage: any, setErrorMessage: React.Dispatch<React.SetStateAction<any>>}) {
+
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
 
   const getAllCountries = () => {
     const countryNames = Object.values(countries).map(
@@ -32,204 +36,321 @@ const ContactInfo = () => {
 
   const countryArray = getAllCountries();
 
+  const {
+    first_name,
+    last_name,
+    email,
+    phone,
+    country,
+    province,
+    city,
+    zip,
+    address,
+  } = userData;
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setUserData((prevState:UserData) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+ 
+  
   return (
-    <div className={`bg-primaryTheme text-secondaryTheme`}>
-      <div className="flex flex-col w-full px-0 mx-auto md:flex-row">
-        <div className="flex flex-col md:w-full">
-          <form className="justify-center w-full mx-auto" method="post">
-            <div className="">
-              <div className="space-x-0 space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
-                <div className="w-full lg:w-1/2">
-                  <label
-                    htmlFor="firstName"
-                    className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                  >
-                    First Name
-                  </label>
-                  <input
-                    name="firstName"
-                    type="text"
-                    placeholder="First Name"
-                    className="bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-gray-600 "
-                  />
-                </div>
-                <div className="w-full lg:w-1/2 ">
-                  <label
-                    htmlFor="firstName"
-                    className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                  >
-                    Last Name
-                  </label>
-                  <input
-                    name="Last Name"
-                    type="text"
-                    placeholder="Last Name"
-                    className="bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-gray-600"
-                  />
-                </div>
-              </div>
-              <div className="mt-4 space-x-0 space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
-                <div className="w-full lg:w-1/2">
-                  <label
-                    htmlFor="email"
-                    className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                  >
-                    Email
-                  </label>
-                  <input
-                    name="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    className="bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-gray-600 "
-                  />
-                </div>
-                <div className="w-full lg:w-1/2 ">
-                  <label
-                    htmlFor="firstName"
-                    className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                  >
-                    Phone
-                  </label>
-                  <PhoneInput
-                    country={"us"}
-                    inputClass="phone-input"
-                    dropdownClass="phone-input-dropdown"
-                    enableSearch={true}
-                  />
-                </div>
-              </div>
-              <div className="mt-4 space-x-0 space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
-                <div className="w-full lg:w-1/2">
-                  <label
-                    htmlFor="firstName"
-                    className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                  >
-                    Select country
-                  </label>
-                  <Popover open={open} onOpenChange={setOpen}>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        role="combobox"
-                        aria-expanded={open}
-                        className="w-full h-[2.8rem] hover:text-secondaryTheme justify-between bg-black-gradient-2 px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm outline-none focus:ring-1 focus:ring-gray-600"
-                      >
-                        {value ? value : "Select country..."}
-                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent align="start" className="w-[200px] p-0">
-                      <Command>
-                        <CommandInput placeholder="Search framework..." />
-                        <CommandEmpty>No country found.</CommandEmpty>
-                        <CommandGroup>
-                          {countryArray.map((country) => (
-                            <CommandItem
-                              key={country}
-                              onSelect={(currentValue) => {
-                                setValue(
-                                  currentValue === value ? "" : currentValue
-                                );
-                                setOpen(false);
-                              }}
-                            >
-                              <Check
-                                className={cn(
-                                  "mr-2 h-4 w-4",
-                                  value === country
-                                    ? "opacity-100"
-                                    : "opacity-0"
-                                )}
-                              />
-                              {country}
-                            </CommandItem>
-                          ))}
-                        </CommandGroup>
-                      </Command>
-                    </PopoverContent>
-                  </Popover>
-                </div>
-                <div className="w-full lg:w-1/2 ">
-                  <label
-                    htmlFor="firstName"
-                    className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                  >
-                    State/Province
-                  </label>
-                  <input
-                    name=""
-                    type="text"
-                    placeholder="Enter you state/province"
-                    className="bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-gray-600"
-                  />
-                </div>
-              </div>
-              <div className="mt-4 space-x-0 space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
-                <div className="w-full lg:w-1/2">
-                  <label
-                    htmlFor="firstName"
-                    className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                  >
-                    City
-                  </label>
-                  <input
-                    name="firstName"
-                    type="text"
-                    placeholder="Enter your city"
-                    className="bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-gray-600 "
-                  />
-                </div>
-                <div className="w-full lg:w-1/2 ">
-                  <label
-                    htmlFor="firstName"
-                    className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                  >
-                    Post Code
-                  </label>
-                  <input
-                    name="Last Name"
-                    type="text"
-                    placeholder="Enter your post code"
-                    className="bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-gray-600"
-                  />
-                </div>
-              </div>
-              <div className="mt-4">
-                <div className="w-full">
-                  <label
-                    htmlFor="Address"
-                    className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                  >
-                    Address
-                  </label>
-                  <textarea
-                    className="bg-black-gradient-2 w-full px-4 py-3 text-xs border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-gray-600"
-                    name="Address"
-                    cols={20}
-                    rows={4}
-                    placeholder="Address"
-                  ></textarea>
-                </div>
-              </div>
-              <div className="flex items-center mt-4">
-                <div className="items-top flex space-x-2">
-                  <Checkbox id="terms1" />
-                  <div className="grid gap-1.5 leading-none">
-                    <label
-                      htmlFor="terms1"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+    <div className="w-full flex items-center justify-center">
+        <div className="flex flex-col items-center w-full">
+          <Box
+            component="form"
+            autoComplete="off"
+            className="w-full"
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <InputField
+                  inputProps={{
+                    type: "first_name",
+                    name: "first_name",
+                    id: "first_name",
+                    label: "First Name",
+                    value: first_name,
+                    onChange: handleChange,
+                    setErrorMessage: setErrorMessage,
+                    errorMessages: errorMessage,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <InputField
+                  inputProps={{
+                    type: "text",
+                    name: "last_name",
+                    id: "last_name",
+                    label: "Last Name",
+                    value: last_name,
+                    onChange: handleChange,
+                    setErrorMessage: setErrorMessage,
+                    errorMessages: errorMessage,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <InputField
+                  inputProps={{
+                    type: "email",
+                    name: "email",
+                    id: "email",
+                    label: "Email",
+                    value: email,
+                    onChange: handleChange,
+                    setErrorMessage: setErrorMessage,
+                    errorMessages: errorMessage,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <label
+                  htmlFor="firstName"
+                  className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                >
+                  Phone
+                </label>
+                <PhoneInput
+                  country={"us"}
+                  inputClass="common-input"
+                  dropdownClass="phone-input-dropdown"
+                  enableSearch={true}
+                  value={phone}
+                  onFocus={() =>
+                    setErrorMessage((prevErrors: any) => ({
+                      ...prevErrors,
+                      phone: "",
+                    }))
+                  }
+                  onChange={(phone) =>
+                    setUserData((prevData: UserData) => ({ ...prevData, phone }))
+                  }
+                />
+                {errorMessage.phone && errorMessage.phone !== "" && (
+                  <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                    <ErrorIcon />
+                    <Typography className="p-0 text-sm">
+                      {errorMessage.phone}
+                    </Typography>
+                  </Grid>
+                )}
+              </Grid>
+              <Grid item xs={12}>
+                <label
+                  htmlFor="firstName"
+                  className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                >
+                  Country
+                </label>
+                <Popover open={open} onOpenChange={setOpen}>
+                  <PopoverTrigger asChild>
+                    <button
+                      role="combobox"
+                      aria-controls="countryList"
+                      aria-expanded={open}
+                      className="combobox-input flex items-center justify-between px-3 py-2"
                     >
-                      Save this information for the next time.
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
+                      {country ? country : "Select country..."}
+                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </button>
+                  </PopoverTrigger>
+                  <PopoverContent align="start" className="w-[200px] p-0">
+                    <Command>
+                      <CommandInput placeholder="Search country..." />
+                      <CommandEmpty>No country found.</CommandEmpty>
+                      <CommandGroup id="countryList">
+                        {countryArray.map((countryName) => (
+                          <CommandItem
+                            key={countryName}
+                            onSelect={(currentValue) => {
+                              setUserData((prevData: UserData) => ({
+                                ...prevData,
+                                country: currentValue,
+                              }));
+                              setOpen(false);
+                              setErrorMessage((prevErrors: any) => ({
+                                ...prevErrors,
+                                country: "",
+                              }));
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                country === countryName
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                            {countryName}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+                {errorMessage.country && errorMessage.country !== "" && (
+                  <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                    <ErrorIcon />
+                    <Typography className="p-0 text-sm">
+                      {errorMessage.country}
+                    </Typography>
+                  </Grid>
+                )}
+              </Grid>
+              <Grid item xs={12}>
+                <InputField
+                  inputProps={{
+                    type: "text",
+                    name: "province",
+                    id: "province",
+                    label: "State/Province",
+                    value: province,
+                    onChange: handleChange,
+                    setErrorMessage: setErrorMessage,
+                    errorMessages: errorMessage,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <InputField
+                  inputProps={{
+                    type: "text",
+                    name: "city",
+                    id: "city",
+                    label: "City",
+                    value: city,
+                    onChange: handleChange,
+                    setErrorMessage: setErrorMessage,
+                    errorMessages: errorMessage,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <InputField
+                  inputProps={{
+                    type: "text",
+                    name: "zip",
+                    id: "zip",
+                    label: "Zip Code",
+                    value: zip,
+                    onChange: handleChange,
+                    setErrorMessage: setErrorMessage,
+                    errorMessages: errorMessage,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <InputField
+                  inputProps={{
+                    type: "textarea",
+                    multiline: true,
+                    minRows: 3,
+                    name: "address",
+                    id: "address",
+                    label: "Address",
+                    value: address,
+                    onChange: handleChange,
+                    setErrorMessage: setErrorMessage,
+                    errorMessages: errorMessage,
+                  }}
+                />
+              </Grid>
+            </Grid>
+            
+          </Box>
         </div>
-      </div>
+    </div>
+  );
+}
+
+interface Props {
+  inputProps: {
+    type: string;
+    name: string;
+    id: string;
+    label: string;
+    value?: string | number;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    setErrorMessage: React.Dispatch<React.SetStateAction<any>>;
+    errorMessages: any;
+    multiline?: boolean;
+    minRows?: number;
+  };
+}
+
+const InputField = ({ inputProps }: Props) => {
+  const {
+    type,
+    name,
+    id,
+    label,
+    value,
+    onChange,
+    setErrorMessage,
+    multiline,
+    minRows,
+  } = inputProps;
+
+  const errorMessages = inputProps.errorMessages || {};
+
+  return (
+    <div>
+      <label
+        htmlFor="firstName"
+        className="block mb-3 text-sm font-semibold text-secondaryTheme"
+      >
+        {label}
+      </label>
+      <TextField
+        multiline={multiline}
+        minRows={minRows}
+        type={type}
+        name={name}
+        value={value}
+        required
+        fullWidth
+        id={id}
+        onChange={onChange}
+        onFocus={() =>
+          setErrorMessage((prevErrors: any) => ({
+            ...prevErrors,
+            [name]: "",
+          }))
+        }
+        sx={{
+          label: {
+            color: "rgb(214 211 209)",
+          },
+          "& label.Mui-focused": {
+            color: "rgb(214 211 209)",
+          },
+          "& .MuiOutlinedInput-root": {
+            color: "white",
+            "& fieldset": {
+              color: "white",
+              borderColor: "rgb(120 113 108)",
+            },
+            "&:hover fieldset": {
+              borderColor: "rgb(168 162 158)",
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "rgb(214 211 209)",
+            },
+          },
+        }}
+      />
+      {errorMessages[name] && errorMessages[name] !== "" && (
+        <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+          <ErrorIcon />
+          <Typography className="p-0 text-sm">{errorMessages[name]}</Typography>
+        </Grid>
+      )}
     </div>
   );
 };
-
-export default ContactInfo;

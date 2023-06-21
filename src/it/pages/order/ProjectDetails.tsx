@@ -342,8 +342,8 @@ export default function ContactInfo({
                 selected={delivery_date}
                 onChange={handleDateChange}
                 dateFormat="yyyy/MM/dd"
-                showIcon
                 className="common-input w-full"
+                showIcon
                 wrapperClassName="common-input w-full"
               />
               {errorMessage.delivery_date &&
@@ -355,7 +355,6 @@ export default function ContactInfo({
                     </Typography>
                   </Grid>
                 )}
-              v
             </Grid>
           </Grid>
         </Box>

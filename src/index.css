@@ -841,3 +841,27 @@
  background-color: transparent !important;
  border-color: rgb(214 211 209) !important;
 }
+
+/*Sweet Alert*/
+.swal2-modal {
+  background-color: #151030 !important;
+  border-color: rgb(168 162 158) !important;
+  color: #00f6ff !important;
+}
+.swal2-confirm {
+  height: 56px !important;
+  width: 100% !important;
+  background-color: transparent !important;
+  border: 1px solid !important;
+  border-color: rgb(120 113 108) !important;
+  border-radius: 5px !important;
+  color: white !important;
+}
+.swal2-confirm:hover {
+  background-color: transparent !important;
+  border-color: rgb(168 162 158) !important;
+ }
+ .swal2-confirm:focus {
+  background-color: transparent !important;
+  border-color: rgb(214 211 209) !important;
+ }

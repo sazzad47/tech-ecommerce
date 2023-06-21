@@ -5,13 +5,19 @@ import styles from "../../style";
 import ContactInfo from "./ContactInfo";
 import ProjectDetails from "./ProjectDetails";
 import { validateContactInfo, validateProjectDetails } from "./Validate";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../state/store";
+import { useCreateOrderMutation } from "../../../state/api/it";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { ColorRing } from "react-loader-spinner";
 
 export interface Demo {
   url: string;
   description: string;
 }
 
-export interface UserData {
+export type UserData = {
   first_name: string;
   last_name: string;
   email: string;
@@ -27,30 +33,54 @@ export interface UserData {
   order_file: File | null;
   order_description: string;
   delivery_date: Date | null;
-  demo: Demo[];
+  demo: { url: string; description: string }[];
   additional_file: File | null;
-}
+  [key: string]:
+    | string
+    | File
+    | null
+    | Date
+    | { url: string; description: string }[];
+};
+
+const initState: UserData = {
+  first_name: "",
+  last_name: "",
+  email: "",
+  phone: "",
+  country: "",
+  province: "",
+  city: "",
+  zip: "",
+  address: "",
+  title: "",
+  category: "",
+  product: "",
+  order_file: null,
+  order_description: "",
+  delivery_date: null,
+  demo: [{ url: "", description: "" }],
+  additional_file: null,
+};
 
 export default function OrderPage() {
-  const initState: UserData = {
-    first_name: "",
-    last_name: "",
-    email: "",
-    phone: "",
-    country: "",
-    province: "",
-    city: "",
-    zip: "",
-    address: "",
-    title: "",
-    category: "",
-    product: "",
-    order_file: null,
-    order_description: "",
-    delivery_date: null,
-    demo: [{ url: "", description: "" }],
-    additional_file: null,
+  const navigate = useNavigate();
+
+  const successAlert = () => {
+    Swal.fire({
+      title: "Thank you!",
+      text: "We received your order. Go to your dashboard to check your order details.",
+      icon: "success",
+      showConfirmButton: true,
+      confirmButtonText: "Dashboard",
+      preConfirm: () => navigate("/it/profile"),
+    });
   };
+
+  const { access_token } = useSelector((state: RootState) => state.auth);
+
+  const [createOrder, { isLoading: isCreatingOrder }] =
+    useCreateOrderMutation();
 
   const [userData, setUserData] = React.useState<UserData>(initState);
   const [errorMessage, setErrorMessage] = React.useState<any>({});
@@ -86,7 +116,7 @@ export default function OrderPage() {
   const handleNext = () => {
     const errMsg = validateContactInfo(userData);
 
-    // if (errMsg) return setErrorMessage(errMsg);
+    if (Object.keys(errMsg).length > 0) return setErrorMessage(errMsg);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -94,14 +124,25 @@ export default function OrderPage() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const formattedDate = userData.delivery_date
-    ? userData.delivery_date.toISOString().slice(0, 10)
-    : "";
-
   const handleSubmit = async () => {
     const errMsg = validateProjectDetails(userData);
 
-    if (errMsg) return setErrorMessage(errMsg);
+    if (Object.keys(errMsg).length > 0) return setErrorMessage(errMsg);
+
+    const response = await createOrder({ userData, access_token });
+
+    if ("error" in response) {
+      if ("data" in response.error) {
+        const errorData: any = response.error.data;
+        setErrorMessage(errorData);
+      }
+    }
+
+    if ("data" in response) {
+      setErrorMessage({});
+      successAlert();
+      setUserData(initState);
+    }
   };
 
   return (
@@ -130,17 +171,37 @@ export default function OrderPage() {
         }}
         nextButton={
           <Button
-            size="small"
             variant="outlined"
             onClick={activeStep === maxSteps - 1 ? handleSubmit : handleNext}
             className="focus:outline-none normal-case px-4 text-secondaryTheme"
           >
-            {activeStep === maxSteps - 1 ? "Submit" : "Next"}
+            {activeStep === maxSteps - 1 ? (
+              isCreatingOrder ? (
+                <ColorRing
+                  visible={true}
+                  height="30"
+                  width="30"
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="blocks-wrapper"
+                  colors={[
+                    "#b8c480",
+                    "#B2A3B5",
+                    "#F4442E",
+                    "#51E5FF",
+                    "#429EA6",
+                  ]}
+                />
+              ) : (
+                "Submit"
+              )
+            ) : (
+              "Next"
+            )}
           </Button>
         }
         backButton={
           <Button
-            size="small"
             variant="outlined"
             className={`${
               activeStep === 0 ? "hidden" : "d-flex"

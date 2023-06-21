@@ -1,171 +1,413 @@
-import { Checkbox } from "../../components/ui/checkbox";
-import { Button } from "../../components/ui/button";
+import React from "react";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import ErrorIcon from "@mui/icons-material/Error";
+import { BsInfoCircleFill } from "react-icons/bs";
+import { AiFillEye } from "react-icons/ai";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../components/ui/select";
+} from "../../../components/select";
+
+import { Demo, UserData } from ".";
 import { menus } from "../architecture/topbar/menus";
-import { useState } from "react";
-import { BsInfoCircleFill } from "react-icons/bs";
-import { AiFillEye } from "react-icons/ai";
+import { Button, IconButton, Tooltip } from "@mui/material";
 
-const ProjectDetails = () => {
-  const fileURL =
-    "https://drive.google.com/file/d/1-v9NDQh1rlmLwNvRC5DClHcN6sadqgbF/view?usp=sharing";
-
-  const [category, setCategory] = useState<string>("");
+const fileURL =
+  "http://127.0.0.1:8000/media/dummy/Certification-and-ownership-form.pdf/";
+export default function ContactInfo({
+  userData,
+  setUserData,
+  errorMessage,
+  setErrorMessage,
+}: {
+  userData: UserData;
+  setUserData: Function;
+  errorMessage: any;
+  setErrorMessage: React.Dispatch<React.SetStateAction<any>>;
+}) {
+  const { title, category, order_description, delivery_date } =
+    userData;
 
   const categories = menus.map((item, index) => (
     <SelectItem key={index} value={item.title || ""}>
       {item.title}
     </SelectItem>
   ));
- 
-  console.log('category', category)
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setUserData((prevState: UserData) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleFileChange =
+    (propertyName: keyof UserData) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setUserData((prevData: UserData) => ({
+          ...prevData,
+          [propertyName]: file,
+        }));
+        setErrorMessage((prevError: any) => ({ ...prevError, order_file: "" }));
+      }
+    };
+
+  const handleDemoChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const newData = [...userData.demo];
+    newData[index] = {
+      ...newData[index],
+      [event.target.name]: event.target.value,
+    };
+    setUserData((prevData: UserData) => ({
+      ...prevData,
+      demo: newData,
+    }));
+  };
+
+  const deleteField = (index: number) => {
+    const updatedData = [...userData.demo];
+    updatedData.splice(index, 1);
+    setUserData((prevData: UserData) => ({
+      ...prevData,
+      demo: updatedData,
+    }));
+  };
+
+  const addMore = () => {
+    const newDemo: Demo = {
+      url: "",
+      description: "",
+    };
+    setUserData((prevData: UserData) => ({
+      ...prevData,
+      demo: [...prevData.demo, newDemo],
+    }));
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    if (date) {
+      // Set the time component to 0:00 (midnight)
+      date.setHours(0, 0, 0, 0);
+    }
+    setUserData((prevData: UserData) => ({ ...prevData, delivery_date: date }));
+    setErrorMessage((prevError: any) => ({ ...prevError, delivery_date: "" }));
+  };
 
   return (
-    <div className={`bg-primaryTheme text-secondaryTheme`}>
-      <div className="flex flex-col w-full px-0 mx-auto md:flex-row">
-        <div className="flex flex-col md:w-full">
-          <form className="justify-center w-full mx-auto" method="post">
-            <div className="">
-              <div className="space-x-0 space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
-                <div className="w-full lg:w-1/2">
-                  <label
-                    htmlFor="firstName"
-                    className="block mb-3 text-sm font-semibold text-secondaryTheme"
-                  >
-                    Choose category
-                  </label>
-                  <Select onValueChange={setCategory}>
-                    <SelectTrigger className="w-full bg-black-gradient-2">
-                      <SelectValue placeholder="Categories" />
-                    </SelectTrigger>
-                    <SelectContent>{categories}</SelectContent>
-                  </Select>
-                </div>
-              </div>
-            </div>
+    <div className="w-full flex items-center justify-center">
+      <div className="flex flex-col items-center w-full">
+        <Box component="form" autoComplete="off" className="w-full">
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <InputField
+                inputProps={{
+                  type: "title",
+                  name: "title",
+                  id: "title",
+                  label: "Title",
+                  value: title,
+                  onChange: handleChange,
+                  setErrorMessage: setErrorMessage,
+                  errorMessages: errorMessage,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <label
+                htmlFor="firstName"
+                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+              >
+                Choose category
+              </label>
+              <Select
+                value={category}
+                onValueChange={(value) =>
+                  setUserData((prevData: UserData) => ({
+                    ...prevData,
+                    category: value,
+                  }))
+                }
+              >
+                <SelectTrigger className="common-input">
+                  <SelectValue placeholder="Categories" />
+                </SelectTrigger>
+                <SelectContent>{categories}</SelectContent>
+              </Select>
+              {errorMessage.category && errorMessage.category !== "" && (
+                <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                  <ErrorIcon />
+                  <Typography className="p-0 text-sm">
+                    {errorMessage.category}
+                  </Typography>
+                </Grid>
+              )}
+            </Grid>
+            <Grid item xs={12}>
+              <InputField
+                inputProps={{
+                  multiline: true,
+                  minRows: 3,
+                  type: "text",
+                  name: "order_description",
+                  id: "order_description",
+                  label: "Describe your order",
+                  value: order_description,
+                  onChange: handleChange,
+                  setErrorMessage: setErrorMessage,
+                  errorMessages: errorMessage,
+                }}
+              />
+            </Grid>
 
-            <div className="w-full mt-4">
-              <div className="w-full">
-                <ul className="flex flex-col gap-3 text-secondaryTheme">
-                  <li className="flex items-center gap-3">
-                    <BsInfoCircleFill /> Download this file and upload it in the
-                    following box after filling it out.
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => window.open(fileURL, "_blank")}
-                      className="flex items-center gap-3 px-4 py-3 bg-btn-gradient"
-                    >
-                      {" "}
-                      <AiFillEye /> View file
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="mt-4">
-              <div className="block mb-3 text-sm font-semibold text-secondaryTheme">
-                Upload
-              </div>
-              <label className="block">
-                <span className="sr-only">Upload your file</span>
-                <input
-                  type="file"
-                  className=" block w-full text-sm 
-                    file:mr-4 file:py-2 file:px-4
-                    file:rounded-md file:border-0 file:h-[3rem] file:cursor-pointer
-                    file:text-sm file:font-semibold
-                    file:bg-gray-900 file:text-white
-                    hover:file:bg-gray-900/2 bg-btn-gradient cursor-pointer rounded-md text-secondaryTheme h-[3rem]"
-                />
-              </label>
-            </div>
-            <div className="relative pt-3 xl:pt-6">
-              <label
-                htmlFor="note"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+            {userData.demo.map((item, index) => (
+              <Grid key={index} item xs={12}>
+                {index > 0 && (
+                  <Grid className="w-full flex justify-end text-white">
+                    <Tooltip title="Delete">
+                      <IconButton
+                        onClick={() => deleteField(index)}
+                        className="text-inherit flex justify-start p-0 focus:outline-none normal-case mb-1"
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                )}
+                <Grid className="flex flex-col w-full gap-2">
+                  <InputField
+                    inputProps={{
+                      type: "text",
+                      name: "url",
+                      id: "url",
+                      label: "Demo URL",
+                      value: item.url,
+                      onChange: (event) => handleDemoChange(event, index),
+                      setErrorMessage,
+                      errorMessages: errorMessage,
+                    }}
+                  />
+                  <InputField
+                    inputProps={{
+                      multiline: true,
+                      minRows: 3,
+                      type: "text",
+                      name: "description",
+                      id: "description",
+                      label: "Describe demo",
+                      value: item.description,
+                      onChange: (event) => handleDemoChange(event, index),
+                      setErrorMessage,
+                      errorMessages: errorMessage,
+                    }}
+                  />
+                </Grid>
+              </Grid>
+            ))}
+            <Grid className="w-full flex justify-end">
+              <Button
+                onClick={addMore}
+                variant="outlined"
+                startIcon={<AddCircleOutlineIcon />}
+                disableRipple
+                className="mt-2 focus:outline-none normal-case px-4 text-secondaryTheme"
               >
-                Describe your order
-              </label>
-              <textarea
-                name="note"
-                className="flex items-center bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-600"
-                rows={4}
-                placeholder="Describe your order"
-              ></textarea>
-            </div>
-            <div className="w-full mt-4">
-              <label
-                htmlFor="postcode"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
-              >
-                Demo URL
-              </label>
-              <input
-                name="postcode"
-                type="text"
-                placeholder="Enter demo URL"
-                className="bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-gray-600"
-              />
-            </div>
-            <div className="w-full mt-4">
-              <label
-                htmlFor="postcode"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
-              >
-                Delivery Date
-              </label>
-              <input
-                name="postcode"
-                type="text"
-                placeholder="Enter delivery date"
-                className="bg-black-gradient-2 w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-gray-600"
-              />
-            </div>
-            <div className="mt-4">
-              <div className="block mb-3 text-sm font-semibold text-secondaryTheme">
-                Additional File
-              </div>
-              <label className="block">
-                <span className="sr-only">Upload your file</span>
-                <input
-                  type="file"
-                  className=" block w-full text-sm 
-                    file:mr-4 file:py-2 file:px-4
-                    file:rounded-md file:border-0 file:h-[3rem] file:cursor-pointer
-                    file:text-sm file:font-semibold
-                    file:bg-gray-900 file:text-white
-                    hover:file:bg-gray-900/2 bg-btn-gradient cursor-pointer rounded-md text-secondaryTheme h-[3rem]"
-                />
-              </label>
-            </div>
-            <div className="flex items-center mt-4">
-              <div className="items-top flex space-x-2">
-                <Checkbox id="terms1" />
-                <div className="grid gap-1.5 leading-none">
-                  <label
-                    htmlFor="terms1"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                Add another demo
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <ul className="flex flex-col gap-3 text-secondaryTheme">
+                <li className="flex items-center gap-3">
+                  <BsInfoCircleFill /> Download this file and upload it in the
+                  following box after filling it out.
+                </li>
+                <li>
+                  <button
+                    onClick={() => window.open(fileURL, "_blank")}
+                    className="flex items-center gap-3 px-4 py-3 common-input-button"
                   >
-                    I agree to the terms and conditions.
-                  </label>
-                </div>
+                    {" "}
+                    <AiFillEye /> View file
+                  </button>
+                </li>
+              </ul>
+            </Grid>
+            <Grid item xs={12}>
+              <div className="block mb-3 text-sm font-semibold text-secondaryTheme">
+                Upload attached file
               </div>
-            </div>
-            <div className="mt-4">
-              <Button className="w-full">Process</Button>
-            </div>
-          </form>
-        </div>
+              <label className="block">
+                <span className="sr-only">Upload your file</span>
+                <input
+                  type="file"
+                  accept="application/pdf"
+                  onChange={handleFileChange("order_file")}
+                  className=" block w-full text-sm 
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-[5px] file:rounded-r-none file:border-0 file:h-[56px] file:cursor-pointer
+                    file:text-sm file:font-semibold
+                    file:bg-gray-900 file:text-white
+                    hover:file:bg-gray-900/2 common-input cursor-pointer rounded-md text-secondaryTheme"
+                />
+              </label>
+              {errorMessage.order_file && errorMessage.order_file !== "" && (
+                <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                  <ErrorIcon />
+                  <Typography className="p-0 text-sm">
+                    {errorMessage.order_file}
+                  </Typography>
+                </Grid>
+              )}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <div className="block mb-3 text-sm font-semibold text-secondaryTheme">
+                Additional file
+              </div>
+              <label className="block">
+                <span className="sr-only">Upload your file</span>
+                <input
+                  type="file"
+                  accept="application/pdf"
+                  onChange={handleFileChange("additional_file")}
+                  className=" block w-full text-sm 
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-[5px] file:rounded-r-none file:border-0 file:h-[56px] file:cursor-pointer
+                    file:text-sm file:font-semibold
+                    file:bg-gray-900 file:text-white
+                    hover:file:bg-gray-900/2 common-input cursor-pointer rounded-md text-secondaryTheme"
+                />
+              </label>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <label
+                htmlFor="delivery_date"
+                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+              >
+                Delivery date
+              </label>
+              <DatePicker
+                selected={delivery_date}
+                onChange={handleDateChange}
+                dateFormat="yyyy/MM/dd"
+                className="common-input w-full"
+                showIcon
+                wrapperClassName="common-input w-full"
+              />
+              {errorMessage.delivery_date &&
+                errorMessage.delivery_date !== "" && (
+                  <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                    <ErrorIcon />
+                    <Typography className="p-0 text-sm">
+                      {errorMessage.delivery_date}
+                    </Typography>
+                  </Grid>
+                )}
+            </Grid>
+          </Grid>
+        </Box>
       </div>
     </div>
   );
-};
+}
 
-export default ProjectDetails;
+interface Props {
+  inputProps: {
+    type: string;
+    name: string;
+    id: string;
+    label: string;
+    value?: string | number;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    setErrorMessage: React.Dispatch<React.SetStateAction<any>>;
+    errorMessages: any;
+    multiline?: boolean;
+    minRows?: number;
+  };
+}
+
+const InputField = ({ inputProps }: Props) => {
+  const {
+    type,
+    name,
+    id,
+    label,
+    value,
+    onChange,
+    setErrorMessage,
+    multiline,
+    minRows,
+  } = inputProps;
+
+  const errorMessages = inputProps.errorMessages || {};
+
+  return (
+    <div>
+      <label
+        htmlFor="firstName"
+        className="block mb-3 text-sm font-semibold text-secondaryTheme"
+      >
+        {label}
+      </label>
+      <TextField
+        multiline={multiline}
+        minRows={minRows}
+        type={type}
+        name={name}
+        value={value}
+        required
+        fullWidth
+        id={id}
+        onChange={onChange}
+        onFocus={() =>
+          setErrorMessage((prevErrors: any) => ({
+            ...prevErrors,
+            [name]: "",
+          }))
+        }
+        sx={{
+          label: {
+            color: "rgb(214 211 209)",
+          },
+          "& label.Mui-focused": {
+            color: "rgb(214 211 209)",
+          },
+          "& .MuiOutlinedInput-root": {
+            color: "white",
+            "& fieldset": {
+              color: "white",
+              borderColor: "rgb(120 113 108)",
+            },
+            "&:hover fieldset": {
+              borderColor: "rgb(168 162 158)",
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "rgb(214 211 209)",
+            },
+          },
+        }}
+      />
+      {errorMessages[name] && errorMessages[name] !== "" && (
+        <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+          <ErrorIcon />
+          <Typography className="p-0 text-sm">{errorMessages[name]}</Typography>
+        </Grid>
+      )}
+    </div>
+  );
+};
