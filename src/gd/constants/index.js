@@ -17,7 +17,7 @@ import {
   man3,
   man2,
 } from "../assets";
-import { AiOutlineHome } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineForm } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { MdMiscellaneousServices, MdOutlineSecurity } from "react-icons/md";
 import hero1 from "../images/hero1.png";
@@ -58,6 +58,11 @@ export const GenerateNavLinks = ()=> {
       title: "Company",
       icon: IoMdBusiness,
     },
+    {
+      id: "apply",
+      title: "Apply",
+      icon: AiOutlineForm,
+    },
       {
         id: access_token ? "profile" : "login",
         title: access_token ? "Profile" : "Login",
@@ -72,6 +77,36 @@ export const appItems = [
   { id: "it", title: "Information Technology", route: "/it" },
   { id: "ce", title: "Civil Engineering", route: "/ce" },
   { id: "gd", title: "Global Donation", route: "/gd" },
+];
+
+export const applyForOptions = [
+  {  title: "Myself", value: "Myself" },
+  {  title: "Family", value: "Family" },
+  {  title: "Relatives", value: "Relatives" },
+  {  title: "Public", value: "Public" },
+];
+
+export const maritalStatusOptions = [
+  {  title: "Single", value: "Single" },
+  {  title: "Married", value: "Married" },
+  {  title: "Separated", value: "Separated" },
+  {  title: "Devorced", value: "Devorced" },
+  {  title: "Other (please specify)", value: "Other" },
+];
+
+export const bloodGroupOptions = [
+  {  title: "A+", value: "A+" },
+  {  title: "B+", value: "B+" },
+  {  title: "O+", value: "O+" },
+  {  title: "A-", value: "A-" },
+  {  title: "B-", value: "B-" },
+  {  title: "O-", value: "O-" },
+];
+
+export const modeOptions = [
+  {  title: "Normal", value: "Normal" },
+  {  title: "Medium", value: "Medium" },
+  {  title: "Emergency", value: "Emergency" },
 ];
 
 export const causes = [
