@@ -22,7 +22,7 @@ export default function Description({
   setErrorMessage: React.Dispatch<React.SetStateAction<any>>;
 }) {
 
-  const { fixed_time, time_limit, donation_needed, written_description } =
+  const {title, fixed_time, time_limit, donation_needed, written_description } =
     userData;
 
   const conditionalLabel = GenerateLabels({ userData });
@@ -45,6 +45,20 @@ export default function Description({
       <div className="flex flex-col items-center w-full">
         <Box component="form" autoComplete="off" className="w-full">
           <Grid container spacing={2}>
+          <Grid item xs={12}>
+              <InputField
+                inputProps={{
+                  type: "text",
+                  name: "title",
+                  id: "title",
+                  label: "Title",
+                  value: title,
+                  onChange: handleChange,
+                  setErrorMessage: setErrorMessage,
+                  errorMessages: errorMessage,
+                }}
+              />
+            </Grid>
             <Grid item xs={12}>
               <label>{conditionalLabel}</label>
               <VideoRecorder
@@ -133,6 +147,8 @@ export default function Description({
             <Grid item xs={12}>
               <InputField
                 inputProps={{
+                  multiline: true,
+                  minRows: 3,
                   type: "text",
                   name: "written_description",
                   id: "written_description",

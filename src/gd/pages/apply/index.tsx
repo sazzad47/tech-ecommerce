@@ -10,7 +10,7 @@ import {
 } from "./Validate";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../state/store";
-import { useCreateOrderMutation } from "../../../state/api/it";
+import { useCreatePostMutation } from "../../../state/api/gd";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ColorRing } from "react-loader-spinner";
@@ -47,6 +47,7 @@ export type UserData = {
   name_of_employment: string;
   photo: File | null;
   other_documents: File | null;
+  title: string;
   live_description: string;
   written_description: string;
   time_limit: string;
@@ -85,6 +86,7 @@ const initState: UserData = {
   name_of_employment: "",
   photo: null,
   other_documents: null,
+  title: "",
   live_description: "",
   written_description: "",
   time_limit: "",
@@ -98,18 +100,18 @@ export default function Apply() {
   const successAlert = () => {
     Swal.fire({
       title: "Thank you!",
-      text: "We received your order. Go to your dashboard to check your order details.",
+      text: "We received your application. Go to your dashboard to check your details.",
       icon: "success",
       showConfirmButton: true,
       confirmButtonText: "Dashboard",
-      preConfirm: () => navigate("/it/profile"),
+      preConfirm: () => navigate("/gd/profile"),
     });
   };
 
   const { access_token } = useSelector((state: RootState) => state.auth);
 
-  const [createOrder, { isLoading: isCreatingOrder }] =
-    useCreateOrderMutation();
+  const [createPost, { isLoading: isCreatingPost }] =
+    useCreatePostMutation();
 
   const [userData, setUserData] = React.useState<UserData>(initState);
   const [errorMessage, setErrorMessage] = React.useState<any>({});
@@ -176,8 +178,8 @@ export default function Apply() {
 
     if (Object.keys(errMsg).length > 0) return setErrorMessage(errMsg);
 
-    const response = await createOrder({ userData, access_token });
-
+    const response = await createPost({ userData, access_token });
+    console.log('response', response)
     if ("error" in response) {
       if ("data" in response.error) {
         const errorData: any = response.error.data;
@@ -226,7 +228,7 @@ export default function Apply() {
             className="focus:outline-none normal-case px-4 text-secondaryTheme"
           >
             {activeStep === maxSteps - 1 ? (
-              isCreatingOrder ? (
+              isCreatingPost ? (
                 <ColorRing
                   visible={true}
                   height="30"

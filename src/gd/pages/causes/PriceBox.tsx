@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { Button } from "../../components/ui/button";
+import { UserData } from "../apply";
+import DonateButton from "./donate/OneTime";
 
 
-const PriceBox = () => {
+const PriceBox = ({data}: {data: UserData}) => {
   return (
     <div className="bg-black-gradient-2 rounded-lg">
       <div className="flex flex-col gap-8 p-5">
@@ -17,11 +18,12 @@ const PriceBox = () => {
 
           <div className="w-full flex justify-between">
             <span>Raised: $4500</span>
-            <span>Goal: $10000</span>
+            <span>Goal: ${data.donation_needed}</span>
           </div>
         </div>
         <Link to="/checkout">
-          <Button className="w-full">Donate</Button>
+          {/* <Button className="w-full">Donate</Button> */}
+          <DonateButton/>
         </Link>
       </div>
     </div>

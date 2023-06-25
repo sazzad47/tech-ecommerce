@@ -1,7 +1,8 @@
 import SocialSharing from "../../components/SocialSharing";
 import styles from "../../style";
+import { UserData } from "../donate/main/Causes";
 
-const Description = () => {
+const Description = ({data}: {data: UserData}) => {
   return (
     <div className="flex flex-col gap-7">
       <div>
@@ -9,16 +10,11 @@ const Description = () => {
           <h1 className={`${styles.heading2}`}>Description</h1>
         </div>
         <p className="text-secondaryTheme">
-          Introducing our cutting-edge multipurpose admin dashboard, a powerful
-          solution designed to streamline your administrative tasks and empower
-          your organization like never before. Packed with an array of
-          innovative features, our dashboard is built to enhance productivity,
-          improve efficiency, and provide you with comprehensive control over
-          your system or organization.
+          {data.written_description}
         </p>
         <div className="mt-5 flex-col gap-3 hidden sm:flex">
           <h3 className="text-xl font-bold text-secondaryTheme">Share</h3>
-          <SocialSharing path="causes/123" title="They Need Food" />
+          <SocialSharing path={`causes/${data.id}`} title={data.title} />
         </div>
       </div>
     </div>

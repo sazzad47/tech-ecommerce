@@ -1,13 +1,69 @@
-import Causes from "./Causes"
+import { useGetPostsQuery } from "src/state/api/gd";
+import { Oval } from "react-loader-spinner";
+import NoResult from "./NoResult";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Pagination } from "@mui/material";
+import filterSearch from "../topbar/filterSearch";
+import Causes from "./Causes";
 
-const Main = () => {
+const Posts = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { data, isLoading } = useGetPostsQuery(location.search);
+  const totalCount = data?.count;
+  const itemsPerPage = 6;
+  const totalPages = Math.ceil(totalCount / itemsPerPage);
+
+  const queryParams = new URLSearchParams(window.location.search);
+  const currentPage = queryParams.get("page");
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    const page = value.toString();
+    filterSearch({ location, page, navigate });
+  };
+
   return (
-    <div className='w-full flex justify-center flex-col gap-7 items-center'>
-      <Causes title="Disaster Relief" />
-      <Causes title="Poverty Alleviation" />
-      <Causes title="Community Development" />
-  </div>
-  )
-}
+    <>
+      {isLoading ? (
+        <div className="w-full h-[90vh] bg-primaryTheme flex items-center justify-center">
+          <Oval
+            height={30}
+            width={30}
+            color="#4fa94d"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#4fa94d"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+        </div>
+      ) : data?.length === 0 ? (
+        <NoResult />
+      ) : (
+        <div className="w-full">
+          <Causes data={data?.results} />
+          <div className="w-full flex items-center justify-center mt-5">
+            <Pagination
+              page={Number(currentPage)}
+              onChange={handlePageChange}
+              sx={{
+                "& .MuiPaginationItem-root": {
+                  color: "white",
+                },
+              }}
+              count={Number(totalPages)}
+              color="standard"
+            />
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
 
-export default Main
+export default Posts;

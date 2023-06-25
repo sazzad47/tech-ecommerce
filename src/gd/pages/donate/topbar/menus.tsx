@@ -12,43 +12,27 @@ export interface MenuProps {
 const menus: Array<MenuProps> = [
   {
     id: 1,
-    title: "Education",
+    title: "Medical",
   },
   {
     id: 2,
-    title: "Health and Medical",  
+    title: "Education",
   },
   {
     id: 3,
-    title: "Environment and Conservation",  
+    title: "Natural Disaster",
   },
   {
     id: 4,
-    title: "Poverty Alleviation",  
+    title: "Animals",
   },
   {
     id: 5,
-    title: "Disaster Relief",  
+    title: "Employment",
   },
   {
     id: 6,
-    title: "Animal Welfare",  
-  },
-  {
-    id: 7,
-    title: "Social Justice",  
-  },
-  {
-    id: 8,
-    title: "Arts and Culture",  
-  },
-  {
-    id: 9,
-    title: "Community Development",  
-  },
-  {
-    id: 10,
-    title: "International Aid",  
+    title: "Sports",
   },
 ];
 

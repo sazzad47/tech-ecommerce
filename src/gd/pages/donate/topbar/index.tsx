@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconButton, Typography } from "@mui/material";
 import { menus } from "./menus";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -7,39 +7,71 @@ import { CSSTransition } from "react-transition-group";
 import CloseIcon from "@mui/icons-material/Close";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import SearchBar from "./SearchBar";
-import { Button } from "../../../components/ui/button";
+import { Button } from "../../../../components/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../../components/ui/select";
+} from "../../../../components/select";
+import filterSearch from "./filterSearch";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useGetPostCountriesQuery } from "src/state/api/gd";
 
 const Topbar = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
+  const [countries, setCountries] = useState([]);
+  const { data } = useGetPostCountriesQuery(null);
+
+  const countriesOptions = countries?.map((item, index) => (
+    <SelectItem key={index} value={item || ""}>
+      {item}
+    </SelectItem>
+  ));
+
+  useEffect(() => {
+    if (data) {
+      setCountries(data.countries);
+    }
+  }, [data]);
+
   return (
-    <div className=" w-full flex items-center justify-between gap-0 sm:gap-[5rem] h-[10vh]">
-      <Button onClick={() => setOpenSidebar(!openSidebar)}>
-        {" "}
+    <div className="w-full flex flex-col sm:flex-row gap-5 items-center">
+      <Button
+        className="w-full sm:w-auto"
+        onClick={() => setOpenSidebar(!openSidebar)}
+      >
         <ListIcon className="mr-2 h-4 w-4" /> Categories
       </Button>
-
-      <div className="hidden sm:flex flex-1">
-        <SearchBar />
-      </div>
-      <div className="flex gap-3">
-        <Select>
-          <SelectTrigger className="w-[140px] sm:w-[180px] bg-blue-gradient">
-            <SelectValue placeholder="Sort" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="Newest">Newest</SelectItem>
-            <SelectItem value="Oldest">Oldest</SelectItem>
-            <SelectItem value="Emergency">Emergency</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+      <Select
+        onValueChange={(value) => {
+          filterSearch({ location, country: value, navigate: navigate });
+        }}
+        
+      >
+        <SelectTrigger className="w-full sm:w-[180px] bg-blue-gradient">
+          <SelectValue placeholder="Country" />
+        </SelectTrigger>
+        <SelectContent>
+       {countriesOptions}
+        </SelectContent>
+      </Select>
+      <SearchBar />
+      <Select  onValueChange={(value) => {
+          filterSearch({ location, ordering: value, navigate: navigate });
+        }}
+        >
+        <SelectTrigger className="w-full sm:w-[180px] bg-blue-gradient">
+          <SelectValue placeholder="Sort" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="-created_at">Newest</SelectItem>
+          <SelectItem value="created_at">Oldest</SelectItem>
+        </SelectContent>
+      </Select>
       <CSSTransition
         classNames="tech-main-menu"
         in={openSidebar}
@@ -105,6 +137,9 @@ const MainMenu = ({
   setOpenSidebar: Function;
   setOpenMainMenu: Function;
 }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   return (
     <div className="">
       <div className="w-[18rem] h-[10vh] px-2">
@@ -127,6 +162,11 @@ const MainMenu = ({
                 setCurrentMegaMenu(megaMenu.title);
                 setOpenMegaMenu(true);
               } else {
+                filterSearch({
+                  location,
+                  category: megaMenu.title,
+                  navigate: navigate,
+                });
                 setOpenSidebar(false);
                 setOpenMainMenu(false);
               }
@@ -152,6 +192,9 @@ const MegaMenu = ({
   setOpenMainMenu: Function;
   setOpenSidebar: Function;
 }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="w-[18rem] h-[10vh] px-2">
@@ -172,6 +215,11 @@ const MegaMenu = ({
           ?.submenus?.map((microMenu, i) => (
             <div
               onClick={() => {
+                filterSearch({
+                  location,
+                  category: microMenu.title,
+                  navigate: navigate,
+                });
                 setOpenSidebar(false);
               }}
               key={i}

@@ -43,8 +43,8 @@ export const validateContactInfo = (userData: UserData) => {
     errors.email = "Invalid email.";
   }
 
-  if (userData.phone && !/^\d{10}$/.test(userData.phone)) {
-    errors.phone = "Invalid phone number.";
+  if (!userData.phone) {
+    errors.phone = "This field is required.";
   }
 
   if (!userData.country) {

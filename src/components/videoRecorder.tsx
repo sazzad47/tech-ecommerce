@@ -124,8 +124,9 @@ const VideoRecorder = ({
 
         setUserData((prevData: UserData) => ({
           ...prevData,
-          [name]: videoBlob,
+          [name]: new File([videoBlob], 'live.mp4', { type: videoBlob.type }),
         }));
+        
         setRecordingDuration(0);
       };
 

@@ -15,8 +15,9 @@ import Settings from "../pages/profile/settings";
 const routes = [
     { path: "/gd", component: <Home /> },
     { path: "/gd/home", component: <Home /> },
-    { path: "/gd/causes", component: <Donate /> },
+    { path: "gd/causes/*", component: <Donate /> },
     { path: "/gd/causes/:id", component: <CuaseDetails /> },
+    { path: "/gd/causes/donate", component: <CuaseDetails /> },
     { path: "/gd/donate", component: <Checkout /> },
     { path: "/gd/apply", component: <Apply /> },
     { path: "/gd/services", component: <Services /> },

@@ -63,9 +63,6 @@ export default function BillingAddress({
   const countryArray = getAllCountries();
 
   const {
-    application_for,
-    mode,
-    category,
     first_name,
     last_name,
     fathers_name,
@@ -91,6 +88,7 @@ export default function BillingAddress({
       {item.title}
     </SelectItem>
   ));
+
 
   const modeChoices = modeOptions.map((item, index) => (
     <SelectItem key={index} value={item.title || ""}>
@@ -142,7 +140,6 @@ export default function BillingAddress({
                 Whom are you applying for?
               </label>
               <Select
-                value={application_for}
                 onValueChange={(value) => {
                   setUserData((prevData: UserData) => ({
                     ...prevData,
@@ -177,7 +174,6 @@ export default function BillingAddress({
                 In which mode do you want to apply?
               </label>
               <Select
-                value={mode}
                 onValueChange={(value) => {
                   setUserData((prevData: UserData) => ({
                     ...prevData,
@@ -190,7 +186,7 @@ export default function BillingAddress({
                 }}
               >
                 <SelectTrigger className="common-input">
-                  <SelectValue placeholder="Apply for" />
+                  <SelectValue placeholder="Mode" />
                 </SelectTrigger>
                 <SelectContent>{modeChoices}</SelectContent>
               </Select>
@@ -211,7 +207,6 @@ export default function BillingAddress({
                 Select category
               </label>
               <Select
-                value={category}
                 onValueChange={(value) =>
                   setUserData((prevData: UserData) => ({
                     ...prevData,
