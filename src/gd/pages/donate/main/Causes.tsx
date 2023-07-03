@@ -37,7 +37,8 @@ export type UserData = {
   written_description: string;
   time_limit: string;
   fixed_time: Date | null;
-  donation_needed: string | number;
+  donation_needed: number;
+  total_donations: number;
   [key: string]: string | File | null | Date | number;
 };
 
@@ -48,10 +49,7 @@ const Causes = ({ data }: { data: UserData[] }) => {
         <div className="min-w-full overflow-x-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
             {data.map((post, index) => (
-              <TemplateCard
-                key={`post-${index}`}
-                {...post}
-              />
+              <TemplateCard key={`post-${index}`} {...post} />
             ))}
           </div>
         </div>
@@ -64,40 +62,52 @@ export const TemplateCard: React.FC<UserData> = ({
   photo,
   written_description,
   donation_needed,
+  total_donations,
   id,
 }) => {
-
-  return (   
-      <div className="bg-black-gradient rounded-2xl w-full">
-        <div className="relative w-full h-[230px]">
-          <img
-            src={photo}
-            alt="project_image"
-            className="w-full h-full object-cover rounded-se-2xl rounded-ss-2xl"
-          />
-        </div>
-        <div className="p-5 text-secondaryTheme">
-          <div className="progress-box ">
-            <div className="progress-bar">
-              <span className="progress-per bg-green-700 w-[45%]">
-                <span className="tooltip">45%</span>
+  const percentage = Math.floor((total_donations / donation_needed) * 100);
+  // const progressBar = `progress-per bg-green-700 w-[${percentage}%]`;
+  const progressBar = `progress-per bg-green-700 w-[${percentage}%]`;
+  console.log("progressBar", progressBar);
+  return (
+    <div className="bg-black-gradient rounded-2xl w-full">
+      <div className="relative w-full h-[230px]">
+        <img
+          src={photo}
+          alt="project_image"
+          className="w-full h-full object-cover rounded-se-2xl rounded-ss-2xl"
+        />
+      </div>
+      <div className="p-5 text-secondaryTheme">
+        <div className="progress-box ">
+          <div className="progress-bar">
+            {percentage && (
+              <span style={{ width: `${percentage}%` }} className="progress-per bg-green-700">
+                <span className="tooltip"> {percentage}% </span>
               </span>
-            </div>
+            )}
           </div>
+        </div>
 
-          <div className="w-full flex justify-between">
-            <span>Raised: $4500</span>
-            <span>Goal: ${donation_needed}</span>
-          </div>
+        <div className="w-full flex justify-between">
+          <span>Raised: ${total_donations}</span>
+          <span>Goal: ${donation_needed}</span>
+        </div>
 
-          <p className="mt-2 text-secondaryTheme text-[14px] line-clamp-2">{written_description}</p>
+        <p className="mt-2 text-secondaryTheme text-[14px] line-clamp-2">
+          {written_description}
+        </p>
 
-          <div className="mt-4 flex justify-between items-center">
-            <Link to={`/gd/causes/${id}`}><PrimaryButton> View </PrimaryButton></Link>
-            <Link to="/gd/donate"><Button>Donate</Button></Link>
-          </div>
+        <div className="mt-4 flex justify-between items-center">
+          <Link to={`/gd/causes/${id}`}>
+            <PrimaryButton> View </PrimaryButton>
+          </Link>
+          <Link to="/gd/donate">
+            <Button>Donate</Button>
+          </Link>
         </div>
       </div>
+    </div>
   );
 };
 

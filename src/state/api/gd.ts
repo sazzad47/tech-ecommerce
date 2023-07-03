@@ -58,12 +58,14 @@ export const gdApi = createApi({
         };
       },
     }),
-    createPaymentSession: builder.mutation<any, any>({
-      query: ({id}) => ({
-        url: `create-payment/${id}/`,
+    createDonationSession: builder.mutation<any, any>({
+      query: ({userData, id, access_token}) => ({
+        url: `create-donation/${id}/`,
         method: "POST",
+        body: userData,
         headers: {
           "Content-type": "application/json",
+          authorization: `Bearer ${access_token}`,
         },
       }),
     }),
@@ -127,4 +129,4 @@ export const gdApi = createApi({
   }),
 });
 
-export const { useCreatePostMutation, useGetOrdersQuery, useGetOrderDetailsQuery, useUpdatePostMutation, useCreatePaymentSessionMutation, useGetTransactionsQuery, useGetPostsQuery, useGetPostCountriesQuery, useGetPostQuery } = gdApi;
+export const { useCreatePostMutation, useGetOrdersQuery, useGetOrderDetailsQuery, useUpdatePostMutation, useCreateDonationSessionMutation, useGetTransactionsQuery, useGetPostsQuery, useGetPostCountriesQuery, useGetPostQuery } = gdApi;

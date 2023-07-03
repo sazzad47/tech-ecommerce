@@ -3,7 +3,6 @@ import { GoLocation } from "react-icons/go";
 import PriceBox from "./PriceBox";
 import Description from "./Description";
 import styles from "../../style";
-import hero3 from "../../images/hero3.png";
 import Emergency from "./Emergency";
 import TopContributors from "./TopContributors";
 import SocialSharing from "../../components/SocialSharing";

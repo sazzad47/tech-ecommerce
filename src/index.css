@@ -801,6 +801,10 @@
  border-radius: 5px !important;
  color: white !important;
 }
+.common-input.active {
+ background-color: rgb(4 47 46) !important;
+ border-color: rgb(168 162 158) !important;
+}
 .common-input:hover{
  border-color: rgb(168 162 158) !important;
 }

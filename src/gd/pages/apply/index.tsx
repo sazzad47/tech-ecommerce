@@ -53,7 +53,7 @@ export type UserData = {
   time_limit: string;
   fixed_time: Date | null;
   donation_needed: string | number;
-  [key: string]: string | File | null | Date | number;
+  [key: string]: string | File | null | Date | number | undefined;
 };
 
 const initState: UserData = {
@@ -193,9 +193,6 @@ export default function Apply() {
       setUserData(initState);
     }
   };
-
-  console.log("userdata", userData);
-  console.log('errorMsg', errorMessage);
 
   return (
     <div

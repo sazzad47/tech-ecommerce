@@ -1,7 +1,7 @@
 import Home from "../pages/home";
-import Donate from "../pages/donate";
-import Checkout from "../pages/checkout";
+import Causes from "../pages/donate";
 import CuaseDetails from "../pages/causes/[id]";
+import Donate from "../pages/causes/donate";
 import Apply from "../pages/apply";
 import Services from "../pages/services";
 import Security from "../pages/security";
@@ -15,10 +15,9 @@ import Settings from "../pages/profile/settings";
 const routes = [
     { path: "/gd", component: <Home /> },
     { path: "/gd/home", component: <Home /> },
-    { path: "gd/causes/*", component: <Donate /> },
+    { path: "gd/causes", component: <Causes /> },
     { path: "/gd/causes/:id", component: <CuaseDetails /> },
-    { path: "/gd/causes/donate", component: <CuaseDetails /> },
-    { path: "/gd/donate", component: <Checkout /> },
+    { path: "/gd/causes/donate/:id", component: <Donate /> },
     { path: "/gd/apply", component: <Apply /> },
     { path: "/gd/services", component: <Services /> },
     { path: "/gd/security", component: <Security /> },
