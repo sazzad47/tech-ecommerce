@@ -8,7 +8,6 @@ interface FilterSearchProps {
   page?: string;
 }
 
-  // Function to set the query parameters and update the URL
   const filterSearch = ({location, navigate, category, ordering, page, search, country }: FilterSearchProps) => {
     const query = new URLSearchParams(location.search);
 
