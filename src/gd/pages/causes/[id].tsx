@@ -3,12 +3,11 @@ import { GoLocation } from "react-icons/go";
 import PriceBox from "./PriceBox";
 import Description from "./Description";
 import styles from "../../style";
-import Emergency from "./Emergency";
 import TopContributors from "./TopContributors";
-import SocialSharing from "../../components/SocialSharing";
 import { useGetPostQuery } from "src/state/api/gd";
 import { Oval } from "react-loader-spinner";
 import { useParams } from "react-router-dom";
+import Comments from "./Comments";
 
 const Product: React.FC = () => {
   const params = useParams();
@@ -24,7 +23,7 @@ const Product: React.FC = () => {
 
   const country = data?.country;
   const capitalizedCountry =  country?.charAt(0).toUpperCase() + country?.slice(1);
-
+  
   return (
     <>
       {isLoading ? (
@@ -78,12 +77,9 @@ const Product: React.FC = () => {
                 <PriceBox data={data} />
                 <TopContributors />
               </div>
-              <div className="mt-5 flex-col gap-3 flex sm:hidden">
-                <h3 className="text-xl font-bold text-secondaryTheme">Share</h3>
-                <SocialSharing path="causes/123" title="They Need Food" />
-              </div>
+              
             </div>
-            <Emergency />
+            <Comments />
           </div>
         </div>
       )}

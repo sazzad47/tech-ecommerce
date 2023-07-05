@@ -87,6 +87,15 @@ export const gdApi = createApi({
         },
       }),
     }),
+    getDonorsComments: builder.query<any, any>({
+      query: (id) => ({
+        url: `donors-comments/${id}/`,
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }),
+    }),
     getPostCountries: builder.query<any, any>({
       query: () => ({
         url: "post-countries/",
@@ -129,4 +138,4 @@ export const gdApi = createApi({
   }),
 });
 
-export const { useCreatePostMutation, useGetOrdersQuery, useGetOrderDetailsQuery, useUpdatePostMutation, useCreateDonationSessionMutation, useGetTransactionsQuery, useGetPostsQuery, useGetPostCountriesQuery, useGetPostQuery } = gdApi;
+export const { useCreatePostMutation, useGetOrdersQuery, useGetOrderDetailsQuery, useUpdatePostMutation, useCreateDonationSessionMutation, useGetTransactionsQuery, useGetPostsQuery, useGetPostCountriesQuery, useGetPostQuery, useGetDonorsCommentsQuery} = gdApi;

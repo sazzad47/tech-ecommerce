@@ -14,7 +14,7 @@ const Description = ({data}: {data: UserData}) => {
         </p>
         <div className="mt-5 flex-col gap-3 hidden sm:flex">
           <h3 className="text-xl font-bold text-secondaryTheme">Share</h3>
-          <SocialSharing path={`causes/${data.id}`} title={data.title} />
+          <SocialSharing path={`gd/causes/${data.id}`} title={data.title} />
         </div>
       </div>
     </div>

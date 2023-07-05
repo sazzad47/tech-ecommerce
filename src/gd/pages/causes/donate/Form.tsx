@@ -23,9 +23,9 @@ import {
 import { currencies } from "src/gd/constants";
 import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import { useCreateDonationSessionMutation } from "src/state/api/gd";
-import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "src/state/store";
+import { useParams } from "react-router-dom";
 
 export type UserData = {
   currency: string;
@@ -35,6 +35,11 @@ export type UserData = {
   [key: string]: string | number | boolean | null;
 };
 
+type DataProps = {
+  suggested_donations: any[];
+  suggested_tips: any[];
+}
+
 const initState: UserData = {
   currency: "usd",
   donation_amount: null,
@@ -42,9 +47,10 @@ const initState: UserData = {
   is_hidden: false,
 };
 
-const suggestedDonations = [{ amount: 20 }, { amount: 30 }, { amount: 40 }];
 
-export default function Form() {
+export default function Form({data}: {data: DataProps}) {
+  const suggestedDonations = data.suggested_donations;
+  const suggestedTips = data.suggested_tips;
   const params = useParams();
   const { id } = params;
   const { access_token } = useSelector((state: RootState) => state.auth);
@@ -88,7 +94,7 @@ export default function Form() {
     fetchConversionRate();
   }, [currency]);
 
-  const [createDonationSession, { isLoading }] =
+  const [createDonationSession, { isLoading: sessionLoading }] =
     useCreateDonationSessionMutation();
 
   const createDonation = async () => {
@@ -101,7 +107,8 @@ export default function Form() {
       window.location.href = response.data.checkout_url;
     }
   };
-
+  
+  
   return (
     <div className="w-full flex items-center justify-center">
       <div className="flex flex-col items-center w-full">
@@ -235,7 +242,7 @@ export default function Form() {
                 Suggested tips
               </label>
               <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-2">
-                {suggestedDonations.map((item, index) => (
+                {suggestedTips.map((item, index) => (
                   <div
                     key={index}
                     onClick={() => {
@@ -313,7 +320,7 @@ export default function Form() {
                 variant="contained"
                 className="normal-case text-slate-200 bg-stone-500 hover:bg-stone-600"
               >
-                {isLoading ? (
+                {sessionLoading ? (
                   <ColorRing
                     visible={true}
                     height="30"

@@ -52,7 +52,7 @@ const App = () => {
       }
     });
   };
-
+  console.log('urs', `${process.env.REACT_APP_BASE_BACKEND_URL}/api/user/auth/`)
   return (
     <div id="section-id" className="bg-primaryTheme w-full overflow-hidden">      
       <div className={`bg-primaryTheme ${styles.flexStart}`}>
