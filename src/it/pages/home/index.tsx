@@ -1,18 +1,15 @@
 import styles from "../../style";
 import animateScrollTo from "animated-scroll-to";
-import {
-  Business,
-  CTA,
-  Stats,
-  Hero,
-  Projects,
-  About,
-  StarsCanvas,
-  Contact,
-  Feedbacks,
-  Faqs,
-} from "../../components";
-import Skills from "../../components/Designs";
+import { Faqs } from "../../components";
+import Designs from "./designs";
+import PremiumTemplates from "./premiumTemplates";
+import Hero from "./Hero";
+import Service from "./Service";
+import Technologies from "./technologies";
+import Business from "./Business";
+import Stats from "./Stats";
+import Reviews from "./reviews";
+import Contact from "./contact";
 
 const App = () => {
   const scrollToBottom = () => {
@@ -36,7 +33,7 @@ const App = () => {
 
   function scrollToTop() {
     const targetPosition = 0;
-  
+
     animateScrollTo(targetPosition, {
       speed: 3, // Speed of the scrolling animation in pixels per second
       minDuration: 30000,
@@ -51,31 +48,26 @@ const App = () => {
         // Scroll animation was interrupted by user or another call of "animateScrollTo"
       }
     });
-  };
-  console.log('urs', `${process.env.REACT_APP_BASE_BACKEND_URL}/api/user/auth/`)
+  }
+
   return (
-    <div id="section-id" className="bg-primaryTheme w-full overflow-hidden">      
+    <div id="section-id" className="w-full overflow-hidden">
       <div className={`bg-primaryTheme ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
           <Hero scrollToBottom={scrollToBottom} />
         </div>
       </div>
 
-      <div className={`bg-primaryTheme ${styles.paddingX} ${styles.flexCenter}`}>
-        <div className={`${styles.boxWidth}`}>
-          <About />
-          <Skills />
-          <Projects />
-          <Business />
-          <Stats />
-          <Feedbacks />
-          <Faqs />
-          <CTA />
-          <div className="relative z-0">
-            <Contact />
-            <StarsCanvas />
-          </div>
-        </div>
+      <div className="bg-primaryTheme flex flex-col gap-[5rem]">
+        <Service />
+        <Designs />
+        <PremiumTemplates />
+        <Technologies />
+        <Business />
+        <Stats />
+        <Faqs />
+        <Reviews />
+        <Contact />
       </div>
     </div>
   );

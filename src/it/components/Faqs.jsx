@@ -53,30 +53,43 @@ const Faqs = () => {
   ];
 
   return (
-    <section className="w-full flex flex-col justify-center items-center">
-      <p className={`${styles.heading2} text-center`}>
-        Frequently Asked Questions
-      </p>
-      <div className="w-full max-w-xl mt-[3rem] p-5 flex flex-col gap-5 bg-black-gradient-2 rounded-[20px] box-shadow">
-        {faqsList.map((item, i) => (
-          <div key={i} className="accordion__item bg-black-gradient">
-            <header
-              className="accordion__header text-secondaryTheme"
-              onClick={() => toggleItem(i)}
-            >
-              <h3 className="accordion__title">{item.question}</h3>
-              {openItem === i ? <AiOutlineMinus /> : <AiOutlinePlus />}
-            </header>
+    <section
+      style={{
+        backgroundImage:
+          "url('https://res.cloudinary.com/dhhn4nlmq/image/upload/v1689345445/15518074_5594016_kennp1.jpg')",
+      }}
+      className="w-full flex flex-col justify-center items-center bg-cover bg-center py-[4rem]"
+    >
+      <div className="bg-white shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] py-[2rem] w-full md:w-[80%] mx-auto flex flex-col items-center justify-center">
+        <p className={`${styles.heading2} text-center m-0 p-0`}>
+          Frequently Asked Questions
+        </p>
+        <p
+          className={`${styles.paragraph} text-center text-pink-700 max-w-[450px]`}
+        >
+          Find answers to common queries below
+        </p>
+        <div className="w-full max-w-xl mt-[3rem] p-5 flex flex-col gap-5 rounded-[20px]">
+          {faqsList.map((item, i) => (
+            <div key={i} className="accordion__item bg-pink-50">
+              <header
+                className="accordion__header text-gray-900 font-bold"
+                onClick={() => toggleItem(i)}
+              >
+                <h3 className="accordion__title">{item.question}</h3>
+                {openItem === i ? <AiOutlineMinus /> : <AiOutlinePlus />}
+              </header>
 
-            <Collapse isOpened={openItem === i}>
-              <div className="accordion__content">
-                <p className="accordion__description text-secondaryTheme">
-                  {item.answer}
-                </p>
-              </div>
-            </Collapse>
-          </div>
-        ))}
+              <Collapse isOpened={openItem === i}>
+                <div className="accordion__content">
+                  <p className="accordion__description text-gray-700">
+                    {item.answer}
+                  </p>
+                </div>
+              </Collapse>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

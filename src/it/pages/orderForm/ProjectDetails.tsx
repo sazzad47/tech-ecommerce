@@ -139,7 +139,7 @@ export default function ContactInfo({
             <Grid item xs={12} sm={6}>
               <label
                 htmlFor="firstName"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                className="block mb-3 text-sm font-semibold text-gray-800"
               >
                 Choose category
               </label>
@@ -158,7 +158,7 @@ export default function ContactInfo({
                 <SelectContent>{categories}</SelectContent>
               </Select>
               {errorMessage.category && errorMessage.category !== "" && (
-                <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                   <ErrorIcon />
                   <Typography className="p-0 text-sm">
                     {errorMessage.category}
@@ -169,7 +169,7 @@ export default function ContactInfo({
             <Grid item xs={12} sm={6}>
               <label
                 htmlFor="product"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                className="block mb-3 text-sm font-semibold text-gray-800"
               >
                 Choose product
               </label>
@@ -188,7 +188,7 @@ export default function ContactInfo({
                 <SelectContent>{products}</SelectContent>
               </Select>
               {errorMessage.product && errorMessage.product !== "" && (
-                <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                   <ErrorIcon />
                   <Typography className="p-0 text-sm">
                     {errorMessage.product}
@@ -216,7 +216,7 @@ export default function ContactInfo({
             {userData.demo.map((item, index) => (
               <Grid key={index} item xs={12}>
                 {index > 0 && (
-                  <Grid className="w-full flex justify-end text-white">
+                  <Grid className="w-full flex justify-end text-#4b5563">
                     <Tooltip title="Delete">
                       <IconButton
                         onClick={() => deleteField(index)}
@@ -263,13 +263,13 @@ export default function ContactInfo({
                 variant="outlined"
                 startIcon={<AddCircleOutlineIcon />}
                 disableRipple
-                className="mt-2 focus:outline-none normal-case px-4 text-secondaryTheme"
+                className="mt-2 focus:outline-none normal-case px-4 text-gray-800"
               >
                 Add another demo
               </Button>
             </Grid>
             <Grid item xs={12}>
-              <ul className="flex flex-col gap-3 text-secondaryTheme">
+              <ul className="flex flex-col gap-3 text-gray-800">
                 <li className="flex items-center gap-3">
                   <BsInfoCircleFill /> Download this file and upload it in the
                   following box after filling it out.
@@ -277,7 +277,7 @@ export default function ContactInfo({
                 <li>
                   <button
                     onClick={() => window.open(fileURL, "_blank")}
-                    className="flex items-center gap-3 px-4 py-3 common-input-button"
+                    className="flex items-center gap-3 px-4 py-3 common-input-button-it"
                   >
                     {" "}
                     <AiFillEye /> View file
@@ -286,7 +286,7 @@ export default function ContactInfo({
               </ul>
             </Grid>
             <Grid item xs={12}>
-              <div className="block mb-3 text-sm font-semibold text-secondaryTheme">
+              <div className="block mb-3 text-sm font-semibold text-gray-800">
                 Upload attached file
               </div>
               <label className="block">
@@ -299,12 +299,12 @@ export default function ContactInfo({
                     file:mr-4 file:py-2 file:px-4
                     file:rounded-[5px] file:rounded-r-none file:border-0 file:h-[56px] file:cursor-pointer
                     file:text-sm file:font-semibold
-                    file:bg-gray-900 file:text-white
-                    hover:file:bg-gray-900/2 common-input cursor-pointer rounded-md text-secondaryTheme"
+                    file:bg-fuchsia-900 file:text-white
+                    hover:file:bg-fuchsia-900/2 common-input-it cursor-pointer rounded-md text-gray-800"
                 />
               </label>
               {errorMessage.order_file && errorMessage.order_file !== "" && (
-                <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                   <ErrorIcon />
                   <Typography className="p-0 text-sm">
                     {errorMessage.order_file}
@@ -313,7 +313,7 @@ export default function ContactInfo({
               )}
             </Grid>
             <Grid item xs={12} sm={6}>
-              <div className="block mb-3 text-sm font-semibold text-secondaryTheme">
+              <div className="block mb-3 text-sm font-semibold text-gray-800">
                 Additional file
               </div>
               <label className="block">
@@ -326,15 +326,15 @@ export default function ContactInfo({
                     file:mr-4 file:py-2 file:px-4
                     file:rounded-[5px] file:rounded-r-none file:border-0 file:h-[56px] file:cursor-pointer
                     file:text-sm file:font-semibold
-                    file:bg-gray-900 file:text-white
-                    hover:file:bg-gray-900/2 common-input cursor-pointer rounded-md text-secondaryTheme"
+                    file:bg-fuchsia-900 file:text-white
+                    hover:file:bg-fuchsia-900/2 common-input-it cursor-pointer rounded-md text-gray-800"
                 />
               </label>
             </Grid>
             <Grid item xs={12} sm={6}>
               <label
                 htmlFor="delivery_date"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                className="block mb-3 text-sm font-semibold text-gray-800"
               >
                 Delivery date
               </label>
@@ -348,7 +348,7 @@ export default function ContactInfo({
               />
               {errorMessage.delivery_date &&
                 errorMessage.delivery_date !== "" && (
-                  <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                  <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                     <ErrorIcon />
                     <Typography className="p-0 text-sm">
                       {errorMessage.delivery_date}
@@ -397,7 +397,7 @@ const InputField = ({ inputProps }: Props) => {
     <div>
       <label
         htmlFor="firstName"
-        className="block mb-3 text-sm font-semibold text-secondaryTheme"
+        className="block mb-3 text-sm font-semibold text-gray-800"
       >
         {label}
       </label>
@@ -425,9 +425,9 @@ const InputField = ({ inputProps }: Props) => {
             color: "rgb(214 211 209)",
           },
           "& .MuiOutlinedInput-root": {
-            color: "white",
+            color: "#4b5563",
             "& fieldset": {
-              color: "white",
+              color: "#4b5563",
               borderColor: "rgb(120 113 108)",
             },
             "&:hover fieldset": {
@@ -440,7 +440,7 @@ const InputField = ({ inputProps }: Props) => {
         }}
       />
       {errorMessages[name] && errorMessages[name] !== "" && (
-        <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+        <Grid className="flex items-center mt-2 gap-2 text-gray-800">
           <ErrorIcon />
           <Typography className="p-0 text-sm">{errorMessages[name]}</Typography>
         </Grid>

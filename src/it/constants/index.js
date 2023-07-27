@@ -10,13 +10,6 @@ import {
   binance,
   coinbase,
   dropbox,
-  send,
-  shield,
-  star,
-  mobile,
-  backend,
-  creator,
-  web,
   carrent,
   jobit,
   tripguide,
@@ -32,6 +25,29 @@ import { BsPersonFillLock } from "react-icons/bs";
 import { IoMdBusiness } from "react-icons/io";
 import { MdMiscellaneousServices, MdOutlineSecurity } from "react-icons/md";
 import { useSelector } from "react-redux";
+
+import {CgWebsite} from "react-icons/cg";
+import {BsFillMenuAppFill} from "react-icons/bs";
+import {HiDocumentSearch} from "react-icons/hi";
+import {BsPlugin} from "react-icons/bs";
+import {SiGoogleoptimize} from "react-icons/si";
+import {FaAffiliatetheme} from "react-icons/fa";
+import {AiOutlineBug} from "react-icons/ai";
+import {MdContactSupport} from "react-icons/md";
+import {DiReact} from "react-icons/di";
+import {DiAngularSimple} from "react-icons/di"
+import {TbBrandNextjs} from "react-icons/tb";
+import {FaVuejs} from "react-icons/fa";
+import {SiJquery} from "react-icons/si";
+import {SiEmberdotjs} from "react-icons/si";
+import {SiSvelte} from "react-icons/si";
+import {SiBackbonedotjs} from "react-icons/si";
+import {SiD3Dotjs} from "react-icons/si";
+import {SiGatsby, SiRubyonrails, SiPython, SiDotnet, SiSpring, SiGooglesheets, SiAdobeillustrator, SiAdobephotoshop, SiSketch, SiFigma, SiInvision, SiOpenzeppelin, SiAdobeindesign, SiAbstract, SiCanva, SiBlender} from "react-icons/si";
+import {DiNodejsSmall, DiPhp, DiJava, DiLaravel, DiDocker} from 'react-icons/di';
+import {AiTwotoneStar} from "react-icons/ai";
+import {BsFillSendFill} from "react-icons/bs";
+import {MdSecurity} from "react-icons/md";
 
 export const GenereateNavLinks = ()=> {
   const { access_token } = useSelector(state => state.auth);
@@ -85,85 +101,203 @@ export const appItems = [
 export const services = [
   {
     title: "Web Development",
-    icon: web,
+    icon: CgWebsite,
+    shortDescription: "Creating stunning websites to meet your needs.",
+    link: "/it/services/web-development",
   },
   {
     title: "App Development",
-    icon: mobile,
-  },
-  {
-    title: "Graphics Design",
-    icon: backend,
+    icon: BsFillMenuAppFill,
+    shortDescription: "Crafting user-friendly and functional applications.",
+    link: "/it/services/app-development",
   },
   {
     title: "SEO",
-    icon: creator,
+    icon: HiDocumentSearch,
+    shortDescription: "Boosting your online visibility and ranking.",
+    link: "/it/services/seo",
+  },
+  {
+    title: "Plugin Development",
+    icon: BsPlugin,
+    shortDescription: "Building custom plugins for your specific requirements.",
+    link: "/it/services/plugin-development",
+  },
+  {
+    title: "Optimization",
+    icon: SiGoogleoptimize,
+    shortDescription: "Improving performance and efficiency.",
+    link: "/it/services/optimization",
+  },
+  {
+    title: "Theme Customization",
+    icon: FaAffiliatetheme,
+    shortDescription: "Tailoring themes to match your brand.",
+    link: "/it/services/theme-customization",
+  },
+  {
+    title: "Bug Fixing",
+    icon: AiOutlineBug,
+    shortDescription: "Identifying and resolving software issues.",
+    link: "/it/services/bug-fixing",
+  },
+  {
+    title: "Support",
+    icon: MdContactSupport,
+    shortDescription: "Providing reliable and timely technical assistance.",
+    link: "/it/services/support",
   },
 ];
 
+
 export const projects = [
   {
-    name: "Car Rent",
+    name: "Eco Market",
     description:
-      "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
-    tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "mongodb",
-        color: "green-text-gradient",
-      },
-      {
-        name: "tailwind",
-        color: "pink-text-gradient",
-      },
-    ],
+      "E-commerce platform that offers a wide selection of eco-friendly and sustainable products, promoting responsible consumer choices and a greener lifestyle.",
     image: carrent,
-    source_code_link: "https://github.com/",
   },
   {
-    name: "Job IT",
+    name: "Health Track",
     description:
-      "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
-    tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "restapi",
-        color: "green-text-gradient",
-      },
-      {
-        name: "scss",
-        color: "pink-text-gradient",
-      },
-    ],
+      "Mobile app that enables users to track their daily health activities, including exercise, nutrition, and sleep, to maintain a healthy and balanced lifestyle.",
     image: jobit,
-    source_code_link: "https://github.com/",
   },
   {
-    name: "Trip Guide",
+    name: "Recipe Box",
     description:
-      "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
-    tags: [
-      {
-        name: "nextjs",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "supabase",
-        color: "green-text-gradient",
-      },
-      {
-        name: "css",
-        color: "pink-text-gradient",
-      },
-    ],
+      "A digital recipe organizer that helps users save, organize, and discover a variety of delicious recipes from all over the world.",
     image: tripguide,
-    source_code_link: "https://github.com/",
+  },
+];
+
+export const technos = [
+  {
+    name: "React",
+    icon: DiReact,
+  },
+  {
+    name: "Angular",
+    icon: DiAngularSimple,
+  },
+  {
+    name: "Vue.js",
+    icon: FaVuejs,
+  },
+  {
+    name: "jQuery",
+    icon: SiJquery,
+  },
+  {
+    name: "Ember.js",
+    icon: SiEmberdotjs,
+  },
+  {
+    name: "Svelte",
+    icon: SiSvelte,
+  },
+  {
+    name: "Backbone.js",
+    icon: SiBackbonedotjs,
+  },
+  {
+    name: "D3.js",
+    icon: SiD3Dotjs,
+  },
+  {
+    name: "Next.js",
+    icon: TbBrandNextjs,
+  },
+  {
+    name: "Gatsby",
+    icon: SiGatsby,
+  },
+];
+
+
+export const backendTechnos = [
+  {
+    name: "Node.js",
+    icon: DiNodejsSmall,
+  },
+  {
+    name: "Ruby",
+    icon: SiRubyonrails,
+  },
+  {
+    name: "PHP",
+    icon: DiPhp,
+  },
+  {
+    name: "Python",
+    icon: SiPython,
+  },
+  {
+    name: "Java",
+    icon: DiJava,
+  },
+  {
+    name: ".NET",
+    icon: SiDotnet,
+  },
+  {
+    name: "Spring",
+    icon: SiSpring,
+  },
+  {
+    name: "Laravel",
+    icon: DiLaravel,
+  },
+  {
+    name: "Docker",
+    icon: DiDocker,
+  },
+  {
+    name: "Google Sheets",
+    icon: SiGooglesheets,
+  },
+];
+
+export const designTechnos = [
+  {
+    name: "Adobe Illustrator",
+    icon: SiAdobeillustrator,
+  },
+  {
+    name: "Adobe Photoshop",
+    icon: SiAdobephotoshop,
+  },
+  {
+    name: "Sketch",
+    icon: SiSketch,
+  },
+  {
+    name: "Figma",
+    icon: SiFigma,
+  },
+  {
+    name: "InVision",
+    icon: SiInvision,
+  },
+  {
+    name: "Zeplin",
+    icon: SiOpenzeppelin,
+  },
+  {
+    name: "Abstract",
+    icon: SiAbstract,
+  },
+  {
+    name: "Canva",
+    icon: SiCanva,
+  },
+  {
+    name: "Blender",
+    icon: SiBlender,
+  },
+  {
+    name: "Adobe InDesign",
+    icon: SiAdobeindesign,
   },
 ];
 
@@ -197,21 +331,21 @@ export const testimonials = [
 export const features = [
   {
     id: "feature-1",
-    icon: star,
+    icon: AiTwotoneStar,
     title: "Stunning Design",
     content:
       "Stunning design increases your company's value, and puts your business in a better financial situation.",
   },
   {
     id: "feature-2",
-    icon: shield,
+    icon: MdSecurity,
     title: "100% Secured",
     content:
       "We take proactive steps make sure your information and transactions are secure.",
   },
   {
     id: "feature-3",
-    icon: send,
+    icon: BsFillSendFill,
     title: "Fast and Intuitive",
     content:
       "Give your business a boost with our fast and intuitive products and services.",
@@ -268,11 +402,11 @@ export const footerLinks = [
     title: "Useful Links",
     links: [
       {
-        name: "Donate",
+        name: "Account",
         link: "https://www.facebook.com",
       },
       {
-        name: "Explore Designs",
+        name: "Technology",
         link: "https://www.facebook.com",
       },
       {
@@ -280,11 +414,7 @@ export const footerLinks = [
         link: "https://www.facebook.com",
       },
       {
-        name: "Sell",
-        link: "https://www.facebook.com",
-      },
-      {
-        name: "Buy Template",
+        name: "Services",
         link: "https://www.facebook.com",
       },
     ],
@@ -294,10 +424,6 @@ export const footerLinks = [
     links: [
       {
         name: "Help Center",
-        link: "https://www.facebook.com",
-      },
-      {
-        name: "Services",
         link: "https://www.facebook.com",
       },
       {

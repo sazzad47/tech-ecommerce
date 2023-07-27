@@ -229,22 +229,12 @@
   }
 }
 
-.feature-card:hover {
-  background: var(--black-gradient);
-  box-shadow: var(--card-shadow);
-}
+
 
 .feedback-container .feedback-card:last-child {
   margin-right: 0px;
 }
 
-.feedback-card {
-  background: transparent;
-}
-
-.feedback-card:hover {
-  background: var(--black-gradient);
-}
 
 .blue__gradient {
   background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #214d76 100%);
@@ -812,6 +802,26 @@
  border-color: rgb(214 211 209) !important;
 }
 
+.common-input-it {
+ height: 56px !important;
+ width: 100% !important;
+ background-color: transparent !important;
+ border: 1px solid !important;
+ border-color: rgb(120 113 108) !important;
+ border-radius: 5px !important;
+ color: #4b5563 !important;
+}
+.common-input-it.active {
+ background-color: rgb(4 47 46) !important;
+ border-color: rgb(168 162 158) !important;
+}
+.common-input-it:hover{
+ border-color: rgb(168 162 158) !important;
+}
+.common-input-it:focus{
+ border-color: rgb(214 211 209) !important;
+}
+
 .common-input-button {
  height: 56px !important;
  background-color: transparent !important;
@@ -824,6 +834,21 @@
  border-color: rgb(168 162 158) !important;
 }
 .common-input-button:focus{
+ border-color: rgb(214 211 209) !important;
+}
+
+.common-input-button-it {
+ height: 56px !important;
+ background-color: transparent !important;
+ border: 1px solid !important;
+ border-color: rgb(120 113 108) !important;
+ border-radius: 5px !important;
+ color: #4b5563 !important;
+}
+.common-input-button-it:hover{
+ border-color: rgb(168 162 158) !important;
+}
+.common-input-button-it:focus{
  border-color: rgb(214 211 209) !important;
 }
 
@@ -842,6 +867,25 @@
  border-color: rgb(168 162 158) !important;
 }
 .combobox-input:focus {
+ background-color: transparent !important;
+ border-color: rgb(214 211 209) !important;
+}
+
+.combobox-input-it {
+ height: 56px !important;
+ width: 100% !important;
+ background-color: transparent !important;
+ border: 1px solid !important;
+ border-color: rgb(120 113 108) !important;
+ border-radius: 5px !important;
+ color: #4b5563 !important;
+ justify-content: space-between !important;
+}
+.combobox-input-it:hover {
+ background-color: transparent !important;
+ border-color: rgb(168 162 158) !important;
+}
+.combobox-input-it:focus {
  background-color: transparent !important;
  border-color: rgb(214 211 209) !important;
 }
@@ -914,3 +958,59 @@
 .copied{
      background-color: rgb(39,196,82);
 }
+
+.eleven h1 {
+  font-size:30px;text-align:center; line-height:1.5em; font-family:"Playfair Display", serif; text-transform:uppercase;letter-spacing: 2px; color:#111; position: relative;
+}
+
+
+.eleven h1:before {
+  position: absolute;
+  left: 0;
+  top: 64px;
+  width: 60%;
+  left:50%; margin-left:-30%;
+  height: 1px;
+  content: "";
+  background-color: #777; z-index: 4;
+}
+.eleven h1:after {
+  position:absolute;
+  width:40px; height:40px; left:50%; margin-left:-12px; top:40px;
+  content: '\00a7'; font-size:30px; line-height:40px; color:#c50000;
+  font-weight:400; z-index: 5;
+  display:block;
+  background-color:#f8f8f8;
+}
+
+/* SideMenu */
+.side-menu {
+  position: absolute;
+  top: 0;
+  width: 300px;
+  right: 0;
+  transition: right var(--speed) ease; /* Update the transition property */
+  overflow: hidden;
+  z-index: 10000 !important;
+}
+
+/* CSSTransition classes */
+.menu-primary-enter {
+  position: absolute;
+  
+}
+
+.menu-primary-enter-active {
+  right: 0;
+  transition: all var(--speed) ease;
+}
+
+.menu-primary-exit {
+  position: absolute;
+}
+
+.menu-primary-exit-active {
+  right: -300px; /* Update the target position */
+  transition: all var(--speed) ease;
+}
+

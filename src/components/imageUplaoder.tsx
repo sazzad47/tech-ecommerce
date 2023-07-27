@@ -69,7 +69,7 @@ const ImageUploader = ({
           />
           <div className="min-h-[20vh] flex flex-col items-center justify-center gap-3">
             <h3 className="text-xl text-secondaryTheme font-bold">
-              Drag and drop images here or click to upload
+              Drag and drop files here or click to upload
             </h3>
 
             <Button
@@ -83,7 +83,7 @@ const ImageUploader = ({
                 input.click();
               }}
             >
-              Upload images
+              Choose File
             </Button>
           </div>
           <div className="w-full grid gap-2 grid-cols-3 sm:grid-cols-5">

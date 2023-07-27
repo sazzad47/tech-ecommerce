@@ -1,6 +1,5 @@
 import Billing from "./Billing";
 import CardDeal from "./CardDeal";
-import Business from "./Business";
 import Clients from "./Clients";
 import CTA from "./CTA";
 import Stats from "./Stats";
@@ -17,7 +16,6 @@ import Faqs from "./Faqs";
 export {
   Billing,
   CardDeal,
-  Business,
   Clients,
   CTA,
   Stats,

@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import ErrorIcon from "@mui/icons-material/Error";
 import Background from "../Background";
 import logo from "../../it/images/logo.png";
-import authBg from "../../it/images/auth-bg.png";
+// import authBg from "../../it/images/auth-bg.png";
 import { useLoginMutation } from "../../state/api/user";
 import { ColorRing } from "react-loader-spinner";
 import { useDispatch } from "react-redux";
@@ -82,7 +82,7 @@ export default function SignIn() {
   return (
     <div className="p-5 flex justify-center items-center w-full h-screen">
       <Background />
-      <img src={authBg} alt="auth" className="absolute w-full h-full" />
+      {/* <img src={authBg} alt="auth" className="absolute w-full h-full" /> */}
       <div className="z-10 bg-black-gradient-2 w-full sm:w-[30rem] p-5 flex items-center justify-center">
         <div className="flex flex-col items-center">
           <img src={logo} alt="logo" className="h-[40px] w-[40px]" />

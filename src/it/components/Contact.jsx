@@ -1,8 +1,6 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import styles from "../style";
-import { EarthCanvas } from "./canvas";
-import { SectionWrapper } from "../hoc";
 import { slideIn } from "./utils/motion";
 
 const Contact = () => {
@@ -90,10 +88,10 @@ const Contact = () => {
         variants={slideIn("right", "tween", 0.2, 1)}
         className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]"
       >
-        <EarthCanvas />
+        World Map
       </motion.div>
     </div>
   );
 };
 
-export default SectionWrapper(Contact, "contact");
+export default Contact;

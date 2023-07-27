@@ -1,15 +1,15 @@
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 import { services } from "../constants";
-import { SectionWrapper } from "../hoc";
-import { fadeIn, textVariant } from "./utils/motion";
+import { fadeIn } from "./utils/motion";
 import styles from "../style";
 
-const ServiceCard = ({ index, title, icon }) => (
-  <Tilt className="xs:w-[250px] w-full">
+
+const ServiceCard = ({ index, service }) => (
+  <Tilt className="w-full">
     <motion.div
       variants={fadeIn("right", "spring", index * 0.5, 0.75)}
-      className="w-full green-pink-gradient p-[1px] rounded-[20px] "
+      className="w-full p-[1px] rounded-[5px]"
     >
       <div
         options={{
@@ -17,17 +17,13 @@ const ServiceCard = ({ index, title, icon }) => (
           scale: 1,
           speed: 450,
         }}
-        className="bg-black-gradient-2 rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col"
+        className="bg-gray-200 rounded-[5px] p-5 text-center min-h-[280px] flex justify-center gap-3 items-center flex-col"
       >
-        <img
-          src={icon}
-          alt="web-development"
-          className="w-16 h-16 object-contain"
-        />
-
-        <h3 className="text-secondaryTheme text-[20px] font-bold text-center">
-          {title}
+        <service.icon className="text-fuchsia-900 text-5xl" />
+        <h3 className="text-gray-900 text-[20px] font-bold text-center p-0">
+          {service.title}
         </h3>
+        <p className="p-0 text-xl"> {service.shortDescription} </p>
       </div>
     </motion.div>
   </Tilt>
@@ -35,38 +31,22 @@ const ServiceCard = ({ index, title, icon }) => (
 
 const About = () => {
   return (
-    <>
-
-      <motion.div variants={textVariant()} className="w-full flex flex-col justify-between items-center mb-6 relative z-[1]">
+    <div className="bg-white container min-w-full text-gray-800 py-[4rem]">
+      <div className="w-full flex flex-col justify-between items-center mb-6 relative z-[1]">
         <h2 className={styles.heading2}>Service Overview</h2>
-        <div className="w-full flex justify-start md:mt-0 mt-6">
-          <p className={`${styles.paragraph} text-left max-w-[450px]`}>
-            It can be overwhelming to choose the right tech solution for your
-            company, but with our featured products, you can find the perfect fit.
-          </p>
-        </div>
-      </motion.div>
-     
-      
-
-      {/* <motion.p
-        variants={fadeIn("", "", 0.1, 1)}
-        className="mt-4 text-secondaryTheme text-[17px] max-w-3xl leading-[30px]"
-      >
-        I'm a skilled software developer with experience in TypeScript and
-        JavaScript, and expertise in frameworks like React, Node.js, and
-        Three.js. I'm a quick learner and collaborate closely with clients to
-        create efficient, scalable, and user-friendly solutions that solve
-        real-world problems. Let's work together to bring your ideas to life!
-      </motion.p> */}
-
-      <div className="mt-20 flex flex-wrap gap-10">
+        <p
+          className={`${styles.paragraph} text-center text-pink-700 max-w-[450px]`}
+        >
+          Discover the Comprehensive Range of Our Services
+        </p>
+      </div>
+      <div className="mt-10 w-full grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
         {services.map((service, index) => (
-          <ServiceCard key={service.title} index={index} {...service} />
+          <ServiceCard key={service.title} index={index} service={service} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
-export default SectionWrapper(About, "about");
+export default About;
