@@ -11,7 +11,7 @@ const WebDevelopment = () => {
           <div className="eleven">
             <h1>Web Development</h1>
           </div>
-          <Typography className="mt-10">
+          <Typography className="mt-[7rem] sm:mt-[4rem]">
             Web development is the process of creating websites and web
             applications that are accessible via the internet. It involves the
             design, development, and maintenance of web-based solutions using

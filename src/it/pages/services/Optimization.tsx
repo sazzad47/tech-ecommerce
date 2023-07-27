@@ -11,7 +11,7 @@ const Optimization = () => {
           <div className="eleven">
             <h1>Optimization</h1>
           </div>
-          <Typography className="mt-10">
+          <Typography className="mt-[7rem] sm:mt-[4rem]">
             Optimization in web development refers to the process of improving
             the performance and efficiency of websites and web applications. The
             goal is to deliver a smooth user experience by reducing load times,

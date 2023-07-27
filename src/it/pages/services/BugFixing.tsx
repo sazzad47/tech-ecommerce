@@ -11,7 +11,7 @@ const BugFixing = () => {
           <div className="eleven">
             <h1>Bug Fixing</h1>
           </div>
-          <Typography className="mt-10">
+          <Typography className="mt-[7rem] sm:mt-[4rem]">
             Bug fixing is a critical aspect of web development that involves
             identifying and resolving issues, errors, and unexpected behaviors
             in the codebase of a website or web application. Bugs can occur due

@@ -10,7 +10,7 @@ const Security = () => {
           <div className="eleven">
             <h1>User Security Responsibilities</h1>
           </div>
-          <Typography className="mt-10">
+          <Typography className="mt-[7rem] sm:mt-[4rem]">
             While developers and organizations play a crucial role in ensuring
             the security of websites and web applications, users also have
             significant responsibilities when it comes to protecting their own

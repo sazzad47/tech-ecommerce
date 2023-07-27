@@ -11,7 +11,7 @@ const SEO = () => {
           <div className="eleven">
             <h1>Search Engine Optimization (SEO)</h1>
           </div>
-          <Typography className="mt-10">
+          <Typography className="mt-[7rem] sm:mt-[4rem]">
             SEO (Search Engine Optimization) is the process of optimizing your
             website to improve its visibility and ranking on search engine
             results pages (SERPs). It involves various strategies and techniques

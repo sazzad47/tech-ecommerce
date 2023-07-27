@@ -13,7 +13,7 @@ const Services = () => {
           <div className="eleven">
             <h1>Our Services</h1>
           </div>
-          <Typography className="mt-10">
+          <Typography className="mt-[7rem] sm:mt-[4rem]">
             Choose Our Services as your trusted partner in the dynamic digital
             landscape, and let us guide you towards achieving your goals and
             beyond. Together, we'll create a captivating digital experience that

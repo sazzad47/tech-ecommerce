@@ -11,7 +11,7 @@ const PluginDevelopment = () => {
           <div className="eleven">
             <h1>Plugin Development</h1>
           </div>
-          <Typography className="mt-10">
+          <Typography className="mt-[7rem] sm:mt-[4rem]">
             Plugin development involves building custom plugins or extensions
             that integrate seamlessly with existing software or platforms to add
             new features or extend functionality. Plugins are modular components

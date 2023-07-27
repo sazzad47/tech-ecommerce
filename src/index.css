@@ -1014,3 +1014,16 @@
   transition: all var(--speed) ease;
 }
 
+/* Media Query for Medium Devices (e.g., Tablets) */
+@media screen and (max-width: 768px) {
+  .eleven h1 {
+    font-size: 24px;
+  }
+}
+
+/* Media Query for Small Devices (e.g., Mobile Phones) */
+@media screen and (max-width: 576px) {
+  .eleven h1 {
+    font-size: 20px;
+  }
+}

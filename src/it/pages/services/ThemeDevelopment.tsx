@@ -11,7 +11,7 @@ const ThemeDevelopment = () => {
           <div className="eleven">
             <h1>Theme Development</h1>
           </div>
-          <Typography className="mt-10">
+          <Typography className="mt-[7rem] sm:mt-[4rem]">
             Theme development in web development refers to the process of
             creating custom themes or templates that determine the visual
             appearance of a website or web application. Themes provide a

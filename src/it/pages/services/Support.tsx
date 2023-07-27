@@ -11,7 +11,7 @@ const Support = () => {
           <div className="eleven">
             <h1>Support</h1>
           </div>
-          <Typography className="mt-10">
+          <Typography className="mt-[7rem] sm:mt-[4rem]">
             Support in web development refers to providing reliable and timely
             technical assistance to users, clients, or customers who encounter
             issues or need help with a website or web application. Effective

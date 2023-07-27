@@ -12,7 +12,7 @@ const Technology = () => {
           <div className="eleven">
             <h1>Our Technologies</h1>
           </div>
-          <Typography className="mt-10">
+          <Typography className="mt-[7rem] sm:mt-[4rem]">
             Explore captivating user interfaces, powerful data processing, and
             seamless design tools that power the modern web. Join us on this
             enlightening journey into the heart of digital innovation.

@@ -11,7 +11,7 @@ const AppDevelopment = () => {
           <div className="eleven">
             <h1>App Development</h1>
           </div>
-          <Typography className="mt-10">
+          <Typography className="mt-[7rem] sm:mt-[4rem]">
             App development is the process of creating user-friendly and highly
             functional applications to engage your target users. It involves
             designing, developing, and deploying mobile or web applications that

@@ -9,8 +9,8 @@ type DesignCardProps = {
 
 const DesignCard: React.FC<DesignCardProps> = ({ img, name, description }) => {
   return (
-    <div className="mx-5 w-[80vw] sm:w-[50vw] lg:w-[30vw] shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
-      <div className="bg-gray-200 p-5 rounded-2xl w-full">
+    <div className="mx-5 bg-gray-200 w-[80vw] p-5 rounded-2xl sm:w-[50vw] lg:w-[30vw] shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+      <div className=" w-full">
         <div className="relative w-full h-[230px]">
           <img
             src={img}
