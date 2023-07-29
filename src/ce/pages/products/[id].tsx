@@ -57,7 +57,7 @@ const Product: React.FC = () => {
 
   return (
     <div>
-      <div className="bg-primaryTheme">
+      <div className="bg-yellow-500">
         {open && (
           <div className="slider">
             <IoMdCloseCircle className="close" onClick={() => setOpen(false)} />

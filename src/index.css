@@ -959,6 +959,35 @@
      background-color: rgb(39,196,82);
 }
 
+.one h1 {
+  text-align: center;
+  text-transform: uppercase;
+  padding-bottom: 5px;
+  position: relative;
+}
+.one h1:before {
+  width: 28px;
+  height: 5px;
+  display: block;
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  margin-left: -14px;
+  background-color: #000;
+}
+.one h1:after {
+  width: 100px;
+  height: 1px;
+  display: block;
+  content: "";
+  position: relative;
+  margin-top: 25px;
+  left: 50%;
+  margin-left: -50px;
+  background-color: #000;
+}
+
 .eleven h1 {
   font-size:30px;text-align:center; line-height:1.5em; font-family:"Playfair Display", serif; text-transform:uppercase;letter-spacing: 2px; color:#111; position: relative;
 }
@@ -1027,3 +1056,140 @@
     font-size: 20px;
   }
 }
+
+.ce-service-card {
+  position: relative;
+  width: 350px;
+  height: 180px;
+  background: #fff;
+  transition: 0.5s;
+}
+.ce-service-card:hover {
+  height: 450px;
+}
+.ce-service-card .lines {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  overflow: hidden;
+}
+.ce-service-card .lines::before {
+  position: absolute;
+  content: '';
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 120px;
+  background: linear-gradient(transparent, #45f3ff, #45f3ff, #45f3ff, transparent);
+  animation: animate 4s linear infinite;
+  animation-play-state: paused;
+}
+.ce-service-card:hover .lines::before {
+  animation-play-state: running;
+}
+@keyframes animate {
+
+  0%{
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100%{
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.ce-service-card .lines::after {
+  position: absolute;
+  content: '';
+  inset: 3px;
+  background: #292929;
+}
+.ce-service-card .icon-box {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  transform: translateX(-50%);
+  background: #000;
+  transition: 0.5s;
+  z-index: 10;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ce-service-card:hover .icon-box {
+  width: 250px;
+  height: 250px;
+  top: 25px;
+}
+.ce-service-card .icon-box::before {
+  position: absolute;
+  content: '';
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 150px;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(transparent, #ff3c7b, #ff3c7b, #ff3c7b, transparent);
+  animation: animat2 6s linear infinite;
+  animation-play-state: paused;
+}
+.ce-service-card:hover .icon-box::before {
+  animation-play-state: running;
+}
+@keyframes animat2 {
+
+  0%{
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+  100%{
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+}
+.ce-service-card .icon-box::after {
+  position: absolute;
+  content: '';
+  inset: 3px;
+  background: #292929;
+}
+.ce-service-card .icon-box .icon {
+  position: absolute;
+  width: 100px;
+  filter: invert(1);
+  z-index: 1;
+  opacity: 0.5;
+  transition: 0.5s;
+}
+.ce-service-card:hover .icon-box .icon {
+  opacity: 1;
+}
+
+
+/* VerticalMarquee.css */
+.vertical-marquee {
+  height: 400px; /* Set the height of the marquee container */
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.marquee-item {
+  display: block;
+  position: absolute;
+  width: 100%;
+  animation: marquee 10s linear infinite; /* Change the animation duration as desired */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%); /* Adjust this value to control the scrolling speed */
+  }
+}
+.marquee-item.paused {
+  animation-play-state: paused;
+}
+
+

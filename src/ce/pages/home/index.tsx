@@ -1,16 +1,14 @@
 import styles from "../../style";
 import animateScrollTo from "animated-scroll-to";
-import {
-  StarsCanvas,
-  Contact,
-  Faqs,
-} from "../../components";
 import Hero from "./Hero";
 import Services from "./Services";
 import Designs from "./Designs";
-import Statistics from "./Statistics";
-import ContactInfo from "./ContactInfo";
+import Stats from "./Stats";
 import WhyUs from "./WhyUs";
+import Works from "./works";
+import ProvidedFeatures from "./providedFeatures";
+import Faqs from "./Faqs";
+import Contact from "./contact";
 
 const App = () => {
   const scrollToBottom = () => {
@@ -34,7 +32,7 @@ const App = () => {
 
   function scrollToTop() {
     const targetPosition = 0;
-  
+
     animateScrollTo(targetPosition, {
       speed: 3, // Speed of the scrolling animation in pixels per second
       minDuration: 30000,
@@ -49,29 +47,26 @@ const App = () => {
         // Scroll animation was interrupted by user or another call of "animateScrollTo"
       }
     });
-  };
+  }
 
   return (
-    <div id="section-id" className="bg-primaryTheme w-full overflow-hidden">      
-      <div className={`bg-primaryTheme ${styles.flexStart}`}>
+    <div id="section-id" className="bg-yellow-500 w-full overflow-hidden">
+      <div className={`bg-yellow-500 ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
           <Hero scrollToBottom={scrollToBottom} />
         </div>
       </div>
 
-      <div className={`bg-primaryTheme ${styles.paddingX} ${styles.flexCenter}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Statistics/>
-          <Services />
-          <WhyUs/>
-          <Designs />
-          <Faqs />
-          <ContactInfo/>
-          <div className="relative z-0">
-            <Contact />
-            <StarsCanvas />
-          </div>
-        </div>
+      <div>
+        {/* <Statistics/> */}
+        <Services />
+        <Works/>
+        <Designs />
+        <ProvidedFeatures/>
+        <WhyUs />
+        <Faqs />
+        <Stats/>
+        <Contact/>
       </div>
     </div>
   );

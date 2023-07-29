@@ -1,7 +1,6 @@
 import styles from "../../style";
 import animateScrollTo from "animated-scroll-to";
 import {
-  StarsCanvas,
   Contact,
   Faqs,
 } from "../../components";
@@ -68,7 +67,6 @@ const App = () => {
           <ContactInfo/>
           <div className="relative z-0">
             <Contact />
-            <StarsCanvas />
           </div>
         </div>
       </div>

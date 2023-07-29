@@ -8,10 +8,10 @@ const Description = () => {
   return (
     <div className="flex flex-col gap-7">
       <div>
-        <div className="mb-4 md:mb-0 w-full flex flex-col md:flex-row justify-between items-start md:items-center">
-          <h1 className={`${styles.heading2}`}>Description</h1>
+        <div className="mb-4 md:mb-0 w-full flex flex-col md:flex-row justify-between items-start sm:items-start">
+          <h1 className={`${styles.heading2} -mt-[1.2rem]`}>Description</h1>
           <Button
-            className="flex items-center gap-3 px-4 py-3 whitespace-nowrap"
+            className="flex text-white items-center gap-3 px-4 py-3 whitespace-nowrap bg-yellow-600"
             onClick={() => window.open(fileURL, "_blank")}
           >
             <BiVideo className="text-xl" />

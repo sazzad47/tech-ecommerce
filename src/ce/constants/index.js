@@ -92,29 +92,43 @@ export const appItems = [
 export const services = [
   {
     title: "House Design",
-    icon: <MdHomeWork />,
+    icon: MdHomeWork,
+    description: "We offer creative and functional house design services to turn your dream home into a reality.",
+    link: "/ce/house-design", // Add the link property here
   },
   {
     title: "Office Design",
-    icon: <HiOfficeBuilding />,
+    icon: HiOfficeBuilding,
+    description: "Our office design solutions focus on optimizing space and productivity to create a professional environment.",
+    link: "/ce/office-design", // Add the link property here
   },
   {
     title: "Market Design",
-    icon: <SiMarketo />,
+    icon: SiMarketo,
+    description: "Our market design expertise ensures an efficient layout and appealing ambiance to attract customers.",
+    link: "/ce/market-design", // Add the link property here
   },
   {
     title: "Mosque Design",
-    icon: <FaMosque />,
+    icon: FaMosque,
+    description: "We specialize in mosque design, creating sacred spaces that reflect architectural beauty and spiritual values.",
+    link: "/ce/mosque-design", // Add the link property here
   },
   {
     title: "Road Design",
-    icon: <ImRoad />,
+    icon: ImRoad,
+    description: "Our road design services prioritize safety and functionality to build well-planned and durable roads.",
+    link: "/ce/road-design", // Add the link property here
   },
   {
     title: "Bridge Design",
-    icon: <GiArchBridge />,
+    icon: GiArchBridge,
+    description: "Bridging the gap with our bridge design solutions, combining aesthetics and structural integrity.",
+    link: "/ce/bridge-design", // Add the link property here
   },
 ];
+
+
 
 export const projects = [
   {

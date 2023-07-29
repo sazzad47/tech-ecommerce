@@ -347,7 +347,7 @@ export default function BillingAddress({
                     onChange={(event) => handleSocialLinksChange(event, index)}
                     sx={{
                       width: "100%",
-                      color: "white",
+                      color: "#4b5563",
                       label: {
                         color: "darkred",
                         "&.Mui-focused": {
@@ -355,19 +355,19 @@ export default function BillingAddress({
                         },
                       },
                       ".MuiOutlinedInput-notchedOutline": {
-                        color: "rgb(214 211 209)",
+                        color: "#4b5563",
                         borderColor: "rgb(120 113 108)",
                       },
                       "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                        color: "rgb(214 211 209)",
-                        borderColor: "rgb(214 211 209)",
+                        color: "#4b5563",
+                        borderColor: "#4b5563",
                       },
                       "&:hover .MuiOutlinedInput-notchedOutline": {
-                        color: "rgb(214 211 209)",
+                        color: "#4b5563",
                         borderColor: "rgb(168 162 158)",
                       },
                       ".MuiSvgIcon-root ": {
-                        fill: "rgb(214 211 209)",
+                        fill: "#4b5563",
                       },
                     }}
                     inputProps={{

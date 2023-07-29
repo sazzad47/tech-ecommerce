@@ -1,58 +1,55 @@
-import { Tilt } from "react-tilt";
-import { motion } from "framer-motion";
-import { SectionWrapper } from "../../hoc";
-import { fadeIn, textVariant } from "../../components/utils/motion";
-import styles from "../../style";
 import { services } from "../../constants";
+import { Link } from "react-router-dom";
 
-interface Service {
-  index: number;
+type ServiceProps = {
   title: string;
-  icon: React.ReactNode;
-}
+  icon: React.ElementType;
+  description: string;
+  link: string;
+};
 
+type ServiceCardProps = {
+  service: ServiceProps;
+};
 
-const ServiceCard: React.FC<Service> = ({ index, title, icon }) => (
-  <Tilt className=" w-full">
-    <motion.div
-      variants={fadeIn("right", "spring", index * 0.5, 0.75)}
-      className="w-full green-pink-gradient p-[1px] rounded-[20px]"
-    >
+const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => (
+  <div className="w-full p-[1px] rounded-[5px]">
+    <Link to={`${service.link}`}>
       <div
-        className="text-secondaryTheme bg-black-gradient-2 rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col"
+        data-tilt-options={JSON.stringify({
+          max: 45,
+          scale: 1,
+          speed: 450,
+        })}
+        className="bg-gray-600 rounded-[5px] p-5 text-center min-h-[280px] flex justify-center gap-3 items-center flex-col"
       >
-        <div className="text-3xl">
-
-       {icon}
-        </div>
-
-        <h3 className="text-secondaryTheme text-[20px] font-bold text-center">
-          {title}
+        <service.icon className="text-yellow-600 text-5xl" />
+        <h3 className="text-yellow-400 text-[20px] font-bold text-center p-0">
+          {service.title}
         </h3>
+        <p className="p-0 text-xl text-white"> {service.description} </p>
       </div>
-    </motion.div>
-  </Tilt>
+    </Link>
+  </div>
 );
 
-const About: React.FC = () => {
+const Services: React.FC = () => {
   return (
     <>
-      <motion.div
-        variants={textVariant()}
-        className="mt-10 w-full flex flex-col justify-center items-center mb-6 relative z-[1]"
-      >
+      <div className="p-[2rem] sm:p-[5rem] w-full flex flex-col justify-center items-center relative z-[1]">
         <div>
-          <h2 className={styles.heading2}>Service Overview</h2>
+          <div className="one mb-[3rem]">
+            <h1 className="text-2xl sm:text-4xl">Service Overview</h1>
+          </div>
         </div>
-      </motion.div>
-
-      <div className="mt-10 w-full grid grid-cols-1 sm:grid-cols-3 gap-7">
-        {services.map((service, index) => (
-          <ServiceCard key={service.title} index={index} {...service} />
-        ))}
+        <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-7">
+          {services.map((service, index) => (
+            <ServiceCard key={index} service={service} />
+          ))}
+        </div>
       </div>
     </>
   );
 };
 
-export default SectionWrapper(About, "about");
+export default Services;

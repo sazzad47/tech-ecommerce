@@ -37,6 +37,7 @@
     "@types/react-table": "^7.7.14",
     "animated-scroll-to": "^2.3.0",
     "axios": "^1.4.0",
+    "better-react-carousel": "^1.1.1",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
     "cmdk": "^0.2.0",

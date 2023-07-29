@@ -8,7 +8,6 @@ import Hero from "./Hero";
 import ProjectCard from "./ProjectCard";
 import About from "./About";
 import Contact from "./Contact";
-import { StarsCanvas } from "./canvas";
 import Feedbacks from "./Feedbacks";
 import Pricing from "./Pricing";
 import Faqs from "./Faqs";
@@ -24,7 +23,6 @@ export {
   ProjectCard,
   About,
   Contact,
-  StarsCanvas,
   Feedbacks,
   Pricing,
   Faqs,

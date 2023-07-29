@@ -3,6 +3,7 @@ import Architecture from "../pages/architecture";
 import Checkout from "../pages/checkout";
 import ProductDetails from "../pages/products/[id]";
 import Order from "../pages/order";
+import OrderForm from "../pages/orderForm";
 import Services from "../pages/services";
 import Security from "../pages/security";
 import Company from "../pages/company";
@@ -22,8 +23,10 @@ const routes = [
     { path: "/ce/products/:id", component: <ProductDetails /> },
     { path: "/ce/checkout", component: <Checkout /> },
     { path: "/ce/order", component: <Order /> },
+    { path: "/ce/order/create", component: <OrderForm /> },
     { path: "/ce/services", component: <Services /> },
     { path: "/ce/security", component: <Security /> },
+    { path: "/ce/blogs/:id", component: <Security /> },
     { path: "/ce/company", component: <Company /> },
     { path: "/ce/profile", component: <Orders /> },
     { path: "/ce/profile/orders/:id", component: <OrderDetails /> },
