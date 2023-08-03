@@ -9,6 +9,7 @@ import { removeToken } from "../../../state/localStorage";
 import { useGetProfileQuery } from "src/state/api/user";
 import { RootState } from "src/state/store";
 import { Oval } from "react-loader-spinner";
+import { Avatar } from "@mui/material";
 
 interface LayoutProps {
   children: ReactNode;
@@ -57,9 +58,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </div>
               ) : (
                 <>
-                  <img
+                   <Avatar
                     className="h-20 w-20 rounded-full ring-2 ring-gray-400"
-                    src={data.avatar}
+                    src={data?.avatar}
                     alt="profile"
                   />
                   <div className="w-full flex flex-col items-center">
