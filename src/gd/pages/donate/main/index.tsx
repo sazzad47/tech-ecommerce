@@ -29,16 +29,16 @@ const Posts = () => {
   return (
     <>
       {isLoading ? (
-        <div className="w-full h-[90vh] flex items-center justify-center">
+        <div className="w-full h-[60vh] flex items-center justify-center">
           <Oval
-            height={30}
-            width={30}
-            color="#4fa94d"
+            height={40}
+            width={40}
+            color="#1a2e05"
             wrapperStyle={{}}
             wrapperClass=""
             visible={true}
             ariaLabel="oval-loading"
-            secondaryColor="#4fa94d"
+            secondaryColor="#3f6212"
             strokeWidth={2}
             strokeWidthSecondary={2}
           />
