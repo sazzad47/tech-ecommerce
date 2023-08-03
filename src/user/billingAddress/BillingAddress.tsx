@@ -18,6 +18,7 @@ import { countries } from "countries-list";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { handleNotification } from "../../state/slices/common/auth";
+import "react-phone-input-2/lib/style.css";
 
 import {
   Command,

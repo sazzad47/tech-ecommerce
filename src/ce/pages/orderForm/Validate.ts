@@ -69,10 +69,6 @@ export const validateProjectDetails = (userData: UserData) => {
     errors.category = "Category is required.";
   }
 
-  if (!userData.product) {
-    errors.product = "Product is required.";
-  }
-
   if (!userData.order_file) {
     errors.order_file = "Order file is required.";
   }

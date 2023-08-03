@@ -11,11 +11,13 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "../../../state/store";
 import { useCreatePostMutation } from "../../../state/api/gd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ColorRing } from "react-loader-spinner";
 import Credentials from "./credentials";
 import Description from "./Description";
+import { PrimaryButton } from "src/gd/components/Button";
+import "react-phone-input-2/lib/style.css";
 
 export type UserData = {
   application_for: string;
@@ -45,15 +47,16 @@ export type UserData = {
   permission_letter: File | null;
   test_results: File | null;
   name_of_employment: string;
-  photo: File | null;
+  credential_photos: string[];
   other_documents: File | null;
   title: string;
+  photo: string;
   live_description: string;
   written_description: string;
   time_limit: string;
   fixed_time: Date | null;
   donation_needed: string | number;
-  [key: string]: string | File | null | Date | number | undefined;
+  [key: string]: string | string[] | number | Date | File | null | undefined;
 };
 
 const initState: UserData = {
@@ -84,9 +87,10 @@ const initState: UserData = {
   permission_letter: null,
   test_results: null,
   name_of_employment: "",
-  photo: null,
+  credential_photos: [],
   other_documents: null,
   title: "",
+  photo: "",
   live_description: "",
   written_description: "",
   time_limit: "",
@@ -110,12 +114,11 @@ export default function Apply() {
 
   const { access_token } = useSelector((state: RootState) => state.auth);
 
-  const [createPost, { isLoading: isCreatingPost }] =
-    useCreatePostMutation();
+  const [createPost, { isLoading: isCreatingPost }] = useCreatePostMutation();
 
   const [userData, setUserData] = React.useState<UserData>(initState);
   const [errorMessage, setErrorMessage] = React.useState<any>({});
-
+  console.log("userData", userData);
   const steps = [
     {
       label: "Introduction",
@@ -179,7 +182,7 @@ export default function Apply() {
     if (Object.keys(errMsg).length > 0) return setErrorMessage(errMsg);
 
     const response = await createPost({ userData, access_token });
-    console.log('response', response)
+    console.log("response", response);
     if ("error" in response) {
       if ("data" in response.error) {
         const errorData: any = response.error.data;
@@ -196,16 +199,20 @@ export default function Apply() {
 
   return (
     <div
-      className={`${styles.paddingX} ${styles.paddingY} bg-primaryTheme text-secondaryTheme`}
+      className={`${styles.paddingX} ${styles.paddingY} text-secondaryTheme`}
     >
-      <div className="mb-3">
-        <h1 className={`flex items-center justify-center ${styles.heading2}`}>
-          Apply for donation!
-        </h1>
+      <div className="mb-3 flex justify-between items-center">
+        <h1 className={`text-start ${styles.heading2}`}>Apply for donation!</h1>
+        <Link to={`${access_token ? "/gd/apply/volunteer" : "/login"}`}>
+          <PrimaryButton> Be a Volunteer </PrimaryButton>
+        </Link>
       </div>
-      <h4 className="text-xl font-bold">{steps[activeStep].label}</h4>
-      <div className="h-[255] max-w-[400] w-full mt-5">
-        {steps[activeStep].content}
+
+      <div className="w-full bg-white p-[1rem] sm:p-[5rem] mt-[3rem]">
+        <h4 className="text-xl font-bold text-gray-900 m-0 p-0">
+          {steps[activeStep].label}
+        </h4>
+        <div className="w-full mt-5">{steps[activeStep].content}</div>
       </div>
       <MobileStepper
         variant="text"
@@ -220,9 +227,9 @@ export default function Apply() {
         }}
         nextButton={
           <Button
-            variant="outlined"
+            variant="contained"
             onClick={activeStep === maxSteps - 1 ? handleSubmit : handleNext}
-            className="focus:outline-none normal-case px-4 text-secondaryTheme"
+            className="focus:outline-none bg-green-700 normal-case px-4 text-secondaryTheme"
           >
             {activeStep === maxSteps - 1 ? (
               isCreatingPost ? (

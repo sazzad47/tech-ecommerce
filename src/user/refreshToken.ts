@@ -1,16 +1,13 @@
 import { useRefreshTokenMutation } from "../state/api/user";
-import { setUserToken } from "../state/slices/common/auth";
 import { useDispatch } from "react-redux";
-import { useCallback } from "react";
-import { AppDispatch } from "../state/store";
+import { useCallback, useState } from "react";
+import { setUserToken } from "src/state/slices/common/auth";
 
-type RefreshAccessTokenHook = {
-    refreshAccessToken: () => Promise<void>;
-  };
 
-export const useRefreshAccessToken = (): RefreshAccessTokenHook => {
+export const useRefreshAccessToken = () => {
   const [refreshToken] = useRefreshTokenMutation();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
 
   const refreshAccessToken = useCallback(async () => {
     const refresh_token = localStorage.getItem("refresh_token");
@@ -22,20 +19,24 @@ export const useRefreshAccessToken = (): RefreshAccessTokenHook => {
         if ("data" in response) {
           const new_access_token = response.data.access;
           dispatch(setUserToken({ access_token: new_access_token }));
+          setLoading(false);
         } else {
           // Handle token refreshing error or expired refresh token
           dispatch(setUserToken({ access_token: "" }));
+          setLoading(false);
         }
       } else {
         // Handle missing refresh token
         dispatch(setUserToken({ access_token: "" }));
+        setLoading(false);
       }
     } catch (error) {
       // Handle token refreshing error
       dispatch(setUserToken({ access_token: "" }));
+      setLoading(false);
     }
   }, [dispatch, refreshToken]);
 
 
-  return { refreshAccessToken };
+  return { refreshAccessToken, loading };
 };

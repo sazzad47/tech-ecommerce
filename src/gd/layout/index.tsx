@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import Navbar from "./Navbar";
-import styles from "../style";
 import Footer from "./Footer";
 import "../style.css";
 
@@ -13,12 +12,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <main className="">
         <Navbar />
-        <div className="pt-[12vh]">{children}</div>
-        <div className={`bg-primaryTheme ${styles.paddingX} ${styles.flexCenter}`}>
-          <div className={`${styles.boxWidth}`}>
+        <div className="pt-[12vh] bg-green-600">{children}</div>
+          <div className={``}>
             <Footer />
           </div>
-        </div>
       </main>
     </>
   );

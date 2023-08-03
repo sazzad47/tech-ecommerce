@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { UserData } from ".";
 import { RadioGroup, RadioGroupItem } from "src/components/radio-group";
 import VideoRecorder from "src/components/videoRecorder";
+import FileUploader from "src/components/fileUploader";
 
 export default function Description({
   userData,
@@ -21,9 +22,13 @@ export default function Description({
   errorMessage: any;
   setErrorMessage: React.Dispatch<React.SetStateAction<any>>;
 }) {
-
-  const {title, fixed_time, time_limit, donation_needed, written_description } =
-    userData;
+  const {
+    title,
+    fixed_time,
+    time_limit,
+    donation_needed,
+    written_description,
+  } = userData;
 
   const conditionalLabel = GenerateLabels({ userData });
 
@@ -45,7 +50,7 @@ export default function Description({
       <div className="flex flex-col items-center w-full">
         <Box component="form" autoComplete="off" className="w-full">
           <Grid container spacing={2}>
-          <Grid item xs={12}>
+            <Grid item xs={12}>
               <InputField
                 inputProps={{
                   type: "text",
@@ -60,8 +65,19 @@ export default function Description({
               />
             </Grid>
             <Grid item xs={12}>
-              <label>{conditionalLabel}</label>
+              <FileUploader
+                setUserData={setUserData}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
+                label="Post Photo"
+                name="photo"
+                accept="image/*"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <label className="text-gray-800">{conditionalLabel}</label>
               <VideoRecorder
+                userData={userData}
                 setUserData={setUserData}
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
@@ -69,7 +85,7 @@ export default function Description({
               />
             </Grid>
             <Grid item xs={12} sm={time_limit === "No limit" ? 6 : 12}>
-              <label className="block mb-3 text-sm font-semibold text-secondaryTheme">
+              <label className="block mb-3 text-sm font-semibold text-gray-800">
                 Time limit
               </label>
               <RadioGroup
@@ -88,15 +104,19 @@ export default function Description({
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="No limit" id="time_limit" />
-                  <label htmlFor="No limit">No limit</label>
+                  <label className="text-gray-800" htmlFor="No limit">
+                    No limit
+                  </label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="Date" id="time_limit" />
-                  <label htmlFor="Date">Set a date</label>
+                  <label className="text-gray-800" htmlFor="Date">
+                    Set a date
+                  </label>
                 </div>
               </RadioGroup>
               {errorMessage.time_limit && errorMessage.time_limit !== "" && (
-                <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                   <ErrorIcon />
                   <Typography className="p-0 text-sm">
                     {errorMessage.time_limit}
@@ -108,7 +128,7 @@ export default function Description({
               <Grid item xs={12} sm={6}>
                 <label
                   htmlFor="date_of_birth"
-                  className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                  className="block mb-3 text-sm font-semibold text-gray-800"
                 >
                   Please set a date
                 </label>
@@ -116,12 +136,12 @@ export default function Description({
                   selected={fixed_time}
                   onChange={handleDateChange}
                   dateFormat="yyyy/MM/dd"
-                  className="common-input w-full"
+                  className="common-input-it w-full"
                   showIcon
-                  wrapperClassName="common-input w-full"
+                  wrapperClassName="common-input-it w-full"
                 />
                 {errorMessage.fixed_time && errorMessage.fixed_time !== "" && (
-                  <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                  <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                     <ErrorIcon />
                     <Typography className="p-0 text-sm">
                       {errorMessage.fixed_time}
@@ -201,7 +221,7 @@ const InputField = ({ inputProps }: Props) => {
     <div>
       <label
         htmlFor="firstName"
-        className="block mb-3 text-sm font-semibold text-secondaryTheme"
+        className="block mb-3 text-sm font-semibold text-gray-800"
       >
         {label}
       </label>
@@ -223,28 +243,28 @@ const InputField = ({ inputProps }: Props) => {
         }
         sx={{
           label: {
-            color: "rgb(214 211 209)",
+            color: "#4b5563",
           },
           "& label.Mui-focused": {
-            color: "rgb(214 211 209)",
+            color: "#4b5563",
           },
           "& .MuiOutlinedInput-root": {
-            color: "white",
+            color: "#4b5563",
             "& fieldset": {
-              color: "white",
+              color: "#4b5563",
               borderColor: "rgb(120 113 108)",
             },
             "&:hover fieldset": {
               borderColor: "rgb(168 162 158)",
             },
             "&.Mui-focused fieldset": {
-              borderColor: "rgb(214 211 209)",
+              borderColor: "#4b5563",
             },
           },
         }}
       />
       {errorMessages[name] && errorMessages[name] !== "" && (
-        <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+        <Grid className="flex items-center mt-2 gap-2 text-gray-800">
           <ErrorIcon />
           <Typography className="p-0 text-sm">{errorMessages[name]}</Typography>
         </Grid>

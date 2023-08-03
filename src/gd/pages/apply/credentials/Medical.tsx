@@ -2,17 +2,20 @@ import React from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import FileUploader from "src/components/fileUploader";
+import ImageUploader from "src/components/imageUplaoder";
+import { UserData } from "..";
 
 export default function Medical({
+  userData,
   setUserData,
   errorMessage,
   setErrorMessage,
 }: {
+  userData: UserData;
   setUserData: Function;
   errorMessage: any;
   setErrorMessage: React.Dispatch<React.SetStateAction<any>>;
 }) {
-
   return (
     <div className="w-full flex items-center justify-center">
       <div className="flex flex-col items-center w-full">
@@ -50,13 +53,13 @@ export default function Medical({
               />
             </Grid>
             <Grid item xs={12}>
-              <FileUploader
+              <ImageUploader
+                userData={userData}
                 setUserData={setUserData}
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
                 label="Photo of the sick person"
-                name="photo"
-                accept="image/*"
+                name="credential_photos"
               />
             </Grid>
             <Grid item xs={12}>
@@ -75,4 +78,3 @@ export default function Medical({
     </div>
   );
 }
-

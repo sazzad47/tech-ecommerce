@@ -17,10 +17,10 @@ const TableRow: React.FC<TableRowProps> = ({ label, value }) => {
 
   return (
     <tr>
-      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-500 capitalize">
+      <td className="px-6 py-4 font-medium text-gray-500 capitalize">
         {label}:
       </td>
-      <td className="px-6 py-4 whitespace-nowrap">
+      <td className="px-6 py-4">
         {Array.isArray(value) ? (
           <ul>
             {value.map(
@@ -84,7 +84,7 @@ const Table: React.FC<OrderDetailsTableProps> = ({ data }) => {
   return (
     <div className="overflow-x-auto max-w-full">
       <table>
-        <tbody>{rows}</tbody>
+        <tbody className="text-gray-900">{rows}</tbody>
       </table>
     </div>
   );

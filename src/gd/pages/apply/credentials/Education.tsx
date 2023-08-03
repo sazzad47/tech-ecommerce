@@ -2,12 +2,16 @@ import React from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import FileUploader from "src/components/fileUploader";
+import { UserData } from "..";
+import ImageUploader from "src/components/imageUplaoder";
 
 export default function Education({
+  userData,
   setUserData,
   errorMessage,
   setErrorMessage,
 }: {
+  userData: UserData;
   setUserData: Function;
   errorMessage: any;
   setErrorMessage: React.Dispatch<React.SetStateAction<any>>;
@@ -50,13 +54,13 @@ export default function Education({
               />
             </Grid>
             <Grid item xs={12}>
-              <FileUploader
+               <ImageUploader
+                userData={userData}
                 setUserData={setUserData}
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
                 label="Photo of the student"
-                name="photo"
-                accept="image/*"
+                name="credential_photos"
               />
             </Grid>
             <Grid item xs={12}>

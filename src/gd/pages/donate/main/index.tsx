@@ -24,11 +24,12 @@ const Posts = () => {
     const page = value.toString();
     filterSearch({ location, page, navigate });
   };
-
+  
+  console.log('data', data)
   return (
     <>
       {isLoading ? (
-        <div className="w-full h-[90vh] bg-primaryTheme flex items-center justify-center">
+        <div className="w-full h-[90vh] flex items-center justify-center">
           <Oval
             height={30}
             width={30}
@@ -42,7 +43,7 @@ const Posts = () => {
             strokeWidthSecondary={2}
           />
         </div>
-      ) : data?.length === 0 ? (
+      ) : data?.count === 0 ? (
         <NoResult />
       ) : (
         <div className="w-full">

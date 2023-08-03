@@ -135,7 +135,7 @@ export default function BillingAddress({
             <Grid item xs={12} sm={6}>
               <label
                 htmlFor="application_for"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                className="block mb-3 text-sm font-semibold text-gray-800"
               >
                 Whom are you applying for?
               </label>
@@ -151,14 +151,14 @@ export default function BillingAddress({
                   }));
                 }}
               >
-                <SelectTrigger className="common-input">
+                <SelectTrigger className="common-input-it">
                   <SelectValue placeholder="Apply for" />
                 </SelectTrigger>
                 <SelectContent>{applyForChoices}</SelectContent>
               </Select>
               {errorMessage.application_for &&
                 errorMessage.application_for !== "" && (
-                  <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                  <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                     <ErrorIcon />
                     <Typography className="p-0 text-sm">
                       {errorMessage.application_for}
@@ -169,7 +169,7 @@ export default function BillingAddress({
             <Grid item xs={12} sm={6}>
               <label
                 htmlFor="mode"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                className="block mb-3 text-sm font-semibold text-gray-800"
               >
                 In which mode do you want to apply?
               </label>
@@ -185,13 +185,13 @@ export default function BillingAddress({
                   }));
                 }}
               >
-                <SelectTrigger className="common-input">
+                <SelectTrigger className="common-input-it">
                   <SelectValue placeholder="Mode" />
                 </SelectTrigger>
                 <SelectContent>{modeChoices}</SelectContent>
               </Select>
               {errorMessage.mode && errorMessage.mode !== "" && (
-                <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                   <ErrorIcon />
                   <Typography className="p-0 text-sm">
                     {errorMessage.mode}
@@ -202,7 +202,7 @@ export default function BillingAddress({
             <Grid item xs={12}>
               <label
                 htmlFor="category"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                className="block mb-3 text-sm font-semibold text-gray-800"
               >
                 Select category
               </label>
@@ -214,13 +214,13 @@ export default function BillingAddress({
                   }))
                 }
               >
-                <SelectTrigger className="common-input">
+                <SelectTrigger className="common-input-it">
                   <SelectValue placeholder="Categories" />
                 </SelectTrigger>
                 <SelectContent>{categoryOptions}</SelectContent>
               </Select>
               {errorMessage.category && errorMessage.category !== "" && (
-                <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                   <ErrorIcon />
                   <Typography className="p-0 text-sm">
                     {errorMessage.category}
@@ -301,13 +301,13 @@ export default function BillingAddress({
             <Grid item xs={12} sm={6}>
               <label
                 htmlFor="phone"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                className="block mb-3 text-sm font-semibold text-gray-800"
               >
                 Phone
               </label>
               <PhoneInput
                 country={"us"}
-                inputClass="common-input"
+                inputClass="common-input-it"
                 dropdownClass="phone-input-dropdown"
                 enableSearch={true}
                 value={phone}
@@ -322,7 +322,7 @@ export default function BillingAddress({
                 }
               />
               {errorMessage.phone && errorMessage.phone !== "" && (
-                <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                   <ErrorIcon />
                   <Typography className="p-0 text-sm">
                     {errorMessage.phone}
@@ -333,7 +333,7 @@ export default function BillingAddress({
             <Grid item xs={12} sm={6}>
               <label
                 htmlFor="country"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                className="block mb-3 text-sm font-semibold text-gray-800"
               >
                 Country
               </label>
@@ -343,7 +343,7 @@ export default function BillingAddress({
                     role="combobox"
                     aria-controls="countryList"
                     aria-expanded={open}
-                    className="combobox-input flex items-center justify-between px-3 py-2"
+                    className="combobox-input-it flex items-center justify-between px-3 py-2"
                   >
                     {country ? country : "Select country..."}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -385,7 +385,7 @@ export default function BillingAddress({
                 </PopoverContent>
               </Popover>
               {errorMessage.country && errorMessage.country !== "" && (
-                <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                   <ErrorIcon />
                   <Typography className="p-0 text-sm">
                     {errorMessage.country}
@@ -454,7 +454,7 @@ export default function BillingAddress({
             <Grid item xs={12} sm={marital_status === "Other" ? 6 : 12}>
               <label
                 htmlFor="application_for"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                className="block mb-3 text-sm font-semibold text-gray-800"
               >
                 Marital Status
               </label>
@@ -471,14 +471,14 @@ export default function BillingAddress({
                   }));
                 }}
               >
-                <SelectTrigger className="common-input">
+                <SelectTrigger className="common-input-it">
                   <SelectValue placeholder="Categories" />
                 </SelectTrigger>
                 <SelectContent>{maritalStatusChoices}</SelectContent>
               </Select>
               {errorMessage.marital_status &&
                 errorMessage.marital_status !== "" && (
-                  <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                  <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                     <ErrorIcon />
                     <Typography className="p-0 text-sm">
                       {errorMessage.marital_status}
@@ -502,7 +502,7 @@ export default function BillingAddress({
                 />
                 {errorMessage.specific_marital_status &&
                   errorMessage.specific_marital_status !== "" && (
-                    <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                    <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                       <ErrorIcon />
                       <Typography className="p-0 text-sm">
                         {errorMessage.specific_marital_status}
@@ -514,7 +514,7 @@ export default function BillingAddress({
             <Grid item xs={12} sm={6}>
               <label
                 htmlFor="date_of_birth"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                className="block mb-3 text-sm font-semibold text-gray-800"
               >
                 Date of birth
               </label>
@@ -522,13 +522,13 @@ export default function BillingAddress({
                 selected={date_of_birth}
                 onChange={handleDateChange}
                 dateFormat="yyyy/MM/dd"
-                className="common-input w-full"
+                className="common-input-it w-full"
                 showIcon
-                wrapperClassName="common-input w-full"
+                wrapperClassName="common-input-it w-full"
               />
               {errorMessage.date_of_birth &&
                 errorMessage.date_of_birth !== "" && (
-                  <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                  <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                     <ErrorIcon />
                     <Typography className="p-0 text-sm">
                       {errorMessage.date_of_birth}
@@ -537,7 +537,7 @@ export default function BillingAddress({
                 )}
             </Grid>
             <Grid item xs={12} sm={6}>
-              <label className="block mb-3 text-sm font-semibold text-secondaryTheme">
+              <label className="block mb-3 text-sm font-semibold text-gray-800">
                 Blood group
               </label>
               <Select
@@ -553,13 +553,13 @@ export default function BillingAddress({
                   }));
                 }}
               >
-                <SelectTrigger className="common-input">
+                <SelectTrigger className="common-input-it">
                   <SelectValue placeholder="Blood group" />
                 </SelectTrigger>
                 <SelectContent>{bloodGroupChoices}</SelectContent>
               </Select>
               {errorMessage.blood_group && errorMessage.blood_group !== "" && (
-                <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                   <ErrorIcon />
                   <Typography className="p-0 text-sm">
                     {errorMessage.blood_group}
@@ -568,7 +568,7 @@ export default function BillingAddress({
               )}
             </Grid>
             <Grid item xs={12} sm={sex === "Other" ? 6 : 12}>
-              <label className="block mb-3 text-sm font-semibold text-secondaryTheme">
+              <label className="block mb-3 text-sm font-semibold text-gray-800">
                 Sex
               </label>
               <RadioGroup
@@ -587,19 +587,19 @@ export default function BillingAddress({
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="Male" id="sex" />
-                  <label htmlFor="Male">Male</label>
+                  <label htmlFor="Male" className="text-gray-800">Male</label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="Female" id="sex" />
-                  <label htmlFor="Female">Female</label>
+                  <label htmlFor="Female" className="text-gray-800">Female</label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="Other" id="sex" />
-                  <label htmlFor="Other">Other</label>
+                  <label htmlFor="Other" className="text-gray-800">Other</label>
                 </div>
               </RadioGroup>
               {errorMessage.sex && errorMessage.sex !== "" && (
-                <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                   <ErrorIcon />
                   <Typography className="p-0 text-sm">
                     {errorMessage.sex}
@@ -679,7 +679,7 @@ const InputField = ({ inputProps }: Props) => {
     <div>
       <label
         htmlFor="firstName"
-        className="block mb-3 text-sm font-semibold text-secondaryTheme"
+        className="block mb-3 text-sm font-semibold text-gray-800"
       >
         {label}
       </label>
@@ -701,28 +701,28 @@ const InputField = ({ inputProps }: Props) => {
         }
         sx={{
           label: {
-            color: "rgb(214 211 209)",
+            color: "#4b5563",
           },
           "& label.Mui-focused": {
-            color: "rgb(214 211 209)",
+            color: "#4b5563",
           },
           "& .MuiOutlinedInput-root": {
-            color: "white",
+            color: "#4b5563",
             "& fieldset": {
-              color: "white",
+              color: "#4b5563",
               borderColor: "rgb(120 113 108)",
             },
             "&:hover fieldset": {
               borderColor: "rgb(168 162 158)",
             },
             "&.Mui-focused fieldset": {
-              borderColor: "rgb(214 211 209)",
+              borderColor: "#4b5563",
             },
           },
         }}
       />
       {errorMessages[name] && errorMessages[name] !== "" && (
-        <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+        <Grid className="flex items-center mt-2 gap-2 text-gray-800">
           <ErrorIcon />
           <Typography className="p-0 text-sm">{errorMessages[name]}</Typography>
         </Grid>

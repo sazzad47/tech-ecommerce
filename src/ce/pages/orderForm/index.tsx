@@ -6,7 +6,7 @@ import ProjectDetails from "./ProjectDetails";
 import { validateContactInfo, validateProjectDetails } from "./Validate";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../state/store";
-import { useCreateOrderMutation } from "../../../state/api/it";
+import { useCreateOrderMutation } from "../../../state/api/ce";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ColorRing } from "react-loader-spinner";
@@ -80,7 +80,7 @@ export default function OrderPage() {
       icon: "success",
       showConfirmButton: true,
       confirmButtonText: "Dashboard",
-      preConfirm: () => navigate("/it/profile"),
+      preConfirm: () => navigate("/ce/profile"),
     });
   };
 
@@ -167,7 +167,7 @@ export default function OrderPage() {
       </div>
       <div className="bg-white p-[1rem] sm:p-[5rem]">
         <h4 className="text-xl font-bold">{steps[activeStep].label}</h4>
-        <div className="h-[255] max-w-[400] w-full mt-5">
+        <div className="w-full mt-5">
           {steps[activeStep].content}
         </div>
         <MobileStepper

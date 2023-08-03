@@ -15,6 +15,8 @@ import supp from "../../assets/support.jpg";
 import { BiDownload } from "react-icons/bi";
 import {BsCloudUploadFill} from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "src/state/store";
 
 interface Product {
   name: string;
@@ -184,6 +186,7 @@ interface ProductProps {
 }
 
 function ProductDetails({ product }: ProductProps) {
+  const { access_token } = useSelector((state: RootState) => state.auth);
   const handleDownload = () => {
     fetch(product.pdf)
       .then((response) => {
@@ -219,7 +222,7 @@ function ProductDetails({ product }: ProductProps) {
           <Tooltip title="Upload">
             <IconButton className="text-white bg-gray-500 w-[50px] h-[50px]">
               {" "}
-             <Link to="/it/order/create"> <BsCloudUploadFill className="text-white text-2xl" />{" "} </Link> 
+             <Link to={`${access_token ? "/it/order/create" : "/login"}`} > <BsCloudUploadFill className="text-white text-2xl" />{" "} </Link> 
             </IconButton>
           </Tooltip>
         </div>

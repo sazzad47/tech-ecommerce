@@ -27,7 +27,7 @@ const Product: React.FC = () => {
   return (
     <>
       {isLoading ? (
-        <div className="w-full h-[90vh] bg-primaryTheme flex items-center justify-center">
+        <div className="w-full h-[90vh] flex items-center justify-center">
           <Oval
             height={30}
             width={30}
@@ -42,7 +42,7 @@ const Product: React.FC = () => {
           />
         </div>
       ) : (
-        <div className="bg-primaryTheme">
+        <div className="">
           <div
             className={`${styles.paddingX} ${styles.paddingY} w-full flex flex-col gap-7`}
           >

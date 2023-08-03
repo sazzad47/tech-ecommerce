@@ -30,27 +30,32 @@ import { useParams } from "react-router-dom";
 export type UserData = {
   currency: string;
   donation_amount: number | null;
-  tips_amount: number | null;
+  company_tips_amount: number | null;
+  volunteer_tips_amount: number | null;
+  comment: string;
   is_hidden: boolean;
   [key: string]: string | number | boolean | null;
 };
 
 type DataProps = {
   suggested_donations: any[];
-  suggested_tips: any[];
-}
+  suggested_company_tips: any[];
+  suggested_volunteer_tips: any[];
+};
 
 const initState: UserData = {
   currency: "usd",
   donation_amount: null,
-  tips_amount: null,
+  company_tips_amount: null,
+  volunteer_tips_amount: null,
+  comment: "",
   is_hidden: false,
 };
 
-
-export default function Form({data}: {data: DataProps}) {
+export default function Form({ data }: { data: DataProps }) {
   const suggestedDonations = data.suggested_donations;
-  const suggestedTips = data.suggested_tips;
+  const suggestedCompanyTips = data.suggested_company_tips;
+  const suggestedVolunteerTips = data.suggested_volunteer_tips;
   const params = useParams();
   const { id } = params;
   const { access_token } = useSelector((state: RootState) => state.auth);
@@ -59,7 +64,7 @@ export default function Form({data}: {data: DataProps}) {
   const [open, setOpen] = React.useState(false);
   const [conversionRate, setConversionRate] = useState<number>(1);
 
-  const { currency, donation_amount, tips_amount, is_hidden } = userData;
+  const { currency, donation_amount, company_tips_amount, volunteer_tips_amount, comment, is_hidden } = userData;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -71,7 +76,8 @@ export default function Form({data}: {data: DataProps}) {
 
   const [customizeDonationField, setCustomizeDonationField] =
     useState<boolean>(false);
-  const [customizeTipsField, setCustomizeTipsField] = useState<boolean>(false);
+  const [customizeCompanyTipsField, setCustomizeCompanyTipsField] = useState<boolean>(false);
+  const [customizeVolunteerTipsField, setCustomizeVolunteerTipsField] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchConversionRate = async () => {
@@ -98,6 +104,7 @@ export default function Form({data}: {data: DataProps}) {
     useCreateDonationSessionMutation();
 
   const createDonation = async () => {
+
     const response = await createDonationSession({
       userData,
       id,
@@ -107,8 +114,7 @@ export default function Form({data}: {data: DataProps}) {
       window.location.href = response.data.checkout_url;
     }
   };
-  
-  
+ console.log('userData', userData)
   return (
     <div className="w-full flex items-center justify-center">
       <div className="flex flex-col items-center w-full">
@@ -117,7 +123,7 @@ export default function Form({data}: {data: DataProps}) {
             <Grid item xs={12}>
               <label
                 htmlFor="firstName"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                className="block mb-3 text-sm font-semibold text-gray-800"
               >
                 Currency
               </label>
@@ -127,7 +133,7 @@ export default function Form({data}: {data: DataProps}) {
                     role="combobox"
                     aria-controls="currencyList"
                     aria-expanded={open}
-                    className="combobox-input flex items-center justify-between px-3 py-2"
+                    className="combobox-input-it flex items-center justify-between px-3 py-2"
                   >
                     {currency ? currency : "Select currency..."}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -169,7 +175,7 @@ export default function Form({data}: {data: DataProps}) {
                 </PopoverContent>
               </Popover>
               {errorMessage.currency && errorMessage.currency !== "" && (
-                <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+                <Grid className="flex items-center mt-2 gap-2 text-gray-800">
                   <ErrorIcon />
                   <Typography className="p-0 text-sm">
                     {errorMessage.currency}
@@ -180,7 +186,7 @@ export default function Form({data}: {data: DataProps}) {
             <Grid item xs={12}>
               <label
                 htmlFor="amount"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                className="block mb-3 text-sm font-semibold text-gray-800"
               >
                 Suggested amount
               </label>
@@ -191,12 +197,12 @@ export default function Form({data}: {data: DataProps}) {
                     onClick={() => {
                       setUserData((prevData) => ({
                         ...prevData,
-                        donation_amount: item.amount,
+                        donation_amount: parseFloat((item.amount * conversionRate).toFixed(2)),
                       }));
                       setCustomizeDonationField(false);
                     }}
-                    className={`common-input ${
-                      donation_amount === item.amount ? "active" : ""
+                    className={`common-input-it ${
+                      donation_amount === parseFloat((item.amount * conversionRate).toFixed(2)) ? "active" : ""
                     } cursor-pointer flex items-center justify-center`}
                   >
                     {`${(item.amount * conversionRate).toFixed(
@@ -212,7 +218,7 @@ export default function Form({data}: {data: DataProps}) {
                     }));
                     setCustomizeDonationField(true);
                   }}
-                  className="common-input cursor-pointer flex items-center justify-center"
+                  className="common-input-it cursor-pointer flex items-center justify-center"
                 >
                   Customise
                 </div>
@@ -237,23 +243,23 @@ export default function Form({data}: {data: DataProps}) {
             <Grid item xs={12}>
               <label
                 htmlFor="amount"
-                className="block mb-3 text-sm font-semibold text-secondaryTheme"
+                className="block mb-3 text-sm font-semibold text-gray-800"
               >
-                Suggested tips
+                Suggested tips for company
               </label>
               <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-2">
-                {suggestedTips.map((item, index) => (
+                {suggestedCompanyTips.map((item, index) => (
                   <div
                     key={index}
                     onClick={() => {
                       setUserData((prevData) => ({
                         ...prevData,
-                        tips_amount: item.amount,
+                        company_tips_amount: parseFloat((item.amount * conversionRate).toFixed(2)),
                       }));
-                      setCustomizeTipsField(false);
+                      setCustomizeCompanyTipsField(false);
                     }}
-                    className={`common-input ${
-                      tips_amount === item.amount ? "active" : ""
+                    className={`common-input-it ${
+                      company_tips_amount === parseFloat((item.amount * conversionRate).toFixed(2)) ? "active" : ""
                     } cursor-pointer flex items-center justify-center`}
                   >
                     {`${(item.amount * conversionRate).toFixed(
@@ -265,25 +271,25 @@ export default function Form({data}: {data: DataProps}) {
                   onClick={() => {
                     setUserData((prevData) => ({
                       ...prevData,
-                      tips_amount: null,
+                      company_tips_amount: null,
                     }));
-                    setCustomizeTipsField(true);
+                  setCustomizeCompanyTipsField(true);
                   }}
-                  className="common-input cursor-pointer flex items-center justify-center"
+                  className="common-input-it cursor-pointer flex items-center justify-center"
                 >
                   Customise
                 </div>
               </div>
             </Grid>
-            {customizeTipsField && (
+            {customizeCompanyTipsField && (
               <Grid item xs={12}>
                 <InputField
                   inputProps={{
                     type: "number",
-                    name: "tips_amount",
-                    id: "tips_amount",
+                    name: "company_tips_amount",
+                    id: "company_tips_amount",
                     label: "Enter tips amount",
-                    value: tips_amount,
+                    value: company_tips_amount,
                     onChange: handleChange,
                     setErrorMessage: setErrorMessage,
                     errorMessages: errorMessage,
@@ -292,8 +298,81 @@ export default function Form({data}: {data: DataProps}) {
               </Grid>
             )}
             <Grid item xs={12}>
+              <label
+                htmlFor="amount"
+                className="block mb-3 text-sm font-semibold text-gray-800"
+              >
+                Suggested tips for volunteer
+              </label>
+              <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {suggestedVolunteerTips.map((item, index) => (
+                  <div
+                    key={index}
+                    onClick={() => {
+                      setUserData((prevData) => ({
+                        ...prevData,
+                        volunteer_tips_amount: parseFloat((item.amount * conversionRate).toFixed(2)),
+                      }));
+                      setCustomizeVolunteerTipsField(false);
+                    }}
+                    className={`common-input-it ${
+                      volunteer_tips_amount === parseFloat((item.amount * conversionRate).toFixed(2)) ? "active" : ""
+                    } cursor-pointer flex items-center justify-center`}
+                  >
+                    {`${(item.amount * conversionRate).toFixed(
+                      2
+                    )} ${currency.toUpperCase()}`}
+                  </div>
+                ))}
+                <div
+                  onClick={() => {
+                    setUserData((prevData) => ({
+                      ...prevData,
+                      volunteer_tips_amount: null,
+                    }));
+                  setCustomizeVolunteerTipsField(true);
+                  }}
+                  className="common-input-it cursor-pointer flex items-center justify-center"
+                >
+                  Customise
+                </div>
+              </div>
+            </Grid>
+            {customizeVolunteerTipsField && (
+              <Grid item xs={12}>
+                <InputField
+                  inputProps={{
+                    type: "number",
+                    name: "volunteer_tips_amount",
+                    id: "volunteer_tips_amount",
+                    label: "Enter tips amount",
+                    value: volunteer_tips_amount,
+                    onChange: handleChange,
+                    setErrorMessage: setErrorMessage,
+                    errorMessages: errorMessage,
+                  }}
+                />
+              </Grid>
+            )}
+            <Grid item xs={12}>
+              <InputField
+                inputProps={{
+                  type: "text",
+                  multiline: true,
+                  minRows: 3,
+                  name: "comment",
+                  id: "comment",
+                  label: "Comment",
+                  value: comment,
+                  onChange: handleChange,
+                  setErrorMessage: setErrorMessage,
+                  errorMessages: errorMessage,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
               <FormControlLabel
-                className="text-secondaryTheme"
+                className="text-gray-800"
                 control={
                   <Checkbox
                     checked={is_hidden}
@@ -316,6 +395,7 @@ export default function Form({data}: {data: DataProps}) {
             </Grid>
             <Grid item xs={12}>
               <Button
+                disabled={!donation_amount}
                 onClick={createDonation}
                 variant="contained"
                 className="normal-case text-slate-200 bg-stone-500 hover:bg-stone-600"
@@ -354,7 +434,7 @@ interface Props {
     name: string;
     id: string;
     label: string;
-    value: number | null;
+    value: number | string | null;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     setErrorMessage: React.Dispatch<React.SetStateAction<any>>;
     errorMessages: any;
@@ -382,7 +462,7 @@ const InputField = ({ inputProps }: Props) => {
     <div>
       <label
         htmlFor="firstName"
-        className="block mb-3 text-sm font-semibold text-secondaryTheme"
+        className="block mb-3 text-sm font-semibold text-gray-800"
       >
         {label}
       </label>
@@ -404,28 +484,28 @@ const InputField = ({ inputProps }: Props) => {
         }
         sx={{
           label: {
-            color: "rgb(214 211 209)",
+            color: "#4b5563",
           },
           "& label.Mui-focused": {
-            color: "rgb(214 211 209)",
+            color: "#4b5563",
           },
           "& .MuiOutlinedInput-root": {
-            color: "white",
+            color: "#4b5563",
             "& fieldset": {
-              color: "white",
+              color: "#4b5563",
               borderColor: "rgb(120 113 108)",
             },
             "&:hover fieldset": {
               borderColor: "rgb(168 162 158)",
             },
             "&.Mui-focused fieldset": {
-              borderColor: "rgb(214 211 209)",
+              borderColor: "#4b5563",
             },
           },
         }}
       />
       {errorMessages[name] && errorMessages[name] !== "" && (
-        <Grid className="flex items-center mt-2 gap-2 text-secondaryTheme">
+        <Grid className="flex items-center mt-2 gap-2 text-gray-800">
           <ErrorIcon />
           <Typography className="p-0 text-sm">{errorMessages[name]}</Typography>
         </Grid>

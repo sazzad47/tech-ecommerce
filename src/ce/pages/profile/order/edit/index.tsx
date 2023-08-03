@@ -168,7 +168,7 @@ export default function OrderPage() {
 
   return (
     <Layout>
-      <div className="">
+      <div className="bg-black-gradient-2 p-5">
         <h4 className="text-xl font-bold">{steps[activeStep].label}</h4>
         <div className="h-[255] max-w-[400] w-full mt-5">
           {steps[activeStep].content}

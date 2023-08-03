@@ -12,27 +12,37 @@ import {
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import Info from "./info";
 import Intro from "./info/Intro";
-import { useUpdateProfileMutation, useGetProfileQuery } from "../../state/api/user";
+import {
+  useUpdateProfileMutation,
+  useGetProfileQuery,
+} from "../../state/api/user";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { handleNotification } from "../../state/slices/common/auth";
 import { ColorRing, Oval } from "react-loader-spinner";
+import { uploadToCloudinary } from "src/utils/uploadToCloudinary";
 
 const Profile = () => {
   interface UserData {
     avatar: any | null;
+    email: string;
   }
+  const [photo, setPhoto] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
 
-  const initState: UserData = {
-    avatar: null,
-  };
   const { access_token } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
-  const [updateProfile, { isLoading: isUpdatingProfile }] =
+  const [updateProfile] =
     useUpdateProfileMutation();
   const { data, isLoading: isFetchingProfile } = useGetProfileQuery({
     access_token,
   });
+ 
+
+  const initState: UserData = {
+    avatar: null,
+    email: '',
+  };
 
   const profilePhotoInput = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState<boolean>(false);
@@ -54,16 +64,19 @@ const Profile = () => {
     if (e.target.files) {
       let newPhoto = e.target.files[0];
       const newPhotoURL = URL.createObjectURL(newPhoto);
-      setUserData((prevData) => ({ ...prevData, avatar: newPhoto }));
+      setPhoto(newPhoto);
       setPhotoURL(newPhotoURL);
       handleClickOpen();
     }
   };
 
   const updatePhoto = async () => {
-    const response = await updateProfile({ userData, access_token });
-
+    setUploading(true);
+    const cloudinaryURL = await uploadToCloudinary([photo]);
+    setUserData((prevData) => ({ ...prevData, avatar: cloudinaryURL[0] }));
+    const response = await updateProfile({ userData: {...userData, avatar: cloudinaryURL[0]}, access_token });
     if ("data" in response) {
+      setUploading(false);
       dispatch(
         handleNotification({
           show: true,
@@ -77,6 +90,7 @@ const Profile = () => {
   useEffect(() => {
     if (data) {
       setPhotoURL(data.avatar);
+      setUserData((prevData) => ({ ...prevData, email: data.email }));
     }
   }, [data]);
 
@@ -112,6 +126,7 @@ const Profile = () => {
                 src={photoURL}
                 className="w-full h-full cursor-pointer"
               />
+             
               <input
                 ref={profilePhotoInput}
                 hidden
@@ -176,7 +191,7 @@ const Profile = () => {
                       sx={{ mt: 3 }}
                       onClick={updatePhoto}
                     >
-                      {isUpdatingProfile ? (
+                      {uploading ? (
                         <ColorRing
                           visible={true}
                           height="30"

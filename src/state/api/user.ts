@@ -109,6 +109,47 @@ export const userApi = createApi({
         },
       }),
     }),
+    createVolunteerInformation: builder.mutation<any, any>({
+      query: ({userData, access_token}) => ({
+        url: "volunteer-information/",
+        method: "POST",
+        body: userData,
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${access_token}`,
+        },
+      }),
+    }),
+    updateVolunteerInformation: builder.mutation<any, any>({
+      query: ({userData, access_token}) => ({
+        url: "volunteer-information/update/",
+        method: "PUT",
+        body: userData,
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${access_token}`,
+        },
+      }),
+    }),
+    getVolunteerInformation: builder.query<any, any>({
+      query: ({access_token}) => ({
+        url: "volunteer-information/",
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${access_token}`,
+        },
+      }),
+    }),
+    getVolunteers: builder.query<any, any>({
+      query: () => ({
+        url: "volunteers/",
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }),
+    }),
     updateProfile: builder.mutation<any, any>({
       query: ({ userData, access_token }) => {
         const formData = new FormData();
@@ -152,7 +193,11 @@ export const {
   useGetBillingAddressQuery,
   useCreateBillingAddressMutation,
   useUpdateBillingAddressMutation,
+  useCreateVolunteerInformationMutation,
+  useUpdateVolunteerInformationMutation,
+  useGetVolunteerInformationQuery,
   useGetProfileQuery,
   useUpdateProfileMutation,
+  useGetVolunteersQuery,
 
 } = userApi;

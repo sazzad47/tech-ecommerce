@@ -3,9 +3,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import profilePhoto from "../../images/profile-photo.png";
 import {
   AiOutlineMacCommand,
-  AiOutlineClose,
-  AiOutlineTransaction,
+  AiOutlineClose
 } from "react-icons/ai";
+import {GiCloverSpiked} from "react-icons/gi";
+import {MdAttachMoney} from "react-icons/md";
+import {FaGratipay} from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 import { FiSettings, FiLogOut } from "react-icons/fi";
 import { useDispatch } from "react-redux";
@@ -100,27 +102,39 @@ export interface MenuProps {
 export const menus: Array<MenuProps> = [
   {
     id: 1,
-    title: "Orders",
+    title: "Posts",
     icon: <AiOutlineMacCommand />,
-    url: "/it/profile",
+    url: "/gd/profile",
   },
   {
     id: 2,
-    title: "Transactions",
-    icon: <AiOutlineTransaction />,
-    url: "/it/profile/transactions",
+    title: "Funds",
+    icon: <MdAttachMoney />,
+    url: "/gd/profile/funds",
   },
   {
     id: 3,
-    title: "Profile",
-    icon: <ImProfile />,
-    url: "/it/profile/edit",
+    title: "Donations",
+    icon: <GiCloverSpiked />,
+    url: "/gd/profile/donations",
   },
   {
     id: 4,
+    title: "Tips",
+    icon: <FaGratipay />,
+    url: "/gd/profile/tips",
+  },
+  {
+    id: 5,
+    title: "Profile",
+    icon: <ImProfile />,
+    url: "/gd/profile/edit",
+  },
+  {
+    id: 6,
     title: "Settings",
     icon: <FiSettings />,
-    url: "/it/profile/settings",
+    url: "/gd/profile/settings",
   },
 ];
 

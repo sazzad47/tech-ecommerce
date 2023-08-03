@@ -11,6 +11,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "../../../lib/utils";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import "react-phone-input-2/lib/style.css";
 
 import {
   Command,

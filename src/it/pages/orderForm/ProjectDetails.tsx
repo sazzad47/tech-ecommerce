@@ -22,6 +22,7 @@ import {
 import { Demo, UserData } from ".";
 import { menus } from "../technology/topbar/menus";
 import { Button, IconButton, Tooltip } from "@mui/material";
+import FileUploader from "src/components/fileUploader";
 
 const fileURL =
   "http://127.0.0.1:8000/media/dummy/Certification-and-ownership-form.pdf/";
@@ -60,18 +61,6 @@ export default function ContactInfo({
     }));
   };
 
-  const handleFileChange =
-    (propertyName: keyof UserData) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (file) {
-        setUserData((prevData: UserData) => ({
-          ...prevData,
-          [propertyName]: file,
-        }));
-        setErrorMessage((prevError: any)=> ({...prevError, order_file: ""}))
-      }
-    };
 
   const handleDemoChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -114,7 +103,7 @@ export default function ContactInfo({
       date.setHours(0, 0, 0, 0);
     }
     setUserData((prevData: UserData) => ({ ...prevData, delivery_date: date }));
-    setErrorMessage((prevError: any)=> ({...prevError, delivery_date: ""}))
+    setErrorMessage((prevError: any) => ({ ...prevError, delivery_date: "" }));
   };
 
   return (
@@ -152,7 +141,7 @@ export default function ContactInfo({
                   }))
                 }
               >
-                <SelectTrigger className="common-input">
+                <SelectTrigger className="common-input-it">
                   <SelectValue placeholder="Categories" />
                 </SelectTrigger>
                 <SelectContent>{categories}</SelectContent>
@@ -182,7 +171,7 @@ export default function ContactInfo({
                   }))
                 }
               >
-                <SelectTrigger className="common-input">
+                <SelectTrigger className="common-input-it">
                   <SelectValue placeholder="Categories" />
                 </SelectTrigger>
                 <SelectContent>{products}</SelectContent>
@@ -286,50 +275,24 @@ export default function ContactInfo({
               </ul>
             </Grid>
             <Grid item xs={12}>
-              <div className="block mb-3 text-sm font-semibold text-gray-800">
-                Upload attached file
-              </div>
-              <label className="block">
-                <span className="sr-only">Upload your file</span>
-                <input
-                  type="file"
-                  accept="application/pdf"
-                  onChange={handleFileChange("order_file")}
-                  className=" block w-full text-sm 
-                    file:mr-4 file:py-2 file:px-4
-                    file:rounded-[5px] file:rounded-r-none file:border-0 file:h-[56px] file:cursor-pointer
-                    file:text-sm file:font-semibold
-                    file:bg-fuchsia-900 file:text-white
-                    hover:file:bg-fuchsia-900/2 common-input-it cursor-pointer rounded-md text-gray-800"
-                />
-              </label>
-              {errorMessage.order_file && errorMessage.order_file !== "" && (
-                <Grid className="flex items-center mt-2 gap-2 text-gray-800">
-                  <ErrorIcon />
-                  <Typography className="p-0 text-sm">
-                    {errorMessage.order_file}
-                  </Typography>
-                </Grid>
-              )}
+              <FileUploader
+                setUserData={setUserData}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
+                label="Upload attached file"
+                name="order_file"
+                accept="application/pdf"
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <div className="block mb-3 text-sm font-semibold text-gray-800">
-                Additional file
-              </div>
-              <label className="block">
-                <span className="sr-only">Upload your file</span>
-                <input
-                  type="file"
-                  accept="application/pdf"
-                  onChange={handleFileChange("additional_file")}
-                  className=" block w-full text-sm 
-                    file:mr-4 file:py-2 file:px-4
-                    file:rounded-[5px] file:rounded-r-none file:border-0 file:h-[56px] file:cursor-pointer
-                    file:text-sm file:font-semibold
-                    file:bg-fuchsia-900 file:text-white
-                    hover:file:bg-fuchsia-900/2 common-input-it cursor-pointer rounded-md text-gray-800"
-                />
-              </label>
+              <FileUploader
+                setUserData={setUserData}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
+                label="Additional file"
+                name="additional_file"
+                accept="application/pdf"
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
               <label
@@ -342,9 +305,9 @@ export default function ContactInfo({
                 selected={delivery_date}
                 onChange={handleDateChange}
                 dateFormat="yyyy/MM/dd"
-                className="common-input w-full"
+                className="common-input-it w-full"
                 showIcon
-                wrapperClassName="common-input w-full"
+                wrapperClassName="common-input-it w-full"
               />
               {errorMessage.delivery_date &&
                 errorMessage.delivery_date !== "" && (

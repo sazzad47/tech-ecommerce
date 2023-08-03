@@ -1,15 +1,16 @@
 import styles from "../../style";
 import animateScrollTo from "animated-scroll-to";
-import {
-  Contact,
-  Faqs,
-} from "../../components";
 import Hero from "./Hero";
 import About from "./About";
 import Causes from "./Causes";
-import Focuses from "./Focuses";
-import ContactInfo from "./ContactInfo";
+// import Focuses from "./Focuses";
 import "./home.css";
+import HowWorks from "./HowWorks";
+import StandBy from "./StandBy";
+import TypeOfGrants from "./TypeOfGrants";
+import CompletedCauses from "./CompletedCauses";
+import Stats from "./Stats";
+import FooterBanner from "./FooterBanner";
 
 const App = () => {
   const scrollToBottom = () => {
@@ -51,25 +52,26 @@ const App = () => {
   };
 
   return (
-    <div id="section-id" className="bg-primaryTheme w-full overflow-hidden">      
-      <div className={`bg-primaryTheme ${styles.flexStart}`}>
+    <div id="section-id" className="w-full overflow-hidden">      
+      <div className={`bg-green-600 ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
           <Hero scrollToBottom={scrollToBottom} />
         </div>
       </div>
 
-      <div className={`bg-primaryTheme ${styles.paddingX} ${styles.flexCenter}`}>
+      <div className={`bg-green-600 ${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
-          <Focuses/>
+          {/* <Focuses/> */}
           <About />
+          <HowWorks />
+          <StandBy/>
+          <TypeOfGrants/>
           <Causes />
-          <Faqs />
-          <ContactInfo/>
-          <div className="relative z-0">
-            <Contact />
-          </div>
+          <CompletedCauses />
+          <Stats/>
         </div>
       </div>
+          <FooterBanner/>
     </div>
   );
 };

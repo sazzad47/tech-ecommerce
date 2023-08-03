@@ -1,25 +1,112 @@
 import styles from "../style";
-import { logo } from "../assets";
+import ReactCountryFlag from "react-country-flag";
 import { footerLinks, socialMedia } from "../constants";
-
+import { Typography } from "@mui/material";
+import { AiOutlineHome } from "react-icons/ai";
+import { AiOutlineMail } from "react-icons/ai";
+import { IoMdCall } from "react-icons/io";
 
 const Footer = () => (
-  <section className={`${styles.flexCenter} ${styles.paddingY} flex-col`}>
+  <section
+    className={`${styles.flexCenter} ${styles.paddingY} ${styles.paddingX} flex-col bg-green-600`}
+  >
     <div className={`${styles.flexStart} md:flex-row flex-col mb-8 w-full`}>
       <div className="flex-[1] flex flex-col justify-start mr-10">
-        <img
-          src={logo}
-          alt="hoobank"
-          className="w-[266px] h-[72.14px] object-contain"
-        />
-        <p className={`${styles.paragraph} mt-4 max-w-[312px]`}>
-        A software solution to grow your business with cutting edge technologies.
-        </p>
+        <h4 className="font-poppins font-medium text-[18px] leading-[27px] text-secondaryTheme">
+          Head Office of The Company
+        </h4>
+        <div className="w-full grid grid-cols-2 gap-2 justify-between mt-4">
+          <div className="flex flex-col gap-1">
+            <div className="flex gap-4 items-center mb-4">
+              {" "}
+              <ReactCountryFlag
+                countryCode="US"
+                svg
+                style={{
+                  width: "2em",
+                  height: "2em",
+                }}
+                title="US"
+              />{" "}
+              <Typography className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite">
+                {" "}
+                USA{" "}
+              </Typography>
+            </div>
+            <div className="flex gap-4 items-center text-white mb-4">
+              {" "}
+              <AiOutlineHome className="h-[2em] w-[2em]" />
+              <Typography className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite">
+                {" "}
+                Texas{" "}
+              </Typography>
+            </div>
+            <div className="flex gap-4 items-center text-white mb-4">
+              {" "}
+              <AiOutlineMail className="h-[2em] w-[2em]" />
+              <Typography className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondaryTheme cursor-pointer">
+                {" "}
+                test@test.com{" "}
+              </Typography>
+            </div>
+            <div className="flex gap-4 items-center text-white">
+              {" "}
+              <IoMdCall className="h-[2em] w-[2em]" />
+              <Typography className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondaryTheme cursor-pointer">
+               03000000000
+              </Typography>
+            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <div className="flex gap-4 items-center mb-4">
+              {" "}
+              <ReactCountryFlag
+                countryCode="IN"
+                svg
+                style={{
+                  width: "2em",
+                  height: "2em",
+                }}
+                title="India"
+              />{" "}
+              <Typography className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite">
+                {" "}
+                India
+              </Typography>
+            </div>
+            <div className="flex gap-4 items-center text-white mb-4">
+              {" "}
+              <AiOutlineHome className="h-[2em] w-[2em]" />
+              <Typography className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite">
+                {" "}
+                Texas{" "}
+              </Typography>
+            </div>
+            <div className="flex gap-4 items-center text-white mb-4">
+              {" "}
+              <AiOutlineMail className="h-[2em] w-[2em]" />
+              <Typography className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondaryTheme cursor-pointer">
+                {" "}
+                test@test.com{" "}
+              </Typography>
+            </div>
+            <div className="flex gap-4 items-center text-white">
+              {" "}
+              <IoMdCall className="h-[2em] w-[2em]" />
+              <Typography className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondaryTheme cursor-pointer">
+               03000000000
+              </Typography>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="flex-[1.5] w-full flex flex-row justify-between flex-wrap md:mt-0 mt-10">
         {footerLinks.map((footerlink) => (
-          <div key={footerlink.title} className={`flex flex-col ss:my-0 my-4 min-w-[150px]`}>
+          <div
+            key={footerlink.title}
+            className={`flex flex-col ss:my-0 my-4 min-w-[150px]`}
+          >
             <h4 className="font-poppins font-medium text-[18px] leading-[27px] text-secondaryTheme">
               {footerlink.title}
             </h4>

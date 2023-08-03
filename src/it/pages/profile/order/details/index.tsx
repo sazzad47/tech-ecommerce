@@ -25,7 +25,7 @@ const Details = () => {
   if (!access_token || isLoading) {
     return (
       <Layout>
-        <div className="w-full h-[70vh] flex items-center justify-center">
+        <div className="w-full h-[70vh] flex items-center justify-center bg-black-gradiant-2">
           <Oval
             height={30}
             width={30}

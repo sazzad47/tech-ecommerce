@@ -19,7 +19,8 @@ import {
 } from "../assets";
 import { AiOutlineHome, AiOutlineForm } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
-import { MdMiscellaneousServices, MdOutlineSecurity } from "react-icons/md";
+import { MdContactSupport } from "react-icons/md";
+import {BsFillCheckSquareFill } from "react-icons/bs";
 import hero1 from "../images/hero1.png";
 import hero2 from "../images/hero2.png";
 import hero3 from "../images/hero3.png";
@@ -27,6 +28,18 @@ import { BiDonateBlood } from "react-icons/bi";
 import { IoMdBusiness } from "react-icons/io";
 import { BsPersonFillLock } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import { GiMedicines } from "react-icons/gi";
+import {GiEternalLove} from "react-icons/gi";
+import {GrEmergency} from 'react-icons/gr';
+import {RiOrganizationChart} from "react-icons/ri";
+import {MdCastForEducation} from "react-icons/md";
+import {MdOutlinePets} from "react-icons/md";
+import {FaEnvira} from "react-icons/fa";
+import {MdBusinessCenter} from "react-icons/md";
+import {RiCommunityLine} from "react-icons/ri";
+import {FaRunning} from "react-icons/fa";
+import {GiClassicalKnowledge} from "react-icons/gi";
+import {BsCalendar2EventFill} from "react-icons/bs";
 
 export const GenerateNavLinks = ()=> {
 
@@ -44,24 +57,24 @@ export const GenerateNavLinks = ()=> {
       icon: BiDonateBlood,
     },
     {
-      id: "services",
-      title: "Services",
-      icon: MdMiscellaneousServices,
+      id: "completed-donations",
+      title: "Completed Donations",
+      icon: BsFillCheckSquareFill,
     },
     {
-      id: "security",
-      title: "Security",
-      icon: MdOutlineSecurity,
+      id: "support",
+      title: "Support",
+      icon: MdContactSupport,
+    },
+    {
+      id: access_token ? "apply" : "login",
+      title: "Apply",
+      icon: AiOutlineForm,
     },
     {
       id: "company",
       title: "Company",
       icon: IoMdBusiness,
-    },
-    {
-      id: "apply",
-      title: "Apply",
-      icon: AiOutlineForm,
     },
       {
         id: access_token ? "profile" : "login",
@@ -79,6 +92,56 @@ export const appItems = [
   { id: "gd", title: "Global Donation", route: "/gd" },
 ];
 
+export const typesOfGrants = [
+  {id: 1, 
+   icon: GiMedicines,
+   title: "Medical",
+  },
+  {id: 2, 
+   icon: GiEternalLove,
+   title: "Memorial",
+  },
+  {id: 3, 
+   icon: GrEmergency,
+   title: "Emergency",
+  },
+  {id: 4, 
+   icon: RiOrganizationChart,
+   title: "Nonprofit",
+  },
+  {id: 5, 
+   icon: MdCastForEducation,
+   title: "Education",
+  },
+  {id: 6, 
+   icon: MdOutlinePets,
+   title: "Animals",
+  },
+  {id: 7, 
+   icon: FaEnvira,
+   title: "Environment",
+  },
+  {id: 8, 
+   icon: MdBusinessCenter,
+   title: "Business",
+  },
+  {id: 9, 
+   icon: RiCommunityLine,
+   title: "Community",
+  },
+  {id: 10, 
+   icon: FaRunning,
+   title: "Competition",
+  },
+  {id: 11, 
+   icon: GiClassicalKnowledge,
+   title: "Creative",
+  },
+  {id: 12, 
+   icon: BsCalendar2EventFill,
+   title: "Event",
+  },
+]
 export const applyForOptions = [
   {  title: "Myself", value: "Myself" },
   {  title: "Family", value: "Family" },
@@ -375,18 +438,28 @@ export const feedback = [
 export const stats = [
   {
     id: "stats-1",
-    title: "Projects Completed",
-    value: "3800+",
+    title: "Years",
+    value: "20",
   },
   {
     id: "stats-2",
-    title: "Clients Satified",
-    value: "230+",
+    title: "Dollars",
+    value: "$10M",
   },
   {
     id: "stats-3",
-    title: "Positive Reviews",
-    value: "3030+",
+    title: "Donors",
+    value: "3030",
+  },
+  {
+    id: "stats-4",
+    title: "Projects",
+    value: "300",
+  },
+  {
+    id: "stats-5",
+    title: "Countries",
+    value: "34",
   },
 ];
 

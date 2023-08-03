@@ -1,10 +1,15 @@
-import Button, { PrimaryButton } from "../../../components/Button";
 import { Link } from "react-router-dom";
+import moment from "moment";
+import { Button } from "@mui/material";
+import ReactCountryFlag from "react-country-flag";
+import countriesList from "countries-list";
 
 export type UserData = {
   id: number;
+  created_at: Date | null;
   application_for: string;
   mode: string;
+  raised: any;
   category: string;
   first_name: string;
   last_name: string;
@@ -49,7 +54,7 @@ const Causes = ({ data }: { data: UserData[] }) => {
         <div className="min-w-full overflow-x-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
             {data.map((post, index) => (
-              <TemplateCard key={`post-${index}`} {...post} />
+              <PostCard key={`post-${index}`} {...post} />
             ))}
           </div>
         </div>
@@ -58,17 +63,35 @@ const Causes = ({ data }: { data: UserData[] }) => {
   );
 };
 
-export const TemplateCard: React.FC<UserData> = ({
+export const PostCard: React.FC<UserData> = ({
   photo,
   written_description,
   donation_needed,
   total_donations,
   id,
+  mode,
+  created_at,
+  raised,
+  country
 }) => {
   const percentage = Math.floor((total_donations / donation_needed) * 100);
-  // const progressBar = `progress-per bg-green-700 w-[${percentage}%]`;
-  const progressBar = `progress-per bg-green-700 w-[${percentage}%]`;
-  console.log("progressBar", progressBar);
+
+
+  const countryCodesMapping = Object.entries(countriesList.countries).map(
+    ([countryCode, countryData]) => ({
+      countryName: countryData.name,
+      countryCode: countryCode,
+    })
+  );
+
+  const capitalizedCountry =  (country?.charAt(0).toUpperCase() + country?.slice(1)) || "";
+  const countryCode = countryCodesMapping.find(
+  (countryMapping) => countryMapping.countryName === capitalizedCountry
+)?.countryCode || "";
+
+
+  console.log('countryCode', countryCode)
+
   return (
     <div className="bg-black-gradient rounded-2xl w-full">
       <div className="relative w-full h-[230px]">
@@ -77,12 +100,29 @@ export const TemplateCard: React.FC<UserData> = ({
           alt="project_image"
           className="w-full h-full object-cover rounded-se-2xl rounded-ss-2xl"
         />
+        <div className="absolute bottom-2 right-2 text-white rounded-full bg-stone-800 px-3 py-2 z-1">
+          {mode}
+        </div>
+        <div className="absolute top-2 left-2 z-1">
+            <ReactCountryFlag
+              countryCode={countryCode}
+              svg
+              style={{
+                width: "2em",
+                height: "2em",
+              }}
+              title={countryCode}
+            />
+          </div>
       </div>
       <div className="p-5 text-secondaryTheme">
         <div className="progress-box ">
           <div className="progress-bar">
             {percentage && (
-              <span style={{ width: `${percentage}%` }} className="progress-per bg-green-700">
+              <span
+                style={{ width: `${percentage}%` }}
+                className="progress-per bg-green-700"
+              >
                 <span className="tooltip"> {percentage}% </span>
               </span>
             )}
@@ -94,16 +134,26 @@ export const TemplateCard: React.FC<UserData> = ({
           <span>Goal: ${donation_needed}</span>
         </div>
 
+        <div className="w-full flex justify-between mt-3">
+          <span> {moment(created_at).fromNow()} </span>
+          <span>Donors: {raised.length}</span>
+        </div>
+
         <p className="mt-2 text-secondaryTheme text-[14px] line-clamp-2">
           {written_description}
         </p>
 
         <div className="mt-4 flex justify-between items-center">
           <Link to={`/gd/causes/${id}`}>
-            <PrimaryButton> View </PrimaryButton>
+            <Button variant="outlined" className="text-white">
+              {" "}
+              View{" "}
+            </Button>
           </Link>
-          <Link to="/gd/donate">
-            <Button>Donate</Button>
+          <Link to={`/gd/causes/donate/${id}`}>
+            <Button variant="contained" className="bg-green-700">
+              Donate
+            </Button>
           </Link>
         </div>
       </div>

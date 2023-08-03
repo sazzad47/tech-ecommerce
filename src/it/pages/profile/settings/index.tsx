@@ -42,7 +42,7 @@ const Settings = () => {
     
   return (
     <Layout>
-        <div>
+        <div className='bg-black-gradient-2 p-5'>
         <Tabs
             TabIndicatorProps={{
               sx: {

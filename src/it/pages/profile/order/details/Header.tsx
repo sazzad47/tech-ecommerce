@@ -11,7 +11,7 @@ export interface OrderDetailsProps {
 
 const Header: React.FC<OrderDetailsProps> = ({ data }) => {
   return (
-    <div className="w-full p-5 mb-5 border border-gray-500 rounded-md flex flex-col gap-3">
+    <div className="w-full p-5 mb-5 bg-black-gradient-2 border border-gray-500 rounded-md flex flex-col gap-3">
       <div className="flex justify-between items-center">
         <Badge
           variant={

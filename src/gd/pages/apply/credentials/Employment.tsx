@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import ErrorIcon from "@mui/icons-material/Error";
 import { UserData } from "..";
 import FileUploader from "src/components/fileUploader";
+import ImageUploader from "src/components/imageUplaoder";
 
 export default function Employment({
   userData,
@@ -69,13 +70,13 @@ export default function Employment({
               />
             </Grid>
             <Grid item xs={12}>
-              <FileUploader
+              <ImageUploader
+                userData={userData}
                 setUserData={setUserData}
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
                 label="Employment picture"
-                name="photo"
-                accept="image/*"
+                name="credential_photos"
               />
             </Grid>
             <Grid item xs={12}>

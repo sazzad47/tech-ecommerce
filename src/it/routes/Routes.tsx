@@ -24,15 +24,26 @@ import Settings from "../pages/profile/settings";
 import PaymentMessage from "../pages/profile/order/details/Message";
 
 
-const routes = [
+const privateRoutes = [
+    { path: "/it/checkout", component: <Checkout /> },
+    { path: "/it/order/create", component: <CreateOrder /> },
+    { path: "/it/profile", component: <Orders /> },
+    { path: "/it/profile/orders/:id", component: <OrderDetails /> },
+    { path: "/it/profile/orders/edit/:id", component: <OrderEdit /> },
+    { path: "/it/profile/transactions", component: <Transactions /> },
+    { path: "/it/profile/edit", component: <Profile /> },
+    { path: "/it/profile/settings", component: <Settings /> },
+    { path: "/it/orders/payment", component: <PaymentMessage /> },
+    
+]
+
+const publicRoutes = [
     { path: "/", component: <Home /> },
     { path: "/it", component: <Home /> },
     { path: "/it/home", component: <Home /> },
     { path: "/it/technology", component: <Technology /> },
-    { path: "/it/checkout", component: <Checkout /> },
     { path: "/it/products/:id", component: <ProductDetails /> },
     { path: "/it/order", component: <Order /> },
-    { path: "/it/order/create", component: <CreateOrder /> },
     { path: "/it/services", component: <Services /> },
     { path: "/it/services/web-development", component: <WebDevelopment /> },
     { path: "/it/services/app-development", component: <AppDevelopment /> },
@@ -44,14 +55,7 @@ const routes = [
     { path: "/it/services/support", component: <Support /> },
     { path: "/it/security", component: <Security /> },
     { path: "/it/company", component: <Company /> },
-    { path: "/it/profile", component: <Orders /> },
-    { path: "/it/profile/orders/:id", component: <OrderDetails /> },
-    { path: "/it/profile/orders/edit/:id", component: <OrderEdit /> },
-    { path: "/it/profile/transactions", component: <Transactions /> },
-    { path: "/it/profile/edit", component: <Profile /> },
-    { path: "/it/profile/settings", component: <Settings /> },
-    { path: "/it/orders/payment", component: <PaymentMessage /> },
     
 ]
 
-export {routes};
+export {privateRoutes, publicRoutes};

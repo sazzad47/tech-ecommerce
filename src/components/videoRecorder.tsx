@@ -1,17 +1,21 @@
-import { Button, Typography } from "@mui/material";
+import { Button, LinearProgress, Typography } from "@mui/material";
 import React, { useState, useRef, useEffect } from "react";
 import { UserData } from "src/gd/pages/apply";
 import ErrorIcon from "@mui/icons-material/Error";
 import getBlobDuration from "get-blob-duration";
+import { uploadToCloudinary } from "src/utils/uploadToCloudinary";
+import {BsFillCloudCheckFill} from "react-icons/bs";
 
 const mimeType = 'video/webm; codecs="opus,vp8"';
 
 const VideoRecorder = ({
+  userData,
   setUserData,
   errorMessage,
   setErrorMessage,
   name,
 }: {
+  userData: UserData;
   setUserData: Function;
   errorMessage: any;
   setErrorMessage: React.Dispatch<React.SetStateAction<any>>;
@@ -35,9 +39,18 @@ const VideoRecorder = ({
   const [stream, setStream] = useState<MediaStream | null>(null);
 
   const [recordedVideo, setRecordedVideo] = useState<string | null>(null);
-
+  const [fileToUpload, setFileToUpload] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  
   const getCameraPermission = async () => {
     setRecordedVideo(null);
+    setFileToUpload(null);
+    setUserData((prevData: UserData) => ({
+      ...prevData,
+      [name]: "",
+    }));
+
 
     if ("MediaRecorder" in window) {
       try {
@@ -99,6 +112,7 @@ const VideoRecorder = ({
 
       mediaRecorder.current.onstop = async () => {
         const videoBlob = new Blob(localVideoChunks, { type: mimeType });
+        const videoFile = new File([videoBlob], "live.mp4", { type: videoBlob.type });
         const videoUrl = URL.createObjectURL(videoBlob);
 
         setRecordedVideo(videoUrl);
@@ -112,21 +126,18 @@ const VideoRecorder = ({
               ...prevErrors,
               [name]: "Video must be between 30s to 4 minutes",
             }));
+            setFileToUpload(null);
           } else {
             setErrorMessage((prevErrors: any) => ({
               ...prevErrors,
               [name]: "",
             }));
+            setFileToUpload(videoFile);
           }
         } catch (error) {
           console.error("Failed to get video duration:", error);
         }
 
-        setUserData((prevData: UserData) => ({
-          ...prevData,
-          [name]: new File([videoBlob], 'live.mp4', { type: videoBlob.type }),
-        }));
-        
         setRecordingDuration(0);
       };
 
@@ -171,51 +182,83 @@ const VideoRecorder = ({
     return formattedDuration;
   }
 
+  const handleUpload = async () => {
+    setUploading(true);
+    const cloudinaryURL = await uploadToCloudinary([fileToUpload], setProgress);
+    setUserData((prevData: UserData) => ({
+      ...prevData,
+      [name]: cloudinaryURL[0],
+    }));
+    setUploading(false);
+  };
+
   return (
     <div>
       <main>
-        <div className="flex gap-5 mt-5">
-          {!permission ? (
-            <Button
-              variant="contained"
-              className="bg-gray-500 capitalize"
-              onClick={getCameraPermission}
-              type="button"
-            >
-              Start Camera
-            </Button>
-          ) : null}
-          {permission && recordingStatus === "inactive" ? (
-            <Button
-              variant="contained"
-              className="bg-gray-500 capitalize"
-              onClick={startRecording}
-              type="button"
-            >
-              Start Recording
-            </Button>
-          ) : null}
-          {recordingStatus === "recording" ? (
-            <Button
-              variant="contained"
-              className="bg-gray-500 capitalize"
-              onClick={stopRecording}
-              type="button"
-            >
-              Stop Recording
-            </Button>
-          ) : null}
-          {recordingStartTime && recordingStatus === "recording" && (
-            <div className="flex items-center mt-2 text-secondaryTheme">
-              <Typography className="p-0 text-sm">
-                Duration: {formatDuration(Math.floor(recordingDuration / 1000))}
-              </Typography>
-            </div>
-          )}
-        </div>
+      {userData.live_description !== "" && <div className="mt-4 w-full sm:w-1/2 rounded-lg flex gap-2 items-center bg-stone-500 px-3 py-2">
+            <BsFillCloudCheckFill className="text-white text-2xl"/> <Typography className="text-white"> Uploaded Successfully </Typography>  </div>}
+        {uploading ? (
+          <div style={{ width: "100%" }}>
+            <LinearProgress variant="determinate" value={progress} />
+          </div>
+
+        ) : (
+          <div className="flex gap-5 mt-5">
+
+            {fileToUpload &&  userData.live_description === "" && (
+              <Button
+                variant="contained"
+                className="bg-green-700 capitalize"
+                type="button"
+                onClick={handleUpload}
+              >
+                Upload Now
+              </Button>
+            )}
+            {!permission ? (
+              <Button
+                variant="contained"
+                className="bg-green-700 capitalize"
+                onClick={getCameraPermission}
+                type="button"
+              >
+                {fileToUpload ? "Retake" : "Start Camera"}
+              </Button>
+            ) : null}
+            {permission && recordingStatus === "inactive" ? (
+              <Button
+                variant="contained"
+                className="bg-green-700 capitalize"
+                onClick={startRecording}
+                type="button"
+              >
+                Start Recording
+              </Button>
+            ) : null}
+            {recordingStatus === "recording" ? (
+              <Button
+                variant="contained"
+                className="bg-green-700 capitalize"
+                onClick={stopRecording}
+                type="button"
+              >
+                Stop Recording
+              </Button>
+            ) : null}
+            {recordingStartTime && recordingStatus === "recording" && (
+              <div className="flex items-center mt-2 text-gray-800">
+                <Typography className="p-0 text-sm">
+                  Duration:{" "}
+                  {formatDuration(Math.floor(recordingDuration / 1000))}
+                </Typography>
+              </div>
+            )}
+           
+          </div>
+        )}
       </main>
 
-      <div className="w-full sm:w-1/2 min-h-[35vh] border border-gray-300 mt-5 relative">
+      <div className="w-full sm:w-1/2 min-h-[35vh] border border-gray-200 mt-5 relative">
         {!recordedVideo ? (
           <video
             ref={liveVideoFeed}
@@ -232,7 +275,7 @@ const VideoRecorder = ({
         ) : null}
       </div>
       {errorMessage[name] && errorMessage[name] !== "" && (
-        <div className="flex items-center mt-2 gap-2 text-secondaryTheme">
+        <div className="flex items-center mt-2 gap-2 text-gray-800">
           <ErrorIcon />
           <Typography className="p-0 text-sm">{errorMessage[name]}</Typography>
         </div>

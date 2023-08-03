@@ -50,14 +50,14 @@ const About: React.FC = () => {
           <Tabs
             TabIndicatorProps={{
               sx: {
-                backgroundColor: "green",
+                backgroundColor: "#bbf7d0",
               },
             }}
             sx={{
               "& button": { color: "#00f6ff" },
               "& button:focus": { outline: "none" },
               "& button.Mui-selected": {
-                color: "green",
+                color: "#bbf7d0",
               },
             }}
             value={value}

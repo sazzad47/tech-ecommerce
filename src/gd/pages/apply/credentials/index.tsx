@@ -21,6 +21,7 @@ const Credentials = ({
     case "Medical":
       return (
         <Medical
+        userData={userData}
           setUserData={setUserData}
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
@@ -29,6 +30,7 @@ const Credentials = ({
     case "Education":
       return (
         <Education
+        userData={userData}
           setUserData={setUserData}
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
@@ -37,6 +39,7 @@ const Credentials = ({
     case "Natural Disaster":
       return (
         <NaturalDisaster
+          userData={userData}
           setUserData={setUserData}
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
@@ -45,6 +48,7 @@ const Credentials = ({
     case "Animals":
       return (
         <Animals
+          userData={userData}
           setUserData={setUserData}
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
@@ -62,6 +66,7 @@ const Credentials = ({
     case "Sports":
       return (
         <Sports
+          userData={userData}
           setUserData={setUserData}
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}

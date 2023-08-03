@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const gdApi = createApi({
+export const gdApi:any = createApi({
   reducerPath: "gdApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.REACT_APP_BASE_BACKEND_URL}/api/gd/`,
@@ -78,6 +78,24 @@ export const gdApi = createApi({
         },
       }),
     }),
+    getCompletedPosts: builder.query<any, any>({
+      query: (params) => ({
+        url: `completed-posts/${params}`,
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }),
+    }),
+    getCompletedPost: builder.query<any, any>({
+      query: (id) => ({
+        url: `single-post/${id}/`,
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }),
+    }),
     getPost: builder.query<any, any>({
       query: (id) => ({
         url: `posts/${id}/`,
@@ -105,16 +123,6 @@ export const gdApi = createApi({
         },
       }),
     }),
-    getOrders: builder.query<any, any>({
-      query: ({access_token}) => ({
-        url: "orders/",
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          authorization: `Bearer ${access_token}`,
-        },
-      }),
-    }),
     getOrderDetails: builder.query<any, any>({
       query: ({access_token, id}) => ({
         url: `orders/${id}/`,
@@ -125,10 +133,62 @@ export const gdApi = createApi({
         },
       }),
     }),
-    getTransactions: builder.query<any, any>({
+    getUserPosts: builder.query<any, any>({
       query: ({access_token}) => ({
-        url: "transactions/",
+        url: "user-posts/",
         method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${access_token}`,
+        },
+      }),
+    }),
+    getPostDetails: builder.query<any, any>({
+      query: ({access_token, id}) => ({
+        url: `user-posts/${id}/`,
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${access_token}`,
+        },
+      }),
+    }),
+    getDonations: builder.query<any, any>({
+      query: ({access_token}) => ({
+        url: "donations/",
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${access_token}`,
+        },
+      }),
+    }),
+    getTips: builder.query<any, any>({
+      query: ({access_token}) => ({
+        url: "tips/",
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${access_token}`,
+        },
+      }),
+    }),
+    createDonationsWithdrawalRequest: builder.mutation<any, any>({
+      query: ({userData, access_token}) => ({
+        url: "donations-withdrawal/create/",
+        method: "POST",
+        body: userData,
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${access_token}`,
+        },
+      }),
+    }),
+    createTipsWithdrawalRequest: builder.mutation<any, any>({
+      query: ({userData, access_token}) => ({
+        url: "tips-withdrawal/create/",
+        method: "POST",
+        body: userData,
         headers: {
           "Content-type": "application/json",
           authorization: `Bearer ${access_token}`,
@@ -138,4 +198,4 @@ export const gdApi = createApi({
   }),
 });
 
-export const { useCreatePostMutation, useGetOrdersQuery, useGetOrderDetailsQuery, useUpdatePostMutation, useCreateDonationSessionMutation, useGetTransactionsQuery, useGetPostsQuery, useGetPostCountriesQuery, useGetPostQuery, useGetDonorsCommentsQuery} = gdApi;
+export const { useCreatePostMutation,useCreateDonationsWithdrawalRequestMutation, useCreateTipsWithdrawalRequestMutation, useGetOrderDetailsQuery, useUpdatePostMutation, useCreateDonationSessionMutation, useGetDonationsQuery, useGetTipsQuery, useGetPostsQuery, useGetPostCountriesQuery, useGetPostQuery, useGetUserPostsQuery, useGetCompletedPostsQuery, useGetDonorsCommentsQuery, useGetCompletedPostQuery, useGetPostDetailsQuery} = gdApi;

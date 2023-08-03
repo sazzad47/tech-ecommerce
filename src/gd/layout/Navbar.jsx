@@ -1,60 +1,33 @@
 import { useState } from "react";
-import { close, logo, menu } from "../assets";
-import { appItems, GenerateNavLinks } from "../constants";
+import { GenerateNavLinks } from "../constants";
 import { Link } from "react-router-dom";
-import { AiFillAppstore } from "react-icons/ai";
+import itLogo from "../assets/itlogo.webp";
+import ceLogo from "../assets/celogo.webp";
+import gdLogo from "../assets/gdlogo.webp";
 
 const Navbar = () => {
   const [activePage, setActivePage] = useState("Home");
-  const [activeApp, setActiveApp] = useState("IT");
-  const [showNavMenu, setShowNavMenu] = useState(false);
-  const [showAppMenu, setShowAppMenu] = useState(false);
   
   const navLinks = GenerateNavLinks();
 
   return (
-    <nav className="h-[12vh] w-full bg-primaryTheme flex py-6 justify-between items-center navbar fixed top-0 z-10 sm:px-16 px-6">
-      <Link to="/ce">
-        <img src={logo} alt="logo" className="w-[50px] h-[42px]" />
-      </Link>
-      <div className="relative h-full ml-8 sm:ml-16 sidebar z-[100]">
-        <div className="pulse cursor-pointer">
-          <AiFillAppstore
-            onClick={() => setShowAppMenu(!showAppMenu)}
-            className="text-secondaryTheme text-2xl"
-          />
-        </div>
-        <div
-          className={`${
-            !showAppMenu ? "hidden" : "flex"
-          } p-6 bg-black-gradient absolute top-10 left-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
-        >
-          <ul className="w-full list-none flex justify-end items-start flex-1 flex-col">
-            {appItems.map((app, index) => (
-              <li
-                key={app.id}
-                className={`w-full font-poppins font-medium cursor-pointer text-[16px] ${
-                  activeApp === app.title
-                    ? "text-secondaryTheme"
-                    : "text-dimWhite"
-                } ${index === appItems.length - 1 ? "mb-0" : "mb-4"}`}
-                onClick={() => setActiveApp(app.title)}
-              >
-                <Link to={`${app.route}`}>
-                  <div className="relative w-full h-full">{app.title}</div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+    <nav className="h-[12vh] w-full bg-green-600 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex py-6 justify-between items-center navbar fixed top-0 z-10 sm:px-16 px-6">
+      <Link to="/gd">
+          <img src={gdLogo} alt="logo" width={60} height={60} />
+        </Link>
+        <Link to="/it">
+          <img src={itLogo} alt="logo" width={60} height={60} />
+        </Link>
+        <Link to="/ce">
+          <img src={ceLogo} alt="logo" width={60} height={60} />
+        </Link>
 
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">
         {navLinks.map((nav, index) => (
           <li
             key={nav.id}
-            className={`font-poppins font-normal cursor-pointer text-[16px] ${
-              activePage === nav.title ? "text-secondaryTheme" : "text-dimWhite"
+            className={`font-poppins font-normal cursor-pointer text-xl ${
+              activePage === nav.title ? "text-gray-200" : "text-white"
             } ${index === navLinks.length - 1 ? "mr-0" : "mr-10"}`}
             onClick={() => setActivePage(nav.title)}
           >
@@ -63,7 +36,7 @@ const Navbar = () => {
               to={nav.id === "login" ? `/${nav.id}` : `/gd/${nav.id}`}
             >
               {" "}
-              <div className="text-lg">
+              <div className="text-2xl">
                 {" "}
                 <nav.icon />{" "}
               </div>{" "}
@@ -72,39 +45,6 @@ const Navbar = () => {
           </li>
         ))}
       </ul>
-
-      <div className="sm:hidden flex flex-1 justify-end items-center">
-        <img
-          src={showNavMenu ? close : menu}
-          alt="menu"
-          className="w-[28px] h-[28px] object-contain"
-          onClick={() => setShowNavMenu(!showNavMenu)}
-        />
-
-        <div
-          className={`${
-            !showNavMenu ? "hidden" : "flex"
-          } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
-        >
-          <ul className="list-none flex justify-end items-start flex-1 flex-col">
-            {navLinks.map((nav, index) => (
-              <li
-                key={nav.id}
-                className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                  activePage === nav.title
-                    ? "text-secondaryTheme"
-                    : "text-dimWhite"
-                } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
-                onClick={() => setActivePage(nav.title)}
-              >
-                <Link to={nav.id === "login" ? `/${nav.id}` : `/gd/${nav.id}`}>
-                  {nav.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
     </nav>
   );
 };

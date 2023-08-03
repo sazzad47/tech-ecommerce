@@ -3,12 +3,15 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import ImageUploader from "src/components/imageUplaoder";
 import FileUploader from "src/components/fileUploader";
+import { UserData } from "..";
 
 export default function NaturalDisaster({
+  userData,
   setUserData,
   errorMessage,
   setErrorMessage,
 }: {
+  userData: UserData;
   setUserData: Function;
   errorMessage: any;
   setErrorMessage: React.Dispatch<React.SetStateAction<any>>;
@@ -43,11 +46,12 @@ export default function NaturalDisaster({
             </Grid>
             <Grid item xs={12}>
               <ImageUploader
+                userData={userData}
                 setUserData={setUserData}
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
                 label="Provide some photos of the disaster"
-                name="photo"
+                name="credential_photos"
               />
             </Grid>
             <Grid item xs={12}>

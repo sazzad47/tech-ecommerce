@@ -4,7 +4,7 @@ import Lottie from "lottie-react";
 
 const NoResult = () => {
   return (
-    <div className="w-full p-5">
+    <div className="w-full">
       <Lottie animationData={animation} loop={true} />;
     </div>
   );

@@ -2,9 +2,8 @@ import React from 'react'
 import Layout from '../Layout'
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Billing from './Billing';
-import Card from './Card';
 import ChangePassword from '../../../../user/changePassword';
+import BillingAddress from 'src/user/billingAddress/BillingAddress';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -43,7 +42,7 @@ const Settings = () => {
     
   return (
     <Layout>
-        <div>
+        <div className="bg-black-gradient-2 p-5">
         <Tabs
             TabIndicatorProps={{
               sx: {
@@ -61,17 +60,14 @@ const Settings = () => {
             onChange={handleChange}
             variant="fullWidth"
           >
-            <Tab label="Card Information" />
             <Tab label="Billing Address" />
             <Tab label="Change Password" />
           </Tabs>
+        
           <TabPanel value={value} index={0}>
-            <Card/>
+            <BillingAddress/>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Billing/>
-          </TabPanel>
-          <TabPanel value={value} index={2}>
             <ChangePassword />
           </TabPanel>
         </div>

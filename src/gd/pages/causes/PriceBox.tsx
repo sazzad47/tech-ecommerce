@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
+import { useSelector } from "react-redux";
+import { RootState } from "src/state/store";
 
 export type UserData = {
   application_for: string;
@@ -44,7 +46,7 @@ export type UserData = {
 const PriceBox = ({ data }: { data: UserData }) => {
   const raised = data.total_donations;
   const goal = data.donation_needed;
-
+  const { access_token } = useSelector((state: RootState) => state.auth);
   const percentage = Math.floor((raised / goal) * 100);
 
   return (
@@ -69,8 +71,8 @@ const PriceBox = ({ data }: { data: UserData }) => {
             <span>Goal: ${data.donation_needed}</span>
           </div>
         </div>
-        <Link to={`/gd/causes/donate/${data.id}`}>
-          <Button variant="outlined" className="capitalize w-full">
+        <Link to={`${access_token ? `/gd/causes/donate/${data.id}` : "/login"}`}>
+          <Button variant="contained" className="capitalize w-full bg-green-700 text-white">
             Donate
           </Button>
         </Link>

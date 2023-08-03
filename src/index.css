@@ -814,6 +814,7 @@
 .common-input-it.active {
  background-color: rgb(4 47 46) !important;
  border-color: rgb(168 162 158) !important;
+ color: white !important;
 }
 .common-input-it:hover{
  border-color: rgb(168 162 158) !important;
@@ -1191,5 +1192,4 @@
 .marquee-item.paused {
   animation-play-state: paused;
 }
-
 

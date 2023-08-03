@@ -16,18 +16,9 @@ import Settings from "../pages/profile/settings";
 import PaymentMessage from "../pages/profile/order/details/Message";
 
 
-const routes = [
-    { path: "/ce", component: <Home /> },
-    { path: "/ce/home", component: <Home /> },
-    { path: "/ce/architecture", component: <Architecture /> },
-    { path: "/ce/products/:id", component: <ProductDetails /> },
+const privateRoutes = [
     { path: "/ce/checkout", component: <Checkout /> },
-    { path: "/ce/order", component: <Order /> },
     { path: "/ce/order/create", component: <OrderForm /> },
-    { path: "/ce/services", component: <Services /> },
-    { path: "/ce/security", component: <Security /> },
-    { path: "/ce/blogs/:id", component: <Security /> },
-    { path: "/ce/company", component: <Company /> },
     { path: "/ce/profile", component: <Orders /> },
     { path: "/ce/profile/orders/:id", component: <OrderDetails /> },
     { path: "/ce/profile/orders/edit/:id", component: <OrderEdit /> },
@@ -37,4 +28,16 @@ const routes = [
     { path: "/ce/orders/payment", component: <PaymentMessage /> },
 ]
 
-export {routes};
+const publicRoutes = [
+    { path: "/ce", component: <Home /> },
+    { path: "/ce/home", component: <Home /> },
+    { path: "/ce/architecture", component: <Architecture /> },
+    { path: "/ce/products/:id", component: <ProductDetails /> },
+    { path: "/ce/order", component: <Order /> },
+    { path: "/ce/services", component: <Services /> },
+    { path: "/ce/security", component: <Security /> },
+    { path: "/ce/blogs/:id", component: <Security /> },
+    { path: "/ce/company", component: <Company /> },
+]
+
+export {privateRoutes, publicRoutes};

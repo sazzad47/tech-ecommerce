@@ -132,8 +132,8 @@ export const validateCredentials = (userData: UserData) => {
     errors.name_of_employment = "This field is required.";
   }
 
-  if (!userData.photo) {
-    errors.photo = "This field is required.";
+  if (!userData.credential_photos) {
+    errors.credential_photos = "This field is required.";
   }
 
   return errors;
@@ -144,6 +144,10 @@ export const validateDescription = (userData: UserData) => {
 
   if (!userData.live_description) {
     errors.live_description = "This field is required";
+  }
+
+  if (!userData.photo) {
+    errors.photo = "This field is required";
   }
 
   if (!userData.time_limit) {
