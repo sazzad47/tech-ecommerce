@@ -17,12 +17,14 @@ import Funds from "../pages/profile/funds";
 import WithdrawDonations from "../pages/profile/funds/WithdrawDonations";
 import WithdrawTips from "../pages/profile/funds/WithdrawTips";
 import BeVolunteer from "../pages/beVolunteer";
+import DonationMessage from "../pages/causes/donate/Message";
 
 
 const privateRoutes = [
     { path: "/gd/apply", component: <Apply /> },
     { path: "/gd/apply/volunteer", component: <BeVolunteer /> },
     { path: "/gd/causes/donate/:id", component: <Donate /> },
+    { path: "/gd/causes/donation-message", component: <DonationMessage /> },
     { path: "/gd/profile", component: <Posts /> },
     { path: "/gd/profile/posts/:id", component: <Post /> },
     { path: "/gd/profile/donations", component: <Donations /> },
